@@ -468,7 +468,8 @@
     body{ background:#fff; }
     .content-grid{ max-width:100%; padding:0; margin:0; }
     #calendarCard{ box-shadow:none; border:none; }
-    .calendar-scroll{ overflow:visible; }
+    .calendar-scroll{ display:block !important; overflow:visible; }
+    .calendar-agenda{ display:none !important; }
     .calendar-scroll table.calendar{ min-width:0; width:100%; }
     table.calendar td{ min-height:70px; }
   }
@@ -480,6 +481,53 @@
   .calendar-scroll{
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+  .calendar-agenda{
+    display:none;
+  }
+  @media (max-width: 700px){
+    .calendar-scroll{ display:none; }
+    .calendar-agenda{ display:block; padding: 4px 18px 10px; }
+  }
+  .agenda-row{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding: 11px 2px;
+    border-bottom: 1px solid var(--border);
+  }
+  .agenda-row:last-child{ border-bottom:none; }
+  .agenda-date{
+    width:44px;
+    flex-shrink:0;
+    text-align:center;
+    padding-top:1px;
+  }
+  .agenda-day{
+    display:block;
+    font-weight:700;
+    color: var(--navy);
+    font-size:1.15rem;
+    line-height:1.1;
+  }
+  .agenda-date.sunday .agenda-day{ color: var(--red); }
+  .agenda-dow{
+    display:block;
+    font-size:0.62rem;
+    color: var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    margin-top:1px;
+  }
+  .agenda-events{
+    flex:1;
+    padding-top:2px;
+  }
+  .agenda-events .evt{ margin-top:0; margin-bottom:5px; }
+  .agenda-events .evt:last-child{ margin-bottom:0; }
+  .agenda-empty{
+    color:#c9cfd8;
+    font-size:0.85rem;
   }
   @media (max-width: 700px){
     .calendar-scroll table.calendar{
@@ -749,6 +797,7 @@
         </tbody>
       </table>
     </div>
+    <div class="calendar-agenda" id="calendarAgenda"></div>
     <div class="calendar-footer no-print">
       <a href="#" class="btn-outline">📅 Zum vollständigen Kalender</a>
     </div>
@@ -1179,9 +1228,53 @@ function renderUpcoming(){
   });
 }
 
+function renderAgenda(){
+  const list = document.getElementById('calendarAgenda');
+  list.innerHTML = '';
+
+  const jsMonth = currentMonth - 1;
+  const daysInMonth = new Date(currentYear, jsMonth + 1, 0).getDate();
+  const weekdayNames = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+
+  for(let d = 1; d <= daysInMonth; d++){
+    const dow = new Date(currentYear, jsMonth, d).getDay();
+
+    const row = document.createElement('div');
+    row.className = 'agenda-row';
+
+    const dateBox = document.createElement('div');
+    dateBox.className = 'agenda-date' + (dow === 0 ? ' sunday' : '');
+    dateBox.innerHTML = '<span class="agenda-day">' + d + '</span><span class="agenda-dow">' + weekdayNames[dow] + '</span>';
+    row.appendChild(dateBox);
+
+    const evtsBox = document.createElement('div');
+    evtsBox.className = 'agenda-events';
+    const evts = getEventsFor(currentYear, currentMonth, d);
+    if(evts){
+      evts.forEach(e=>{
+        const evtRow = document.createElement('div');
+        evtRow.className = 'evt';
+        const dot = document.createElement('span');
+        dot.className = dotClass(e.c);
+        const label = document.createElement('span');
+        label.className = 'evt-text';
+        label.textContent = e.t;
+        evtRow.appendChild(dot);
+        evtRow.appendChild(label);
+        evtsBox.appendChild(evtRow);
+      });
+    } else {
+      evtsBox.innerHTML = '<span class="agenda-empty">—</span>';
+    }
+    row.appendChild(evtsBox);
+    list.appendChild(row);
+  }
+}
+
 function renderMonth(){
   document.getElementById('monthLabel').textContent = germanMonthLabel(currentYear, currentMonth);
   renderCalendar();
+  renderAgenda();
   renderUpcoming();
 }
 
