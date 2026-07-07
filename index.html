@@ -30,7 +30,7 @@
     color: var(--text);
   }
   section[id], div[id], footer[id]{
-    scroll-margin-top: 24px;
+    scroll-margin-top: 90px;
   }
   .announcements-section{
     max-width: 1160px;
@@ -127,6 +127,91 @@
   @media (max-width: 700px){
     .bible-columns{ grid-template-columns: 1fr; }
   }
+
+  .team-section{
+    max-width: 1160px;
+    margin: 0 auto 40px;
+    padding-bottom: 22px;
+  }
+  .team-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    padding: 4px 22px 6px;
+  }
+  .team-card{
+    background: #f7f9fc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .team-role{
+    font-size: 0.75rem;
+    color: var(--blue);
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    margin-bottom:3px;
+  }
+  .team-name{
+    font-weight:700;
+    color: var(--navy);
+    font-size: 0.98rem;
+    margin-bottom:8px;
+  }
+  .team-phone{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    font-size: 0.85rem;
+    color: var(--text);
+    padding: 5px 0;
+    border-top: 1px dashed var(--border);
+  }
+  .team-phone:first-of-type{
+    border-top:none;
+  }
+  .wa-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    background: #25d366;
+    color:#fff;
+    text-decoration:none;
+    font-size:0.76rem;
+    font-weight:600;
+    padding: 5px 10px;
+    border-radius: 16px;
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+  .wa-btn:hover{ background:#1ebc59; }
+  .wa-btn::before{
+    content: "";
+    display:inline-block;
+    width:12px;
+    height:12px;
+    background: #fff;
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5zM12 20a8.9 8.9 0 0 1-4.6-1.3l-.3-.2-3 1 1-3-.2-.3A9 9 0 1 1 12 20zm4.9-6.6c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1-.7.9-.9 1-.3.2-.6.1a7.3 7.3 0 0 1-2.1-1.3 8 8 0 0 1-1.5-1.8c-.2-.3 0-.5.1-.6l.4-.5.2-.4a.5.5 0 0 0 0-.4c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.6 1 2.8s1.8 2.8 4.4 3.9c2.5 1 2.5.7 3 .7s1.6-.7 1.8-1.3.2-1.1.1-1.3-.2-.2-.5-.3z'/></svg>") no-repeat center / contain;
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5zM12 20a8.9 8.9 0 0 1-4.6-1.3l-.3-.2-3 1 1-3-.2-.3A9 9 0 1 1 12 20zm4.9-6.6c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1-.7.9-.9 1-.3.2-.6.1a7.3 7.3 0 0 1-2.1-1.3 8 8 0 0 1-1.5-1.8c-.2-.3 0-.5.1-.6l.4-.5.2-.4a.5.5 0 0 0 0-.4c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.6 1 2.8s1.8 2.8 4.4 3.9c2.5 1 2.5.7 3 .7s1.6-.7 1.8-1.3.2-1.1.1-1.3-.2-.2-.5-.3z'/></svg>") no-repeat center / contain;
+  }
+  .pastor-card{
+    margin: 6px 22px 4px;
+    padding: 16px 20px;
+    background: #eef4fb;
+    border: 1px solid #d5e3f2;
+    border-radius: 8px;
+    text-align:center;
+  }
+  .pastor-card .team-name{ font-size: 1.05rem; }
+  .pastor-card .team-phone{
+    justify-content:center;
+    border-top:none;
+  }
+  @media (max-width: 500px){
+    .team-phone{ flex-direction:column; align-items:flex-start; gap:4px; }
+  }
   header.site-header{
     background:#fff;
     border-bottom:1px solid var(--border);
@@ -134,13 +219,22 @@
     align-items:center;
     justify-content:space-between;
     padding: 14px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(20,30,50,0.06);
   }
   .brand{
     display:flex;
     align-items:center;
     gap:12px;
   }
-  .brand svg{ width:34px; height:34px; }
+  .logo-img{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+    flex-shrink:0;
+  }
   .brand-text .name{
     font-weight:700;
     font-size:1.15rem;
@@ -192,7 +286,7 @@
   }
   .content-grid{
     display:grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
     gap: 24px;
     max-width: 1160px;
     margin: 0 auto 50px;
@@ -250,14 +344,18 @@
   table.calendar td{
     border: 1px solid var(--border);
     vertical-align: top;
-    height: 92px;
-    padding: 6px 8px;
-    font-size:0.78rem;
+    height: auto;
+    min-height: 150px;
+    padding: 9px 10px 14px;
+    font-size:0.8rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   table.calendar td .daynum{
     font-weight:700;
     color: var(--navy);
-    font-size:0.85rem;
+    font-size:0.95rem;
+    margin-bottom:4px;
   }
   table.calendar td.other-month .daynum{
     color:#c3c9d2;
@@ -273,12 +371,15 @@
     display:flex;
     align-items:flex-start;
     gap:5px;
-    margin-top:4px;
-    line-height:1.25;
+    margin-top:3px;
+    line-height:1.2;
+  }
+  .evt span.evt-text{
+    flex:1;
   }
   .evt .dot{
     width:6px; height:6px; border-radius:50%;
-    margin-top:5px;
+    margin-top:4px;
     flex-shrink:0;
   }
   .dot-blue{ background: var(--blue); }
@@ -286,6 +387,7 @@
   .dot-green{ background: var(--green); }
   .dot-purple{ background: var(--purple); }
   .dot-grey{ background:#b7bec9; }
+  .dot-red{ background: var(--red); }
 
   .calendar-footer{
     text-align:center;
@@ -308,10 +410,10 @@
   .btn-outline:hover{ background:#f2f7fd; }
 
   .upcoming-list{
-    padding: 4px 18px 18px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
+    padding: 4px 18px 22px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px 20px;
   }
   .upcoming-item{
     display:flex;
@@ -408,14 +510,7 @@
 
 <header class="site-header">
   <div class="brand">
-    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Kreuz -->
-      <rect x="13.6" y="2" width="4.2" height="26" rx="1.4" fill="var(--navy)"/>
-      <rect x="5" y="10.5" width="22" height="4.2" rx="1.4" fill="var(--navy)"/>
-      <!-- Schwungfeder / Taube-Schweif am Fuß des Kreuzes -->
-      <path d="M15.7 19c3 0.4 6 2.3 7.3 5.4c-3.3 0.5-6.7-0.6-8.6-3.2c-0.6-0.8-0.9-1.5-0.9-1.5s1 0 2.2-0.7z"
-            fill="var(--navy)"/>
-    </svg>
+    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo" class="logo-img">
     <div class="brand-text">
       <div class="name">Gemeinde Gottes Rosal</div>
       <div class="tag">Offizielle Webseite</div>
@@ -441,7 +536,7 @@
     <div class="card-header">
       <div class="title">📅 Gemeindekalender</div>
       <div class="month-nav">
-        <span id="monthLabel">Juni 2026</span>
+        <span id="monthLabel">Juli 2026</span>
         <button onclick="changeMonth(-1)">&#8249;</button>
         <button onclick="changeMonth(1)">&#8250;</button>
       </div>
@@ -464,53 +559,7 @@
     <div class="card-header">
       <div class="title">📖 Zukünftiges</div>
     </div>
-    <div class="upcoming-list">
-
-      <div class="upcoming-item">
-        <div class="icon-badge badge-purple">🧑‍🤝‍🧑</div>
-        <div>
-          <div class="date purple">28. Juni – 1. Juli 2026</div>
-          <div class="evt-title">Jugendfreizeit nach Ruidoso</div>
-          <div class="evt-desc">Mit den Pastoren und Jugendleitern.</div>
-        </div>
-      </div>
-
-      <div class="upcoming-item">
-        <div class="icon-badge badge-green">📗</div>
-        <div>
-          <div class="date green">24. – 26. Juni 2026</div>
-          <div class="evt-title">Ferienbibelschule</div>
-          <div class="evt-desc">Mittwoch bis Freitag</div>
-        </div>
-      </div>
-
-      <div class="upcoming-item">
-        <div class="icon-badge badge-gold">☕</div>
-        <div>
-          <div class="date gold">11. Juli 2026</div>
-          <div class="evt-title">Männerfrühstück</div>
-          <div class="evt-desc">7:00 am – Pizzería La Sierra</div>
-        </div>
-      </div>
-
-      <div class="upcoming-item">
-        <div class="icon-badge badge-blue">👨‍👩‍👧‍👦</div>
-        <div>
-          <div class="date blue">3. Mai 2026</div>
-          <div class="evt-title">Familientag</div>
-          <div class="evt-desc">Gemeinsamer Gottesdienst und Aktivitäten für die ganze Familie.</div>
-        </div>
-      </div>
-
-      <div class="upcoming-item">
-        <div class="icon-badge badge-red">📕</div>
-        <div>
-          <div class="date red">17. Mai 2026</div>
-          <div class="evt-title">Kinderheim La Junta</div>
-          <div class="evt-desc">Gottesdienst um 10:30 am</div>
-        </div>
-      </div>
-
+    <div class="upcoming-list" id="upcomingList">
     </div>
   </div>
 
@@ -583,7 +632,107 @@
   </div>
 </section>
 
-<footer class="site-footer" id="kontakt">
+<section class="card team-section" id="kontakt">
+  <div class="card-header">
+    <div class="title">☎️ Unser Leitungsteam</div>
+  </div>
+  <div class="team-grid">
+
+    <div class="team-card">
+      <div class="team-role">Präsident des Vorstandes</div>
+      <div class="team-name">Cornelius &amp; Tina Fehr</div>
+      <div class="team-phone">
+        <span>625 589 1008</span>
+        <a class="wa-btn" href="https://wa.me/526255891008" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="team-phone">
+        <span>Frau: 625 118 9322</span>
+        <a class="wa-btn" href="https://wa.me/526251189322" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">Vorstand</div>
+      <div class="team-name">Johan &amp; Susa Neufeld</div>
+      <div class="team-phone">
+        <span>625 105 5636</span>
+        <a class="wa-btn" href="https://wa.me/526251055636" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="team-phone">
+        <span>Frau: 625 101 2119</span>
+        <a class="wa-btn" href="https://wa.me/526251012119" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">Vorstand</div>
+      <div class="team-name">Niel &amp; Irene Enns</div>
+      <div class="team-phone">
+        <span>625 120 4337</span>
+        <a class="wa-btn" href="https://wa.me/526251204337" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="team-phone">
+        <span>Frau: 625 126 273</span>
+        <a class="wa-btn" href="https://wa.me/52625126273" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">Vorstand</div>
+      <div class="team-name">Pancho &amp; Eva Thiessen</div>
+      <div class="team-phone">
+        <span>625 114 7133</span>
+        <a class="wa-btn" href="https://wa.me/526251147133" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="team-phone">
+        <span>Frau: 625 105 5822</span>
+        <a class="wa-btn" href="https://wa.me/526251055822" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">Vorstand</div>
+      <div class="team-name">Delfino &amp; Natascha Froesse</div>
+      <div class="team-phone">
+        <span>625 104 1729</span>
+        <a class="wa-btn" href="https://wa.me/526251041729" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="team-phone">
+        <span>Frau: 625 115 3304</span>
+        <a class="wa-btn" href="https://wa.me/526251153304" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">Kassierer</div>
+      <div class="team-name">Jacob &amp; Maria Wiebe</div>
+      <div class="team-phone">
+        <span>625 101 6022</span>
+        <a class="wa-btn" href="https://wa.me/526251016022" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="team-phone">
+        <span>Frau: 625 106 3154</span>
+        <a class="wa-btn" href="https://wa.me/526251063154" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pastor-card">
+    <div class="team-role">Pastor</div>
+    <div class="team-name">Hans &amp; Katherine Klassen</div>
+    <div class="team-phone">
+      <span>625 120 0323</span>
+      <a class="wa-btn" href="https://wa.me/526251200323" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <div class="team-phone">
+      <span>Frau: 625 101 0024</span>
+      <a class="wa-btn" href="https://wa.me/526251010024" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
   <div class="foot-item">📍 Calle Principal s/n, El Rosal, Chihuahua, México</div>
   <div class="foot-item">📞 (625) 123-4567</div>
   <div class="foot-item">✉️ info@gemeindegottesrosal.org</div>
@@ -596,71 +745,136 @@
 </footer>
 
 <script>
-// Kalenderdaten: nur Juni 2026 mit Beispielterminen hinterlegt.
-// Weitere Monate zeigen den Kalenderraster ohne Termine (leicht erweiterbar).
+// ---------------------------------------------------------------
+// Kalenderdaten pro Monat. Jeder Eintrag hat:
+//   events:   { Tag: [ {c: Farbe, t: Text}, ... ] }
+//   upcoming: [ {badge, icon, date, title, desc}, ... ]  -> "Zukünftiges"
+// Um einen neuen Monat hinzuzufügen, einfach einen weiteren
+// Eintrag "JAHR-MONAT" (Monat 1-12) nach demselben Muster ergänzen.
+// ---------------------------------------------------------------
 const monthsData = {
+
   "2026-6": {
     label: "Juni 2026",
-    firstDay: 1, // 0=Sonntag ... Montag ist 8. Juni? berechnet unten stattdessen manuell
-  }
-};
+    events: {
+      3: [ {c:'gold', t:'6:30 – Gitarren üben'}, {c:'blue', t:'7:30 – Gebetsstunde'} ],
+      5: [ {c:'blue', t:'7:30 – Jugendstunde'} ],
+      7: [ {c:'gold', t:'Frauenchor üben'}, {c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'5:00 – Minijugend'} ],
+      8: [ {c:'green', t:'7:00 – Programm Centro Luz en mi Camino (Gruppe 1)'} ],
+      10: [ {c:'blue', t:'7:30 – Gebetsstunde'} ],
+      11: [ {c:'grey', t:'Kein Frauen-Bibelstudium'} ],
+      12: [ {c:'blue', t:'7:30 – Jugendstunde'} ],
+      14: [ {c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'} ],
+      17: [ {c:'blue', t:'7:30 – Gebetsstunde'}, {c:'green', t:'Kinderstunde'} ],
+      19: [ {c:'blue', t:'7:30 – Jugendstunde'} ],
+      20: [ {c:'gold', t:'7:00 – Männerfrühstück – Pizzería La Sierra'} ],
+      21: [ {c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'} ],
+      24: [ {c:'green', t:'Ferienbibelschule'} ],
+      25: [ {c:'green', t:'Ferienbibelschule'} ],
+      26: [ {c:'green', t:'Ferienbibelschule'} ],
+      28: [ {c:'purple', t:'Jugendfreizeit (Ruidoso)'} ],
+      29: [ {c:'purple', t:'Jugendfreizeit (Ruidoso)'} ],
+      30: [ {c:'purple', t:'Jugendfreizeit (Ruidoso)'} ],
+    },
+    upcoming: [
+      { badge:'purple', icon:'🧑‍🤝‍🧑', date:'28. Juni – 1. Juli 2026', title:'Jugendfreizeit nach Ruidoso', desc:'Mit den Pastoren und Jugendleitern.' },
+      { badge:'green',  icon:'📗', date:'24. – 26. Juni 2026', title:'Ferienbibelschule', desc:'Mittwoch bis Freitag' },
+      { badge:'gold',   icon:'☕', date:'11. Juli 2026', title:'Männerfrühstück', desc:'7:00 am – Pizzería La Sierra' },
+      { badge:'blue',   icon:'👨‍👩‍👧‍👦', date:'3. Mai 2026', title:'Familientag', desc:'Gemeinsamer Gottesdienst und Aktivitäten für die ganze Familie.' },
+      { badge:'red',    icon:'📕', date:'17. Mai 2026', title:'Kinderheim La Junta', desc:'Gottesdienst um 10:30 am' },
+    ]
+  },
 
-const eventsJune2026 = {
-  3: [ {c:'gold', t:'6:30 Gitarren üben'}, {c:'blue', t:'7:30 Gebetsstunde'} ],
-  5: [ {c:'blue', t:'7:30 Jugendstunde'} ],
-  7: [ {c:'gold', t:'Frauenchor üben'}, {c:'blue', t:'10:00 Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'5:00 Minijugend'} ],
-  8: [ {c:'green', t:'7:00 Programm Centro Luz en mi Camino (Gruppe 1)'} ],
-  10: [ {c:'blue', t:'7:30 Gebetsstunde'} ],
-  11: [ {c:'grey', t:'Kein Frauen-Bibelstudium'} ],
-  12: [ {c:'blue', t:'7:30 Jugendstunde'} ],
-  14: [ {c:'blue', t:'10:00 Hauptgottesdienst und Sonntagsschule'} ],
-  17: [ {c:'blue', t:'7:30 Gebetsstunde'}, {c:'green', t:'Kinderstunde'} ],
-  19: [ {c:'blue', t:'7:30 Jugendstunde'} ],
-  20: [ {c:'gold', t:'7:00 Männerfrühstück', sub:'Pizzería La Sierra'} ],
-  21: [ {c:'blue', t:'10:00 Hauptgottesdienst und Sonntagsschule'} ],
-  24: [ {c:'green', t:'Ferienbibelschule'} ],
-  25: [ {c:'green', t:'Ferienbibelschule'} ],
-  26: [ {c:'green', t:'Ferienbibelschule'} ],
-  28: [ {c:'blue', t:'Jugendfreizeit (Ruidoso)'} ],
-  29: [ {c:'green', t:'Jugendfreizeit (Ruidoso)'} ],
-  30: [ {c:'green', t:'Jugendfreizeit (Ruidoso)'} ],
+  "2026-7": {
+    label: "Juli 2026",
+    events: {
+      1: [ {c:'gold', t:'6:30 – Gitarren üben'}, {c:'blue', t:'7:30 – Gebetsstunde'} ],
+      3: [ {c:'grey', t:'Keine Jugendstunde'} ],
+      5: [ {c:'gold', t:'Gemeindechor üben'}, {c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'} ],
+      8: [ {c:'blue', t:'7:30 – Gebetsstunde'} ],
+      9: [ {c:'grey', t:'Kein Frauen-Bibelstudium und Gebetsstunde'} ],
+      10: [ {c:'blue', t:'7:30 – Jugendstunde'} ],
+      12: [ {c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'5:00 pm – Mini-Jugend'} ],
+      15: [ {c:'blue', t:'7:30 – Gebetsstunde'} ],
+      17: [ {c:'blue', t:'7:30 – Jugendstunde'} ],
+      18: [ {c:'grey', t:'Das Männerfrühstück fällt aus'} ],
+      19: [ {c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'5:00 – Gemeinschaftsabend'} ],
+      22: [ {c:'blue', t:'7:30 – Gebetsstunde'} ],
+      23: [ {c:'grey', t:'Kein Frauen-Bibelstudium'} ],
+      24: [ {c:'blue', t:'7:30 – Jugendstunde'} ],
+      26: [ {c:'gold', t:'Kinderchor üben'}, {c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'} ],
+      29: [ {c:'gold', t:'6:30 – Gitarren üben'}, {c:'blue', t:'7:30 – Gebetsstunde und Kinderstunde'} ],
+      31: [ {c:'blue', t:'7:30 – Jugendstunde in Neustadt'} ],
+    },
+    upcoming: [
+      { badge:'blue',  icon:'🚌', date:'14. – 16. August 2026', title:'Gemeindeausflug', desc:'Neustädt und Rosal in Sainapuchi' },
+      { badge:'green', icon:'📗', date:'23. – 25. September 2026', title:'Abendversammlungen', desc:'Mit Br. David Knelsen' },
+    ]
+  }
+
 };
-const julyOverflow = { 1: [ {c:'green', t:'Jugendfreizeit (Ruidoso)'} ] };
-const todayCell = 20;
 
 function dotClass(c){ return 'dot dot-' + c; }
 
-function renderJune2026(){
+// aktueller angezeigter Monat (Standard: Juli 2026)
+let currentYear = 2026;
+let currentMonth = 7; // 1-12
+
+function monthKey(y, m){ return y + '-' + m; }
+
+function germanMonthLabel(y, m){
+  const d = new Date(y, m-1, 1);
+  const label = d.toLocaleDateString('de-DE', {month:'long', year:'numeric'});
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}
+
+function getEventsFor(y, m, day){
+  const data = monthsData[monthKey(y, m)];
+  return data && data.events ? data.events[day] : null;
+}
+
+function renderCalendar(){
   const body = document.getElementById('calendarBody');
   body.innerHTML = '';
-  // Layout: Juni 2026 beginnt an einem Montag -> Sonntag 31.Mai, Montag 1.Juni
-  const weeks = [
-    [ {d:31, om:true}, {d:1}, {d:2}, {d:3}, {d:4}, {d:5}, {d:6} ],
-    [ {d:7}, {d:8}, {d:9}, {d:10}, {d:11}, {d:12}, {d:13} ],
-    [ {d:14}, {d:15}, {d:16}, {d:17}, {d:18}, {d:19}, {d:20} ],
-    [ {d:21}, {d:22}, {d:23}, {d:24}, {d:25}, {d:26}, {d:27} ],
-    [ {d:28}, {d:29}, {d:30}, {d:1, om:true, july:true}, {d:2, om:true}, {d:3, om:true}, {d:4, om:true} ],
-  ];
 
-  weeks.forEach(week=>{
+  const jsMonth = currentMonth - 1;
+  const firstWeekday = new Date(currentYear, jsMonth, 1).getDay(); // 0=So
+  const daysInMonth = new Date(currentYear, jsMonth + 1, 0).getDate();
+  const daysInPrevMonth = new Date(currentYear, jsMonth, 0).getDate();
+
+  // Vormonat / Folgemonat für Überlauf-Termine ermitteln
+  let prevY = currentYear, prevM = currentMonth - 1;
+  if(prevM === 0){ prevM = 12; prevY -= 1; }
+  let nextY = currentYear, nextM = currentMonth + 1;
+  if(nextM === 13){ nextM = 1; nextY += 1; }
+
+  let cells = [];
+  for(let i = 0; i < firstWeekday; i++){
+    const d = daysInPrevMonth - firstWeekday + 1 + i;
+    cells.push({ d, om:true, y:prevY, m:prevM });
+  }
+  for(let d = 1; d <= daysInMonth; d++){
+    cells.push({ d, om:false, y:currentYear, m:currentMonth });
+  }
+  let nextDay = 1;
+  while(cells.length % 7 !== 0){
+    cells.push({ d: nextDay, om:true, y:nextY, m:nextM });
+    nextDay++;
+  }
+
+  for(let i = 0; i < cells.length; i += 7){
+    const week = cells.slice(i, i+7);
     const tr = document.createElement('tr');
     week.forEach(cell=>{
       const td = document.createElement('td');
       if(cell.om) td.classList.add('other-month');
-      if(!cell.om && cell.d === todayCell) td.classList.add('today');
 
       const num = document.createElement('div');
       num.className = 'daynum';
       num.textContent = cell.d;
       td.appendChild(num);
 
-      let evts = null;
-      if(cell.july && cell.d === 1){
-        evts = julyOverflow[1];
-      } else if(!cell.om){
-        evts = eventsJune2026[cell.d];
-      }
-
+      const evts = getEventsFor(cell.y, cell.m, cell.d);
       if(evts){
         evts.forEach(e=>{
           const row = document.createElement('div');
@@ -668,78 +882,81 @@ function renderJune2026(){
           const dot = document.createElement('span');
           dot.className = dotClass(e.c);
           const label = document.createElement('span');
-          label.textContent = e.t + (e.sub ? '' : '');
+          label.className = 'evt-text';
+          label.textContent = e.t;
           row.appendChild(dot);
           row.appendChild(label);
           td.appendChild(row);
-          if(e.sub){
-            const subRow = document.createElement('div');
-            subRow.style.marginLeft = '11px';
-            subRow.style.color = 'var(--gold)';
-            subRow.style.fontSize = '0.75rem';
-            subRow.textContent = e.sub;
-            td.appendChild(subRow);
-          }
         });
       }
       tr.appendChild(td);
     });
     body.appendChild(tr);
+  }
+}
+
+function renderUpcoming(){
+  const list = document.getElementById('upcomingList');
+  list.innerHTML = '';
+  const data = monthsData[monthKey(currentYear, currentMonth)];
+  const items = (data && data.upcoming) ? data.upcoming : [];
+
+  if(items.length === 0){
+    const empty = document.createElement('p');
+    empty.style.color = 'var(--muted)';
+    empty.style.fontSize = '0.88rem';
+    empty.style.padding = '4px 4px 16px';
+    empty.textContent = 'Für diesen Monat sind noch keine weiteren Termine eingetragen.';
+    list.appendChild(empty);
+    return;
+  }
+
+  items.forEach(item=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'upcoming-item';
+
+    const badge = document.createElement('div');
+    badge.className = 'icon-badge badge-' + item.badge;
+    badge.textContent = item.icon;
+
+    const textWrap = document.createElement('div');
+
+    const date = document.createElement('div');
+    date.className = 'date ' + item.badge;
+    date.textContent = item.date;
+
+    const title = document.createElement('div');
+    title.className = 'evt-title';
+    title.textContent = item.title;
+
+    const desc = document.createElement('div');
+    desc.className = 'evt-desc';
+    desc.textContent = item.desc;
+
+    textWrap.appendChild(date);
+    textWrap.appendChild(title);
+    textWrap.appendChild(desc);
+
+    wrap.appendChild(badge);
+    wrap.appendChild(textWrap);
+    list.appendChild(wrap);
   });
 }
 
-let currentOffset = 0;
+function renderMonth(){
+  document.getElementById('monthLabel').textContent = germanMonthLabel(currentYear, currentMonth);
+  renderCalendar();
+  renderUpcoming();
+}
+
 function changeMonth(dir){
-  currentOffset += dir;
-  if(currentOffset === 0){
-    document.getElementById('monthLabel').textContent = 'Juni 2026';
-    renderJune2026();
-  } else {
-    // Für andere Monate: leeres Raster als Platzhalter anzeigen
-    const base = new Date(2026, 5 + currentOffset, 1);
-    const label = base.toLocaleDateString('de-DE', {month:'long', year:'numeric'});
-    document.getElementById('monthLabel').textContent = label.charAt(0).toUpperCase() + label.slice(1);
-    renderEmptyMonth(base);
-  }
+  currentMonth += dir;
+  if(currentMonth === 0){ currentMonth = 12; currentYear -= 1; }
+  if(currentMonth === 13){ currentMonth = 1; currentYear += 1; }
+  renderMonth();
 }
 
-function renderEmptyMonth(base){
-  const body = document.getElementById('calendarBody');
-  body.innerHTML = '';
-  const year = base.getFullYear();
-  const month = base.getMonth();
-  const firstDay = new Date(year, month, 1).getDay(); // 0=So
-  const daysInMonth = new Date(year, month+1, 0).getDate();
-  const daysInPrevMonth = new Date(year, month, 0).getDate();
-
-  let cells = [];
-  for(let i=0;i<firstDay;i++){
-    cells.push({d: daysInPrevMonth - firstDay + 1 + i, om:true});
-  }
-  for(let d=1; d<=daysInMonth; d++){
-    cells.push({d});
-  }
-  while(cells.length % 7 !== 0){
-    cells.push({d: cells.length - firstDay - daysInMonth + 1, om:true});
-  }
-
-  for(let i=0;i<cells.length;i+=7){
-    const week = cells.slice(i, i+7);
-    const tr = document.createElement('tr');
-    week.forEach(cell=>{
-      const td = document.createElement('td');
-      if(cell.om) td.classList.add('other-month');
-      const num = document.createElement('div');
-      num.className = 'daynum';
-      num.textContent = cell.d;
-      td.appendChild(num);
-      tr.appendChild(td);
-    });
-    body.appendChild(tr);
-  }
-}
-
-renderJune2026();
+renderMonth();
 </script>
 
 </body>
