@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gemeinde-rosal-v1';
+const CACHE_NAME = 'gemeinde-rosal-v2';
 const FILES_TO_CACHE = [
   './',
   './index.html',
@@ -25,10 +25,30 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const isHTML = event.request.mode === 'navigate' ||
+                 event.request.url.endsWith('.html') ||
+                 event.request.url.endsWith('/');
+
+  if (isHTML) {
+    // Network-first: siempre intenta traer la versión más nueva primero.
+    // Así ves los cambios apenas subes una actualización, sin tener que
+    // desinstalar nada. Solo usa la copia guardada si no hay internet.
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // Para imágenes, manifest, etc: cache-first (cambian poco, así carga más rápido).
   event.respondWith(
     caches.match(event.request).then((cached) => {
       return cached || fetch(event.request).then((response) => {
-        // Nur eigene Dateien zwischenspeichern (nicht externe Links wie wa.me)
         if (event.request.url.startsWith(self.location.origin)) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
@@ -38,3 +58,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
