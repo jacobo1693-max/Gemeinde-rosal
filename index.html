@@ -374,11 +374,18 @@
   table.calendar td .daynum{
     font-weight:700;
     color: var(--navy);
-    font-size:0.95rem;
+    font-size:1.1rem;
     margin-bottom:4px;
+    text-align:right;
   }
   table.calendar td.other-month .daynum{
     color:#c3c9d2;
+  }
+  table.calendar td .daynum.sunday{
+    color: var(--red);
+  }
+  table.calendar td.other-month .daynum.sunday{
+    color:#e3b3af;
   }
   table.calendar td.other-month{
     color:#c3c9d2;
@@ -922,12 +929,13 @@ function renderCalendar(){
   for(let i = 0; i < cells.length; i += 7){
     const week = cells.slice(i, i+7);
     const tr = document.createElement('tr');
-    week.forEach(cell=>{
+    week.forEach((cell, colIndex)=>{
       const td = document.createElement('td');
       if(cell.om) td.classList.add('other-month');
 
       const num = document.createElement('div');
       num.className = 'daynum';
+      if(colIndex === 0) num.classList.add('sunday');
       num.textContent = cell.d;
       td.appendChild(num);
 
