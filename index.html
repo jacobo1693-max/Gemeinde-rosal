@@ -2,8 +2,19 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Gemeinde Gottes Rosal – Offizielle Webseite</title>
+
+<!-- PWA: damit die Seite auf dem Handy wie eine App installiert werden kann -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c3a63">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ges. Rosal">
+
 <style>
   :root{
     --navy: #1c3a63;
@@ -333,6 +344,15 @@
     border-collapse: collapse;
     table-layout: fixed;
   }
+  .calendar-scroll{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  @media (max-width: 700px){
+    .calendar-scroll table.calendar{
+      min-width: 720px;
+    }
+  }
   table.calendar th{
     background: var(--navy);
     color:#fff;
@@ -498,10 +518,42 @@
   .social-yt{ background:#d33b2c; }
   .social-wa{ background:#25d366; }
 
+  .menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:6px;
+    flex-direction:column;
+    gap:5px;
+  }
+  .menu-toggle span{
+    width:24px;
+    height:3px;
+    background: var(--navy);
+    border-radius:2px;
+    display:block;
+  }
+
   @media (max-width: 880px){
     .content-grid{ grid-template-columns: 1fr; }
-    nav.main-nav{ display:none; }
-    header.site-header{ padding:14px 18px; }
+    header.site-header{ padding:14px 18px; flex-wrap:wrap; }
+    .menu-toggle{ display:flex; }
+    nav.main-nav{
+      display:none;
+      width:100%;
+      flex-direction:column;
+      gap:0;
+      order:3;
+      border-top: 1px solid var(--border);
+      margin-top:14px;
+      padding-top:10px;
+    }
+    nav.main-nav.open{ display:flex; }
+    nav.main-nav a{
+      padding:12px 4px;
+      border-bottom:1px solid var(--border);
+    }
     footer.site-footer{ flex-direction:column; align-items:flex-start; }
   }
 </style>
@@ -516,7 +568,10 @@
       <div class="tag">Offizielle Webseite</div>
     </div>
   </div>
-  <nav class="main-nav">
+  <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="main-nav" id="mainNav">
     <a href="#top">Startseite</a>
     <a href="#kalender">Kalender</a>
     <a href="#bekanntmachungen">Bekanntmachungen</a>
@@ -541,15 +596,17 @@
         <button onclick="changeMonth(1)">&#8250;</button>
       </div>
     </div>
-    <table class="calendar">
-      <thead>
-        <tr>
-          <th>SONNTAG</th><th>MONTAG</th><th>DIENSTAG</th><th>MITTWOCH</th><th>DONNERSTAG</th><th>FREITAG</th><th>SAMSTAG</th>
-        </tr>
-      </thead>
-      <tbody id="calendarBody">
-      </tbody>
-    </table>
+    <div class="calendar-scroll">
+      <table class="calendar">
+        <thead>
+          <tr>
+            <th>SONNTAG</th><th>MONTAG</th><th>DIENSTAG</th><th>MITTWOCH</th><th>DONNERSTAG</th><th>FREITAG</th><th>SAMSTAG</th>
+          </tr>
+        </thead>
+        <tbody id="calendarBody">
+        </tbody>
+      </table>
+    </div>
     <div class="calendar-footer">
       <a href="#" class="btn-outline">📅 Zum vollständigen Kalender</a>
     </div>
@@ -957,6 +1014,23 @@ function changeMonth(dir){
 }
 
 renderMonth();
+
+const menuToggle = document.getElementById('menuToggle');
+const mainNav = document.getElementById('mainNav');
+menuToggle.addEventListener('click', () => {
+  mainNav.classList.toggle('open');
+});
+mainNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => mainNav.classList.remove('open'));
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {
+      // Falls die Seite z.B. direkt von der Festplatte geöffnet wird, schlägt dies fehl - kein Problem.
+    });
+  });
+}
 </script>
 
 </body>
