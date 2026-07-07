@@ -229,6 +229,111 @@
   @media (max-width: 500px){
     .team-phone{ flex-direction:column; align-items:flex-start; gap:4px; }
   }
+
+  /* ---------- Bibeltext (4 Sprachen) ---------- */
+  .bibeltext-section{
+    max-width: 1160px;
+    margin: 0 auto 40px;
+    padding-bottom: 26px;
+  }
+  .ann-verse-link{
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-style: normal;
+  }
+  .ann-verse-link:hover{ text-decoration: underline; }
+
+  .bt-wrap{
+    padding: 6px 26px 28px;
+  }
+  .bt-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .bt-tab{
+    border: 1.5px solid var(--border);
+    background: #fff;
+    color: var(--navy);
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight:600;
+    cursor:pointer;
+    transition: all 0.15s ease;
+  }
+  .bt-tab:hover{ border-color: var(--blue); color: var(--blue); }
+  .bt-tab.active{
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    border-color: transparent;
+    color:#fff;
+    box-shadow: 0 3px 10px rgba(28,58,99,0.25);
+  }
+
+  .bt-panel-wrap{
+    position: relative;
+    background: linear-gradient(180deg, #f7f9fc 0%, #ffffff 100%);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--blue);
+    border-radius: 12px;
+    padding: 30px 32px 26px;
+    overflow: hidden;
+  }
+  .bt-quote-mark{
+    position: absolute;
+    top: -6px;
+    left: 14px;
+    font-size: 5rem;
+    font-family: Georgia, serif;
+    color: var(--blue);
+    opacity: 0.12;
+    line-height:1;
+    pointer-events:none;
+  }
+  .bt-panel{
+    display:none;
+    animation: btFadeIn 0.25s ease;
+  }
+  .bt-panel.active{ display:block; }
+  @keyframes btFadeIn{
+    from{ opacity:0; transform: translateY(4px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .bt-panel-label{
+    font-weight:700;
+    color: var(--navy);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    letter-spacing: 0.01em;
+  }
+  .bt-panel-label em{
+    color: var(--muted);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+  .bt-panel p{
+    margin:0;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+  }
+  .bt-panel p sup{
+    color: var(--blue);
+    font-weight:700;
+    font-size: 0.7rem;
+    margin-right: 2px;
+  }
+  @media (max-width: 600px){
+    .bt-wrap{ padding: 6px 16px 22px; }
+    .bt-panel-wrap{ padding: 24px 18px 20px; }
+    .bt-tab{ padding: 8px 14px; font-size: 0.8rem; }
+    .bt-panel p{ font-size: 0.92rem; }
+  }
   header.site-header{
     background:#fff;
     border-bottom:1px solid var(--border);
@@ -344,6 +449,28 @@
     color: var(--blue);
     cursor:pointer;
     padding:2px 6px;
+  }
+  .print-btn{
+    border: 1px solid var(--blue) !important;
+    border-radius: 6px;
+    font-size: 0.8rem !important;
+    font-weight:600;
+    padding: 5px 10px !important;
+    margin-left: 6px;
+  }
+  .print-btn:hover{ background: #f2f7fd; }
+
+  @media print{
+    .no-print, header.site-header, .hero, .announcements-section,
+    .bibeltext-section, .team-section, footer.site-footer{
+      display:none !important;
+    }
+    body{ background:#fff; }
+    .content-grid{ max-width:100%; padding:0; margin:0; }
+    #calendarCard{ box-shadow:none; border:none; }
+    .calendar-scroll{ overflow:visible; }
+    .calendar-scroll table.calendar{ min-width:0; width:100%; }
+    table.calendar td{ min-height:70px; }
   }
   table.calendar{
     width:100%;
@@ -588,6 +715,7 @@
     <a href="#top">Startseite</a>
     <a href="#kalender">Kalender</a>
     <a href="#bekanntmachungen">Bekanntmachungen</a>
+    <a href="#bibeltext">Bibeltext</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
 </header>
@@ -600,13 +728,14 @@
 
 <div class="content-grid" id="kalender">
 
-  <div class="card">
+  <div class="card" id="calendarCard">
     <div class="card-header">
       <div class="title">📅 Gemeindekalender</div>
       <div class="month-nav">
         <span id="monthLabel">Juli 2026</span>
         <button onclick="changeMonth(-1)">&#8249;</button>
         <button onclick="changeMonth(1)">&#8250;</button>
+        <button class="print-btn no-print" onclick="window.print()" title="Kalender drucken">🖨️ Drucken</button>
       </div>
     </div>
     <div class="calendar-scroll">
@@ -620,7 +749,7 @@
         </tbody>
       </table>
     </div>
-    <div class="calendar-footer">
+    <div class="calendar-footer no-print">
       <a href="#" class="btn-outline">📅 Zum vollständigen Kalender</a>
     </div>
   </div>
@@ -676,29 +805,65 @@
     </ul>
 
     <h3>Bibeltext</h3>
-    <p class="ann-verse-ref">1. Korinther 12:8-11</p>
-    <div class="bible-columns">
-      <div class="bible-col">
-        <strong>1. Korinta 12:8-11 PB</strong>
-        <p>[8] Eenem woat daut derch dän Jeist jejäft, en Weisheit to räden. Eenem aundren woat daut derch dän selwjen Jeist jejäft, Erkjantnis verendach to brinjen.<br>
-        [9] Eenem aundren es de Gloowen jejäft, derch dän selwjen Jeist. Eenem aundren es de Gow jejäft, to heelen derch dän selwjen Jeist.<br>
-        [10] Eenem aundren es de Krauft jejäft, Wunda to doonen. Eenem aundren es jejäft, profeetisch to räden; eenem aundren, Jeista to unjascheeden; eenem aundren, veschiedne Sproaken to räden; un eenem aundren, de Sproaken uttolajen.<br>
-        [11] Oba aul dit wirkjt een un deeselwja Jeist, un deelt eenem jiedren doano too, aus hee daut well.</p>
-      </div>
-      <div class="bible-col">
-        <strong>1. Korinther 12:8-11 DELUT</strong>
-        <p>[8] Einem wird gegeben durch den Geist, zu reden von der Weisheit; dem andern wird gegeben, zu reden von der Erkenntnis nach demselben Geist;<br>
-        [9] einem andern der Glaube in demselben Geist; einem andern die Gabe, gesund zu machen in demselben Geist;<br>
-        [10] einem andern, Wunder zu tun; einem andern Weissagung; einem andern, Geister zu unterscheiden; einem andern mancherlei Sprachen; einem andern, die Sprachen auszulegen.<br>
-        [11] Dies aber alles wirkt derselbe eine Geist und teilt einem jeglichen seines zu, nach dem er will.</p>
-      </div>
-    </div>
+    <p class="ann-verse-ref">1. Korinther 12:8-11 — <a href="#bibeltext" class="ann-verse-link">zum vollständigen Text in 4 Sprachen ↓</a></p>
 
     <div class="ann-closing">
       <p><span class="ann-blank">(Gemeindechor)</span> wird uns ein Lied vortragen.</p>
       <p>Danach folgt die Botschaft von Bruder Hans Klassen.</p>
     </div>
 
+  </div>
+</section>
+
+<section class="card bibeltext-section" id="bibeltext">
+  <div class="card-header">
+    <div class="title">📜 Bibeltext</div>
+    <div class="ann-date">1. Korinther 12:8-11</div>
+  </div>
+
+  <div class="bt-wrap">
+    <div class="bt-tabs" role="tablist">
+      <button class="bt-tab active" data-lang="pb" onclick="showBibleLang('pb')">Plautdietsch</button>
+      <button class="bt-tab" data-lang="de" onclick="showBibleLang('de')">Deutsch</button>
+      <button class="bt-tab" data-lang="es" onclick="showBibleLang('es')">Español</button>
+      <button class="bt-tab" data-lang="en" onclick="showBibleLang('en')">English</button>
+    </div>
+
+    <div class="bt-panel-wrap">
+      <span class="bt-quote-mark">&#8220;</span>
+
+      <div class="bt-panel active" data-lang="pb">
+        <div class="bt-panel-label">1. Korinta 12:8&ndash;11 <em>(Plautdietsch)</em></div>
+        <p><sup>8</sup> Eenem woat daut derch dän Jeist jejäft, en Weisheit to räden. Eenem aundren woat daut derch dän selwjen Jeist jejäft, Erkjantnis verendach to brinjen.
+        <sup>9</sup> Eenem aundren es de Gloowen jejäft, derch dän selwjen Jeist. Eenem aundren es de Gow jejäft, to heelen derch dän selwjen Jeist.
+        <sup>10</sup> Eenem aundren es de Krauft jejäft, Wunda to doonen. Eenem aundren es jejäft, profeetisch to räden; eenem aundren, Jeista to unjascheeden; eenem aundren, veschiedne Sproaken to räden; un eenem aundren, de Sproaken uttolajen.
+        <sup>11</sup> Oba aul dit wirkjt een un deeselwja Jeist, un deelt eenem jiedren doano too, aus hee daut well.</p>
+      </div>
+
+      <div class="bt-panel" data-lang="de">
+        <div class="bt-panel-label">1. Korinther 12:8&ndash;11 <em>(DELUT)</em></div>
+        <p><sup>8</sup> Einem wird gegeben durch den Geist, zu reden von der Weisheit; dem andern wird gegeben, zu reden von der Erkenntnis nach demselben Geist;
+        <sup>9</sup> einem andern der Glaube in demselben Geist; einem andern die Gabe, gesund zu machen in demselben Geist;
+        <sup>10</sup> einem andern, Wunder zu tun; einem andern Weissagung; einem andern, Geister zu unterscheiden; einem andern mancherlei Sprachen; einem andern, die Sprachen auszulegen.
+        <sup>11</sup> Dies aber alles wirkt derselbe eine Geist und teilt einem jeglichen seines zu, nach dem er will.</p>
+      </div>
+
+      <div class="bt-panel" data-lang="es">
+        <div class="bt-panel-label">1 Corintios 12:8&ndash;11 <em>(Reina-Valera 1909)</em></div>
+        <p><sup>8</sup> Porque á la verdad, á éste es dada por el Espíritu palabra de sabiduría; á otro, palabra de ciencia según el mismo Espíritu;
+        <sup>9</sup> A otro, fe por el mismo Espíritu; y á otro, dones de sanidades por el mismo Espíritu;
+        <sup>10</sup> A otro, operaciones de milagros; y á otro, profecía; y á otro, discreción de espíritus; y á otro, géneros de lenguas; y á otro, interpretación de lenguas.
+        <sup>11</sup> Mas todas estas cosas obra uno y el mismo Espíritu, repartiendo particularmente á cada uno como quiere.</p>
+      </div>
+
+      <div class="bt-panel" data-lang="en">
+        <div class="bt-panel-label">1 Corinthians 12:8&ndash;11 <em>(KJV)</em></div>
+        <p><sup>8</sup> For to one is given by the Spirit the word of wisdom; to another the word of knowledge by the same Spirit;
+        <sup>9</sup> To another faith by the same Spirit; to another the gifts of healing by the same Spirit;
+        <sup>10</sup> To another the working of miracles; to another prophecy; to another discerning of spirits; to another divers kinds of tongues; to another the interpretation of tongues:
+        <sup>11</sup> But all these worketh that one and the selfsame Spirit, dividing to every man severally as he will.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1025,6 +1190,15 @@ function changeMonth(dir){
   if(currentMonth === 0){ currentMonth = 12; currentYear -= 1; }
   if(currentMonth === 13){ currentMonth = 1; currentYear += 1; }
   renderMonth();
+}
+
+function showBibleLang(lang){
+  document.querySelectorAll('.bt-tab').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  document.querySelectorAll('.bt-panel').forEach(panel=>{
+    panel.classList.toggle('active', panel.dataset.lang === lang);
+  });
 }
 
 renderMonth();
