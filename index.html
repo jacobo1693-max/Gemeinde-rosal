@@ -460,6 +460,17 @@
   }
   .print-btn:hover{ background: #f2f7fd; }
 
+  .view-toggle-btn{
+    display:none;
+    border: 1px solid var(--blue) !important;
+    border-radius: 6px;
+    font-size: 0.78rem !important;
+    font-weight:600;
+    padding: 5px 9px !important;
+    margin-left: 6px;
+  }
+  .view-toggle-btn:hover{ background: #f2f7fd; }
+
   @media print{
     .no-print, header.site-header, .hero, .announcements-section,
     .bibeltext-section, .team-section, footer.site-footer{
@@ -472,6 +483,39 @@
     .calendar-agenda{ display:none !important; }
     .calendar-scroll table.calendar{ min-width:0; width:100%; }
     table.calendar td{ min-height:70px; }
+  }
+
+  @media (max-width: 700px){
+    .view-toggle-btn{ display:inline-flex; align-items:center; }
+
+    /* Vista de lista (por defecto en celular) */
+    #calendarCard.view-agenda .calendar-scroll{ display:none; }
+    #calendarCard.view-agenda .calendar-agenda{ display:block; }
+
+    /* Vista de cuadrícula compacta: cabe sin deslizar */
+    #calendarCard.view-grid .calendar-scroll{
+      display:block;
+      overflow-x:hidden;
+    }
+    #calendarCard.view-grid .calendar-agenda{ display:none; }
+    #calendarCard.view-grid table.calendar{ min-width:0; width:100%; }
+    #calendarCard.view-grid table.calendar th{
+      font-size:0.52rem;
+      padding:5px 1px;
+      letter-spacing:0;
+    }
+    #calendarCard.view-grid table.calendar td{
+      min-height:64px;
+      padding:3px 2px 4px;
+      font-size:0.5rem;
+    }
+    #calendarCard.view-grid table.calendar td .daynum{
+      font-size:0.68rem;
+      margin-bottom:1px;
+    }
+    #calendarCard.view-grid .evt{ gap:2px; margin-top:1px; }
+    #calendarCard.view-grid .evt .dot{ width:4px; height:4px; margin-top:3px; }
+    #calendarCard.view-grid .evt-text{ line-height:1.1; word-break:break-word; }
   }
   table.calendar{
     width:100%;
@@ -486,8 +530,7 @@
     display:none;
   }
   @media (max-width: 700px){
-    .calendar-scroll{ display:none; }
-    .calendar-agenda{ display:block; padding: 4px 18px 10px; }
+    .calendar-agenda{ padding: 4px 18px 10px; }
   }
   .agenda-row{
     display:flex;
@@ -528,11 +571,6 @@
   .agenda-empty{
     color:#c9cfd8;
     font-size:0.85rem;
-  }
-  @media (max-width: 700px){
-    .calendar-scroll table.calendar{
-      min-width: 720px;
-    }
   }
   table.calendar th{
     background: var(--navy);
@@ -783,6 +821,7 @@
         <span id="monthLabel">Juli 2026</span>
         <button onclick="changeMonth(-1)">&#8249;</button>
         <button onclick="changeMonth(1)">&#8250;</button>
+        <button class="view-toggle-btn no-print" id="viewToggleBtn" onclick="toggleMobileView()" title="Ansicht wechseln">▦ Raster</button>
         <button class="print-btn no-print" onclick="window.print()" title="Kalender drucken">🖨️ Drucken</button>
       </div>
     </div>
@@ -1293,6 +1332,33 @@ function showBibleLang(lang){
     panel.classList.toggle('active', panel.dataset.lang === lang);
   });
 }
+
+function toggleMobileView(){
+  const card = document.getElementById('calendarCard');
+  const btn = document.getElementById('viewToggleBtn');
+  const isGrid = card.classList.contains('view-grid');
+  if(isGrid){
+    card.classList.remove('view-grid');
+    card.classList.add('view-agenda');
+    btn.textContent = '▦ Raster';
+    try{ localStorage.setItem('rosal-calendar-view', 'agenda'); }catch(e){}
+  } else {
+    card.classList.remove('view-agenda');
+    card.classList.add('view-grid');
+    btn.textContent = '📋 Liste';
+    try{ localStorage.setItem('rosal-calendar-view', 'grid'); }catch(e){}
+  }
+}
+
+// Gespeicherte Ansicht (Liste/Raster) beim Laden wiederherstellen
+(function initMobileView(){
+  let saved = 'agenda';
+  try{ saved = localStorage.getItem('rosal-calendar-view') || 'agenda'; }catch(e){}
+  const card = document.getElementById('calendarCard');
+  const btn = document.getElementById('viewToggleBtn');
+  card.classList.add(saved === 'grid' ? 'view-grid' : 'view-agenda');
+  btn.textContent = saved === 'grid' ? '📋 Liste' : '▦ Raster';
+})();
 
 renderMonth();
 
