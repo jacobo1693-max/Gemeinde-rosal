@@ -1455,9 +1455,11 @@ const monthsData = {
   "2026-9": {
     label: "September 2026",
     events: {
+      16: [ {c:'grey', t:'Kein Gottesdienst – Ausflug mit Neustadt zusammen'} ],
       23: [ {c:'purple', t:'Abendversammlung'} ],
       24: [ {c:'purple', t:'Abendversammlung'} ],
       25: [ {c:'purple', t:'Abendversammlung mit Br. David Knelsen'} ],
+      26: [ {c:'gold', t:'7:00 – Männer-Gebetsfrühstück mit Br. David K.'} ],
       27: [ {c:'blue', t:'10:00 – Versammlung mit Gemeinschaftsmittagessen'} ],
     }
   },
@@ -1472,7 +1474,9 @@ const monthsData = {
   "2026-12": {
     label: "Dezember 2026",
     events: {
+      23: [ {c:'grey', t:'Keine Gebetsstunde'} ],
       25: [ {c:'red', t:'Weihnachtsgottesdienst'} ],
+      30: [ {c:'grey', t:'Keine Gebetsstunde'} ],
       31: [ {c:'purple', t:'Silvesterabend'} ],
     }
   },
@@ -1504,8 +1508,18 @@ function germanMonthLabel(y, m){
 // kein spezieller Eintrag in monthsData steht:
 //  - Sonntag: 1. Sonntag = Chor übt (wechselt Gemeindechor/Frauenchor),
 //             4. Sonntag = Kinderchor übt, immer Hauptgottesdienst+Sonntagsschule
-//  - Mittwoch: 7:30 – Gebetsstunde
+//  - Mittwoch: 7:30 – Gebetsstunde (plus 6:30 – Gitarren üben am Mittwoch
+//              direkt vor dem 1. Sonntag des Monats, auch wenn das in den
+//              letzten Tagen des Vormonats liegt)
 //  - Freitag: 7:30 – Jugendstunde
+function isGitarrenWednesday(date){
+  // date ist ein Mittwoch. Prüfen, ob der folgende Sonntag (4 Tage später)
+  // der 1. Sonntag seines Monats ist (Tag 1 bis 7).
+  const nextSunday = new Date(date);
+  nextSunday.setDate(date.getDate() + 4);
+  return nextSunday.getDate() <= 7;
+}
+
 function computeDefaultWeeklyEvent(year, month, day){
   const date = new Date(year, month - 1, day);
   const weekday = date.getDay(); // 0=So, 3=Mi, 5=Fr
@@ -1523,7 +1537,12 @@ function computeDefaultWeeklyEvent(year, month, day){
     return events;
   }
   if(weekday === 3){
-    return [ {c:'blue', t:'7:30 – Gebetsstunde'} ];
+    const events = [];
+    if(isGitarrenWednesday(date)){
+      events.push({c:'gold', t:'6:30 – Gitarren üben'});
+    }
+    events.push({c:'blue', t:'7:30 – Gebetsstunde'});
+    return events;
   }
   if(weekday === 5){
     return [ {c:'blue', t:'7:30 – Jugendstunde'} ];
