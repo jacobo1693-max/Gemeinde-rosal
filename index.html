@@ -42,6 +42,7 @@
     color: var(--text);
     overflow-x: hidden;
     max-width: 100vw;
+    padding-top: 74px;
   }
   section[id], div[id], footer[id]{
     scroll-margin-top: 90px;
@@ -341,8 +342,10 @@
     align-items:center;
     justify-content:space-between;
     padding: 14px 40px;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     box-shadow: 0 2px 6px rgba(20,30,50,0.06);
   }
@@ -449,6 +452,10 @@
     color: var(--blue);
     cursor:pointer;
     padding:2px 6px;
+  }
+  .month-nav button:disabled{
+    color:#c9cfd8;
+    cursor:not-allowed;
   }
   .print-btn{
     border: 1px solid var(--blue) !important;
@@ -936,6 +943,71 @@
     color: var(--text);
     background:#fafbfc;
   }
+  /* ---------- Fotos ---------- */
+  .fotos-section{
+    max-width: 1160px;
+    margin: 0 auto 40px;
+    padding-bottom: 22px;
+  }
+  .fotos-body{ padding: 4px 22px 6px; }
+  .gallery-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .gallery-grid img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:8px;
+    border:1px solid var(--border);
+    display:block;
+  }
+  .gallery-empty{
+    grid-column: 1 / -1;
+    color: var(--muted);
+    font-size:0.9rem;
+    padding: 18px 4px 26px;
+  }
+
+  /* ---------- Predigten (Audios) ---------- */
+  .predigten-section{
+    max-width: 1160px;
+    margin: 0 auto 40px;
+    padding-bottom: 22px;
+  }
+  .predigten-body{
+    padding: 4px 22px 20px;
+    display:flex;
+    flex-direction:column;
+    gap: 14px;
+  }
+  .predigten-empty{
+    color: var(--muted);
+    font-size:0.9rem;
+    padding: 14px 2px 6px;
+  }
+  .predigt-item{
+    background:#f7f9fc;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding: 14px 16px;
+  }
+  .predigt-title{
+    font-weight:700;
+    color: var(--navy);
+    font-size:0.95rem;
+    margin-bottom:2px;
+  }
+  .predigt-meta{
+    color: var(--muted);
+    font-size:0.8rem;
+    margin-bottom:10px;
+  }
+  .predigt-item audio{
+    width:100%;
+    height:36px;
+  }
 </style>
 </head>
 <body>
@@ -956,6 +1028,8 @@
     <a href="#kalender">Kalender</a>
     <a href="#bekanntmachungen">Bekanntmachungen</a>
     <a href="#bibeltext">Bibeltext</a>
+    <a href="#fotos">Fotos</a>
+    <a href="#predigten">Predigten</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
 </header>
@@ -973,8 +1047,8 @@
       <div class="title">📅 Gemeindekalender</div>
       <div class="month-nav">
         <span id="monthLabel">Juli 2026</span>
-        <button onclick="changeMonth(-1)">&#8249;</button>
-        <button onclick="changeMonth(1)">&#8250;</button>
+        <button id="prevMonthBtn" onclick="changeMonth(-1)">&#8249;</button>
+        <button id="nextMonthBtn" onclick="changeMonth(1)">&#8250;</button>
         <button class="view-toggle-btn no-print" id="viewToggleBtn" onclick="toggleMobileView()" title="Ansicht wechseln">▦ Raster</button>
         <button class="print-btn no-print" onclick="window.print()" title="Kalender drucken">🖨️ Drucken</button>
       </div>
@@ -1109,6 +1183,26 @@
   </div>
 </section>
 
+<section class="card fotos-section" id="fotos">
+  <div class="card-header">
+    <div class="title">📷 Fotos</div>
+  </div>
+  <div class="fotos-body">
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-empty">Hier erscheinen bald Fotos von Gemeindeaktivitäten. Schick sie mir im Chat, und ich füge sie hier ein.</div>
+    </div>
+  </div>
+</section>
+
+<section class="card predigten-section" id="predigten">
+  <div class="card-header">
+    <div class="title">🎤 Predigten</div>
+  </div>
+  <div class="predigten-body" id="predigtenList">
+    <div class="predigten-empty">Hier erscheinen bald Audioaufnahmen der Predigten. Schick sie mir im Chat, und ich füge sie hier ein.</div>
+  </div>
+</section>
+
 <section class="card team-section" id="kontakt">
   <div class="card-header">
     <div class="title">☎️ Unser Leitungsteam</div>
@@ -1232,7 +1326,7 @@
   </div>
 
   <div class="admin-body">
-    <p class="admin-hint">Trage hier wichtige Termine ein, sobald du sie erfährst. Wenn du bereit bist, sie im Kalender zu veröffentlichen, klicke auf "Code kopieren" und schicke mir (Claude) den Text — ich füge sie dann in den echten Kalender ein.</p>
+    <p class="admin-hint">Trage hier wichtige Termine ein, sobald du sie erfährst. Wenn du bereit bist, sie im Kalender zu veröffentlichen, klicke auf "Code kopieren" und schicke mir (Claude) den Text — ich füge sie dann in den echten Kalender ein. Genauso funktioniert es mit Fotos und Predigten: schick mir die Dateien im Chat, und ich füge sie in die Seiten "Fotos" und "Predigten" ein.</p>
 
     <div class="admin-form">
       <div class="admin-form-row">
@@ -1356,6 +1450,38 @@ const monthsData = {
     upcoming: [
       { badge:'green', icon:'📗', date:'23. – 25. September 2026', title:'Abendversammlungen', desc:'Mit Br. David Knelsen' },
     ]
+  },
+
+  "2026-9": {
+    label: "September 2026",
+    events: {
+      23: [ {c:'purple', t:'Abendversammlung'} ],
+      24: [ {c:'purple', t:'Abendversammlung'} ],
+      25: [ {c:'purple', t:'Abendversammlung mit Br. David Knelsen'} ],
+      27: [ {c:'blue', t:'10:00 – Versammlung mit Gemeinschaftsmittagessen'} ],
+    }
+  },
+
+  "2026-11": {
+    label: "November 2026",
+    events: {
+      8: [ {c:'red', t:'Erntedankfest-Gottesdienst'}, {c:'blue', t:'10:00 – Hauptgottesdienst (keine Sonntagsschule)'}, {c:'gold', t:'Gemeinschaftsessen für die ganze Gemeinde'} ],
+    }
+  },
+
+  "2026-12": {
+    label: "Dezember 2026",
+    events: {
+      25: [ {c:'red', t:'Weihnachtsgottesdienst'} ],
+      31: [ {c:'purple', t:'Silvesterabend'} ],
+    }
+  },
+
+  "2027-1": {
+    label: "Januar 2027",
+    events: {
+      1: [ {c:'gold', t:'9:30 am – Neujahrsgottesdienst'} ],
+    }
   }
 
 };
@@ -1374,9 +1500,42 @@ function germanMonthLabel(y, m){
   return label.charAt(0).toUpperCase() + label.slice(1);
 }
 
+// Übliche wöchentliche Ordnung, die automatisch gilt, wenn für diesen Tag
+// kein spezieller Eintrag in monthsData steht:
+//  - Sonntag: 1. Sonntag = Chor übt (wechselt Gemeindechor/Frauenchor),
+//             4. Sonntag = Kinderchor übt, immer Hauptgottesdienst+Sonntagsschule
+//  - Mittwoch: 7:30 – Gebetsstunde
+//  - Freitag: 7:30 – Jugendstunde
+function computeDefaultWeeklyEvent(year, month, day){
+  const date = new Date(year, month - 1, day);
+  const weekday = date.getDay(); // 0=So, 3=Mi, 5=Fr
+
+  if(weekday === 0){
+    const nth = Math.ceil(day / 7);
+    const events = [];
+    if(nth === 1){
+      const choir = (month % 2 === 1) ? 'Gemeindechor üben' : 'Frauenchor üben';
+      events.push({c:'gold', t:choir});
+    } else if(nth === 4){
+      events.push({c:'gold', t:'Kinderchor üben'});
+    }
+    events.push({c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'});
+    return events;
+  }
+  if(weekday === 3){
+    return [ {c:'blue', t:'7:30 – Gebetsstunde'} ];
+  }
+  if(weekday === 5){
+    return [ {c:'blue', t:'7:30 – Jugendstunde'} ];
+  }
+  return null;
+}
+
 function getEventsFor(y, m, day){
   const data = monthsData[monthKey(y, m)];
-  return data && data.events ? data.events[day] : null;
+  const explicit = data && data.events ? data.events[day] : null;
+  if(explicit) return explicit;
+  return computeDefaultWeeklyEvent(y, m, day);
 }
 
 function renderCalendar(){
@@ -1533,17 +1692,41 @@ function renderAgenda(){
   }
 }
 
+// Der Kalender kann von Juni 2026 bis Dezember 2027 durchblättert werden.
+// Für Monate ohne echte Termine bleibt das Raster einfach leer -
+// es werden keine erfundenen Ereignisse oder "Zukünftiges" angezeigt.
+const MIN_YEAR = 2026, MIN_MONTH = 6;
+const MAX_YEAR = 2027, MAX_MONTH = 12;
+
 function renderMonth(){
   document.getElementById('monthLabel').textContent = germanMonthLabel(currentYear, currentMonth);
   renderCalendar();
   renderAgenda();
   renderUpcoming();
+  updateNavButtons();
+}
+
+function updateNavButtons(){
+  const prevBtn = document.getElementById('prevMonthBtn');
+  const nextBtn = document.getElementById('nextMonthBtn');
+  const atMin = (currentYear === MIN_YEAR && currentMonth === MIN_MONTH);
+  const atMax = (currentYear === MAX_YEAR && currentMonth === MAX_MONTH);
+  if(prevBtn){ prevBtn.disabled = atMin; }
+  if(nextBtn){ nextBtn.disabled = atMax; }
 }
 
 function changeMonth(dir){
-  currentMonth += dir;
-  if(currentMonth === 0){ currentMonth = 12; currentYear -= 1; }
-  if(currentMonth === 13){ currentMonth = 1; currentYear += 1; }
+  let newMonth = currentMonth + dir;
+  let newYear = currentYear;
+  if(newMonth === 0){ newMonth = 12; newYear -= 1; }
+  if(newMonth === 13){ newMonth = 1; newYear += 1; }
+
+  // Innerhalb der erlaubten Spanne bleiben
+  if(newYear < MIN_YEAR || (newYear === MIN_YEAR && newMonth < MIN_MONTH)) return;
+  if(newYear > MAX_YEAR || (newYear === MAX_YEAR && newMonth > MAX_MONTH)) return;
+
+  currentMonth = newMonth;
+  currentYear = newYear;
   renderMonth();
 }
 
