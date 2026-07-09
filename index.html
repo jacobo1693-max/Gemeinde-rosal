@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -676,6 +676,23 @@
     gap:12px;
     align-items:flex-start;
   }
+  .upcoming-item.has-image{
+    flex-direction:column;
+    background:#f7f9fc;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    gap:0;
+  }
+  .upcoming-poster{
+    width:100%;
+    border-radius:8px;
+    margin-bottom:10px;
+    display:block;
+  }
+  .upcoming-item.has-image .icon-badge{
+    display:none;
+  }
   .icon-badge{
     width:38px; height:38px;
     border-radius:50%;
@@ -963,6 +980,15 @@
     border:1px solid var(--border);
     display:block;
   }
+  .gallery-figure{
+    margin:0;
+  }
+  .gallery-figure figcaption{
+    font-size:0.8rem;
+    color: var(--muted);
+    margin-top:6px;
+    text-align:center;
+  }
   .gallery-empty{
     grid-column: 1 / -1;
     color: var(--muted);
@@ -1189,7 +1215,10 @@
   </div>
   <div class="fotos-body">
     <div class="gallery-grid" id="galleryGrid">
-      <div class="gallery-empty">Hier erscheinen bald Fotos von Gemeindeaktivitäten. Schick sie mir im Chat, und ich füge sie hier ein.</div>
+      <figure class="gallery-figure">
+        <img src="jugend-ausflug-ruidoso-2026.jpg" alt="Jugend Ausflug Ruidoso 2026" loading="lazy">
+        <figcaption>Jugend Ausflug Ruidoso 2026</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1423,7 +1452,7 @@ const monthsData = {
       31: [ {c:'blue', t:'7:30 – Jugendstunde in Neustadt'} ],
     },
     upcoming: [
-      { badge:'blue',  icon:'🚌', date:'14. – 16. August 2026', title:'Gemeindeausflug', desc:'Neustädt und Rosal in Sainapuchi' },
+      { badge:'blue',  icon:'🚌', date:'14. – 16. August 2026', title:'Gemeindeausflug', desc:'Neustädt und Rosal in Sainapuchi', image:'ausflug-poster.jpg' },
       { badge:'green', icon:'📗', date:'23. – 25. September 2026', title:'Abendversammlungen', desc:'Mit Br. David Knelsen' },
     ]
   },
@@ -1638,7 +1667,15 @@ function renderUpcoming(){
 
   items.forEach(item=>{
     const wrap = document.createElement('div');
-    wrap.className = 'upcoming-item';
+    wrap.className = 'upcoming-item' + (item.image ? ' has-image' : '');
+
+    if(item.image){
+      const img = document.createElement('img');
+      img.className = 'upcoming-poster';
+      img.src = item.image;
+      img.alt = item.title;
+      wrap.appendChild(img);
+    }
 
     const badge = document.createElement('div');
     badge.className = 'icon-badge badge-' + item.badge;
