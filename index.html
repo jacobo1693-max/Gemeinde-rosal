@@ -784,6 +784,157 @@
       border-bottom:1px solid var(--border);
     }
     footer.site-footer{ flex-direction:column; align-items:flex-start; }
+  }  .admin-footer-link{
+    text-align:center;
+    padding: 10px 0 26px;
+  }
+  .admin-footer-link a{
+    color: #b9c0cb;
+    font-size: 0.72rem;
+    text-decoration:none;
+  }
+  .admin-footer-link a:hover{ color: var(--muted); text-decoration:underline; }
+
+  .admin-section{
+    max-width: 900px;
+    margin: 0 auto 50px;
+    padding-bottom: 24px;
+    border: 1px solid #d5dbe4;
+  }
+  .admin-close-btn{
+    border:1px solid var(--border);
+    background:#fff;
+    color: var(--muted);
+    padding:6px 12px;
+    border-radius:6px;
+    font-size:0.8rem;
+    cursor:pointer;
+  }
+  .admin-body{ padding: 6px 26px 8px; }
+  .admin-hint{
+    background:#f7f9fc;
+    border-left:3px solid var(--blue);
+    padding:10px 14px;
+    font-size:0.85rem;
+    color: var(--text);
+    border-radius:4px;
+    margin: 4px 0 20px;
+  }
+  .admin-form{
+    background:#fafbfc;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:16px;
+    margin-bottom:20px;
+  }
+  .admin-form-row{
+    display:flex;
+    gap:14px;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+  }
+  .admin-form label{
+    display:flex;
+    flex-direction:column;
+    font-size:0.78rem;
+    color: var(--muted);
+    font-weight:600;
+    gap:4px;
+    flex:1;
+    min-width:140px;
+  }
+  .admin-form-full{
+    display:flex;
+    flex-direction:column;
+    font-size:0.78rem;
+    color: var(--muted);
+    font-weight:600;
+    gap:4px;
+    margin-bottom:14px;
+  }
+  .admin-form input, .admin-form select{
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:8px 10px;
+    font-size:0.88rem;
+    font-family:inherit;
+    color: var(--text);
+  }
+  .admin-add-btn{
+    background: var(--navy);
+    color:#fff;
+    border:none;
+    padding:9px 16px;
+    border-radius:6px;
+    font-size:0.85rem;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .admin-add-btn:hover{ background: var(--navy-dark); }
+
+  .admin-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .admin-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:9px 12px;
+    font-size:0.85rem;
+  }
+  .admin-item .adm-date{
+    font-weight:700;
+    color: var(--navy);
+    flex-shrink:0;
+    width:88px;
+  }
+  .admin-item .adm-text{ flex:1; }
+  .admin-item .adm-del{
+    background:none;
+    border:none;
+    color: var(--red);
+    cursor:pointer;
+    font-size:0.9rem;
+  }
+  .admin-empty{
+    color: var(--muted);
+    font-size:0.85rem;
+    padding: 6px 2px 18px;
+  }
+
+  .admin-export{
+    border-top:1px solid var(--border);
+    padding-top:16px;
+  }
+  .admin-copy-btn, .admin-clear-btn{
+    border:1px solid var(--blue);
+    background:#fff;
+    color: var(--blue);
+    padding:8px 14px;
+    border-radius:6px;
+    font-size:0.82rem;
+    font-weight:600;
+    cursor:pointer;
+    margin-right:10px;
+    margin-bottom:10px;
+  }
+  .admin-clear-btn{ border-color: var(--red); color: var(--red); }
+  .admin-export-box{
+    width:100%;
+    min-height:110px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:10px;
+    font-family: monospace;
+    font-size:0.78rem;
+    color: var(--text);
+    background:#fafbfc;
   }
 </style>
 </head>
@@ -1069,6 +1220,51 @@
     <a class="social-wa" href="#">☎</a>
   </div>
 </footer>
+
+<div class="admin-footer-link">
+  <a href="#" onclick="openAdminPanel(); return false;">Admin</a>
+</div>
+
+<section class="card admin-section" id="adminSection" style="display:none;">
+  <div class="card-header">
+    <div class="title">🔒 Admin – Agenda für den Kalender</div>
+    <button class="admin-close-btn" onclick="closeAdminPanel()">✕ Schließen</button>
+  </div>
+
+  <div class="admin-body">
+    <p class="admin-hint">Trage hier wichtige Termine ein, sobald du sie erfährst. Wenn du bereit bist, sie im Kalender zu veröffentlichen, klicke auf "Code kopieren" und schicke mir (Claude) den Text — ich füge sie dann in den echten Kalender ein.</p>
+
+    <div class="admin-form">
+      <div class="admin-form-row">
+        <label>Datum
+          <input type="date" id="admDate">
+        </label>
+        <label>Farbe
+          <select id="admColor">
+            <option value="blue">Blau</option>
+            <option value="gold">Gold</option>
+            <option value="green">Grün</option>
+            <option value="purple">Lila</option>
+            <option value="red">Rot</option>
+            <option value="grey">Grau</option>
+          </select>
+        </label>
+      </div>
+      <label class="admin-form-full">Titel / Text
+        <input type="text" id="admText" placeholder="z.B. 7:30 – Gebetsstunde">
+      </label>
+      <button class="admin-add-btn" onclick="addAgendaItem()">+ Termin hinzufügen</button>
+    </div>
+
+    <div class="admin-list" id="adminList"></div>
+
+    <div class="admin-export">
+      <button class="admin-copy-btn" onclick="copyAgendaCode()">📋 Code kopieren (für den Kalender)</button>
+      <button class="admin-clear-btn" onclick="clearAgenda()">🗑️ Alles löschen</button>
+      <textarea id="admExportBox" class="admin-export-box" readonly placeholder="Hier erscheint der Code zum Kopieren..."></textarea>
+    </div>
+  </div>
+</section>
 
 <script>
 // ---------------------------------------------------------------
@@ -1364,6 +1560,134 @@ function toggleMobileView(){
 })();
 
 renderMonth();
+
+// ---------------------------------------------------------------
+// Admin – Agenda (versteckter Bereich, nur mit Passwort sichtbar)
+// Die Termine werden nur im Browser dieses Geräts gespeichert
+// (localStorage). "Code kopieren" erzeugt den fertigen Text,
+// den man Claude schicken kann, um sie in den echten Kalender
+// einzutragen.
+// ---------------------------------------------------------------
+const ADMIN_PASSWORD = 'Rosal2026'; // Du kannst dieses Passwort jederzeit ändern lassen
+const AGENDA_KEY = 'rosal-admin-agenda';
+
+function getAgenda(){
+  try{
+    return JSON.parse(localStorage.getItem(AGENDA_KEY) || '[]');
+  }catch(e){ return []; }
+}
+function saveAgenda(items){
+  try{ localStorage.setItem(AGENDA_KEY, JSON.stringify(items)); }catch(e){}
+}
+
+function openAdminPanel(){
+  const already = sessionStorage.getItem('rosal-admin-ok') === 'yes';
+  if(!already){
+    const pw = window.prompt('Admin-Passwort:');
+    if(pw !== ADMIN_PASSWORD){
+      if(pw !== null) alert('Falsches Passwort.');
+      return;
+    }
+    try{ sessionStorage.setItem('rosal-admin-ok', 'yes'); }catch(e){}
+  }
+  document.getElementById('adminSection').style.display = 'block';
+  renderAgendaList();
+  document.getElementById('adminSection').scrollIntoView({behavior:'smooth'});
+}
+
+function closeAdminPanel(){
+  document.getElementById('adminSection').style.display = 'none';
+}
+
+function addAgendaItem(){
+  const date = document.getElementById('admDate').value;
+  const color = document.getElementById('admColor').value;
+  const text = document.getElementById('admText').value.trim();
+  if(!date || !text){
+    alert('Bitte Datum und Text ausfüllen.');
+    return;
+  }
+  const items = getAgenda();
+  items.push({ date, color, text });
+  items.sort((a,b)=> a.date.localeCompare(b.date));
+  saveAgenda(items);
+  document.getElementById('admText').value = '';
+  renderAgendaList();
+}
+
+function deleteAgendaItem(index){
+  const items = getAgenda();
+  items.splice(index, 1);
+  saveAgenda(items);
+  renderAgendaList();
+}
+
+function clearAgenda(){
+  if(!confirm('Wirklich alle gespeicherten Termine löschen?')) return;
+  saveAgenda([]);
+  renderAgendaList();
+  document.getElementById('admExportBox').value = '';
+}
+
+function renderAgendaList(){
+  const wrap = document.getElementById('adminList');
+  const items = getAgenda();
+  wrap.innerHTML = '';
+  if(items.length === 0){
+    wrap.innerHTML = '<div class="admin-empty">Noch keine Termine gespeichert.</div>';
+    return;
+  }
+  items.forEach((item, idx)=>{
+    const row = document.createElement('div');
+    row.className = 'admin-item';
+    const d = new Date(item.date + 'T00:00:00');
+    const dateLabel = d.toLocaleDateString('de-DE', {day:'2-digit', month:'2-digit', year:'numeric'});
+    row.innerHTML =
+      '<span class="dot ' + dotClass(item.color) + '"></span>' +
+      '<span class="adm-date">' + dateLabel + '</span>' +
+      '<span class="adm-text">' + item.text.replace(/</g,'&lt;') + '</span>' +
+      '<button class="adm-del" onclick="deleteAgendaItem(' + idx + ')" title="Löschen">✕</button>';
+    wrap.appendChild(row);
+  });
+}
+
+function copyAgendaCode(){
+  const items = getAgenda();
+  if(items.length === 0){
+    alert('Es sind noch keine Termine gespeichert.');
+    return;
+  }
+  // Nach Jahr-Monat gruppieren, im selben Format wie monthsData im Kalender
+  const grouped = {};
+  items.forEach(item=>{
+    const [y, m, d] = item.date.split('-');
+    const key = y + '-' + parseInt(m, 10);
+    if(!grouped[key]) grouped[key] = {};
+    const day = parseInt(d, 10);
+    if(!grouped[key][day]) grouped[key][day] = [];
+    grouped[key][day].push({ c: item.color, t: item.text });
+  });
+
+  let out = '';
+  Object.keys(grouped).sort().forEach(key=>{
+    out += '// ' + key + '\n';
+    Object.keys(grouped[key]).sort((a,b)=>a-b).forEach(day=>{
+      const evts = grouped[key][day].map(e => "{c:'" + e.c + "', t:'" + e.t.replace(/'/g,"\\'") + "'}").join(', ');
+      out += '  ' + day + ': [ ' + evts + ' ],\n';
+    });
+    out += '\n';
+  });
+
+  const box = document.getElementById('admExportBox');
+  box.value = out.trim();
+  box.select();
+  try{
+    document.execCommand('copy');
+    alert('Code kopiert! Du kannst ihn jetzt Claude schicken, damit er in den echten Kalender eingetragen wird.');
+  }catch(e){
+    alert('Code steht unten im Kästchen bereit zum Kopieren.');
+  }
+}
 
 const menuToggle = document.getElementById('menuToggle');
 const mainNav = document.getElementById('mainNav');
