@@ -572,6 +572,19 @@
     border-bottom: 1px solid var(--border);
   }
   .agenda-row:last-child{ border-bottom:none; }
+  .agenda-row.is-today{
+    background: #eaf2fb;
+    margin: 0 -18px;
+    padding: 11px 18px;
+    border-radius: 6px;
+  }
+  .agenda-row.is-today .agenda-day{
+    color: var(--blue);
+  }
+  .agenda-row.is-today .agenda-dow{
+    color: var(--blue);
+    font-weight:700;
+  }
   .agenda-date{
     width:44px;
     flex-shrink:0;
@@ -738,8 +751,23 @@
     color:#c3c9d2;
     background:#fafbfc;
   }
-  table.calendar td.today{
-    background: #fdf3dc;
+  table.calendar td.is-today{
+    background: #eaf2fb;
+    outline: 3px solid var(--blue);
+    outline-offset: -3px;
+    position: relative;
+  }
+  table.calendar td.is-today .daynum{
+    color: var(--blue);
+  }
+  table.calendar td.is-today .daynum::before{
+    content: 'HEUTE';
+    display:block;
+    font-size:0.55rem;
+    font-weight:700;
+    letter-spacing:0.04em;
+    color: var(--blue);
+    text-align:right;
   }
   .evt{
     display:flex;
@@ -1754,6 +1782,9 @@ function renderCalendar(){
   const body = document.getElementById('calendarBody');
   body.innerHTML = '';
 
+  const today = new Date();
+  const todayY = today.getFullYear(), todayM = today.getMonth() + 1, todayD = today.getDate();
+
   const jsMonth = currentMonth - 1;
   const firstWeekday = new Date(currentYear, jsMonth, 1).getDay(); // 0=So
   const daysInMonth = new Date(currentYear, jsMonth + 1, 0).getDate();
@@ -1785,6 +1816,9 @@ function renderCalendar(){
     week.forEach((cell, colIndex)=>{
       const td = document.createElement('td');
       if(cell.om) td.classList.add('other-month');
+      if(!cell.om && cell.y === todayY && cell.m === todayM && cell.d === todayD){
+        td.classList.add('is-today');
+      }
 
       const num = document.createElement('div');
       num.className = 'daynum';
@@ -1891,19 +1925,23 @@ function renderAgenda(){
   const list = document.getElementById('calendarAgenda');
   list.innerHTML = '';
 
+  const today = new Date();
+  const todayY = today.getFullYear(), todayM = today.getMonth() + 1, todayD = today.getDate();
+
   const jsMonth = currentMonth - 1;
   const daysInMonth = new Date(currentYear, jsMonth + 1, 0).getDate();
   const weekdayNames = ['So','Mo','Di','Mi','Do','Fr','Sa'];
 
   for(let d = 1; d <= daysInMonth; d++){
     const dow = new Date(currentYear, jsMonth, d).getDay();
+    const isToday = (currentYear === todayY && currentMonth === todayM && d === todayD);
 
     const row = document.createElement('div');
-    row.className = 'agenda-row';
+    row.className = 'agenda-row' + (isToday ? ' is-today' : '');
 
     const dateBox = document.createElement('div');
     dateBox.className = 'agenda-date' + (dow === 0 ? ' sunday' : '');
-    dateBox.innerHTML = '<span class="agenda-day">' + d + '</span><span class="agenda-dow">' + weekdayNames[dow] + '</span>';
+    dateBox.innerHTML = '<span class="agenda-day">' + d + '</span><span class="agenda-dow">' + (isToday ? 'HEUTE' : weekdayNames[dow]) + '</span>';
     row.appendChild(dateBox);
 
     const evtsBox = document.createElement('div');
