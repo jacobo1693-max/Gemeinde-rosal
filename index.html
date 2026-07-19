@@ -664,6 +664,7 @@
     font-size:2rem;
     animation: nebBounce 1.4s ease-in-out infinite;
     flex-shrink:0;
+    cursor:pointer;
   }
   @keyframes nebBounce{
     0%, 100% { transform: translateY(0); }
@@ -673,6 +674,13 @@
     outline: 3px solid var(--gold);
     outline-offset: -3px;
     background: #fffaf0;
+  }
+  table.calendar td.next-event-flash{
+    animation: nebFlash 0.4s ease 2;
+  }
+  @keyframes nebFlash{
+    0%, 100% { background: #fffaf0; }
+    50% { background: #ffe9a8; }
   }
 
   .day-callout-wrap{
@@ -1937,6 +1945,24 @@ function renderMonth(){
   updateNavButtons();
 }
 
+function scrollToNextEventDay(){
+  // Falls die Mobil-Listenansicht aktiv ist, kurz zur Rasteransicht wechseln,
+  // damit es überhaupt ein Kästchen gibt, zu dem gesprungen werden kann.
+  const card = document.getElementById('calendarCard');
+  if(card.classList.contains('view-agenda') && window.innerWidth <= 700){
+    card.classList.remove('view-agenda');
+    card.classList.add('view-grid');
+    const btn = document.getElementById('viewToggleBtn');
+    if(btn) btn.textContent = '📋 Liste';
+  }
+  const target = document.querySelector('table.calendar td.next-event-target');
+  if(target){
+    target.scrollIntoView({behavior:'smooth', block:'center', inline:'center'});
+    target.classList.add('next-event-flash');
+    setTimeout(()=> target.classList.remove('next-event-flash'), 1200);
+  }
+}
+
 function renderNextEventBanner(){
   const banner = document.getElementById('nextEventBanner');
   const jsMonth = currentMonth - 1;
@@ -1968,7 +1994,7 @@ function renderNextEventBanner(){
       '<div class="neb-datetime">' + dateStr + (timeMatch ? ', ' + timeMatch[1] : '') + '</div>' +
       '<div class="neb-title">' + titleStr + '</div>' +
     '</div>' +
-    '<div class="neb-arrow">⬇️</div>';
+    '<div class="neb-arrow" onclick="scrollToNextEventDay()" title="Zum Tag springen">⬇️</div>';
   banner.classList.add('show');
 
   // Zieltag in der Tabelle hervorheben
