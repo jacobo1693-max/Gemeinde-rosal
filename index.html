@@ -941,6 +941,13 @@
     gap:8px;
   }
   footer.site-footer .foot-item svg{ width:16px; height:16px; opacity:0.85; }
+  a.foot-link{
+    color: inherit;
+    text-decoration: none;
+  }
+  a.foot-link:hover{
+    text-decoration: underline;
+  }
   footer.site-footer .brand-name{
     font-weight:700;
     color:#fff;
@@ -1533,9 +1540,9 @@
 </section>
 
 <footer class="site-footer">
-  <div class="foot-item">📍 Calle Principal s/n, El Rosal, Chihuahua, México</div>
-  <div class="foot-item">📞 (625) 123-4567</div>
-  <div class="foot-item">✉️ info@gemeindegottesrosal.org</div>
+  <a class="foot-item foot-link" href="https://www.google.com/maps/search/?api=1&query=Calle+Principal+s%2Fn%2C+El+Rosal%2C+Chihuahua%2C+M%C3%A9xico" target="_blank" rel="noopener">📍 Calle Principal s/n, El Rosal, Chihuahua, México</a>
+  <a class="foot-item foot-link" href="tel:+526251200323">📞 625 120 0323</a>
+  <a class="foot-item foot-link" href="mailto:info@gemeinderosal.org">✉️ info@gemeinderosal.org</a>
   <div class="brand-name">Gemeinde Gottes Rosal</div>
   <div class="social-icons">
     <a class="social-fb" href="#">f</a>
