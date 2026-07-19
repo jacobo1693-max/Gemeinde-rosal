@@ -667,11 +667,22 @@
     font-weight:800;
     line-height:1.1;
   }
-  .neb-title{
-    font-size:0.95rem;
+  .neb-events{
+    margin-top:8px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+  }
+  .neb-event-line{
+    font-size:0.92rem;
     font-weight:600;
-    margin-top:4px;
-    opacity:0.95;
+    opacity:0.97;
+    display:flex;
+    align-items:center;
+    gap:7px;
+  }
+  .neb-event-line .dot{
+    flex-shrink:0;
   }
   .neb-arrow{
     font-size:2rem;
@@ -2005,8 +2016,13 @@ function renderNextEventBanner(){
   const jsMonth = currentMonth - 1;
   const daysInMonth = new Date(currentYear, jsMonth + 1, 0).getDate();
 
+  const today = new Date();
+  const todayY = today.getFullYear(), todayM = today.getMonth() + 1, todayD = today.getDate();
+  const isCurrentMonth = (currentYear === todayY && currentMonth === todayM);
+  const startDay = isCurrentMonth ? todayD : 1;
+
   let foundDay = null, foundEvts = null;
-  for(let d = 1; d <= daysInMonth; d++){
+  for(let d = startDay; d <= daysInMonth; d++){
     const evts = getEventsFor(currentYear, currentMonth, d);
     if(evts && evts.length){
       foundDay = d;
@@ -2021,15 +2037,18 @@ function renderNextEventBanner(){
     return;
   }
 
-  const timeMatch = foundEvts[0].t.match(/(\d{1,2}:\d{2})/);
+  const isToday = isCurrentMonth && foundDay === todayD;
+  const label = isToday ? 'Heute' : 'Nächster Termin diesen Monat';
   const dateStr = foundDay + '. ' + germanMonthLabel(currentYear, currentMonth).split(' ')[0];
-  const titleStr = foundEvts.map(e => e.t.replace(/^\d{1,2}:\d{2}\s*[–-]\s*/, '')).join(' · ');
+  const eventsHtml = foundEvts.map(e =>
+    '<div class="neb-event-line"><span class="dot ' + dotClass(e.c) + '"></span>' + e.t + '</div>'
+  ).join('');
 
   banner.innerHTML =
     '<div>' +
-      '<div class="neb-label">Nächster Termin diesen Monat</div>' +
-      '<div class="neb-datetime">' + dateStr + (timeMatch ? ', ' + timeMatch[1] : '') + '</div>' +
-      '<div class="neb-title">' + titleStr + '</div>' +
+      '<div class="neb-label">' + label + '</div>' +
+      '<div class="neb-datetime">' + dateStr + '</div>' +
+      '<div class="neb-events">' + eventsHtml + '</div>' +
     '</div>' +
     '<div class="neb-arrow" onclick="scrollToNextEventDay()" title="Zum Tag springen">⬇️</div>';
   banner.classList.add('show');
