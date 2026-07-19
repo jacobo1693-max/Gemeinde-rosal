@@ -529,6 +529,25 @@
     #calendarCard.view-grid .evt{ gap:2px; margin-top:1px; }
     #calendarCard.view-grid .evt .dot{ width:4px; height:4px; margin-top:3px; }
     #calendarCard.view-grid .evt-text{ line-height:1.1; word-break:break-word; }
+    #calendarCard.view-grid .day-callout-wrap{
+      gap:4px;
+    }
+    #calendarCard.view-grid .day-callout{
+      font-size:0.42rem;
+      padding:2px 3px;
+      margin-bottom:6px;
+      gap:2px;
+      border-radius:3px;
+    }
+    #calendarCard.view-grid .day-callout::after{
+      border-left-width:3px;
+      border-right-width:3px;
+      border-top-width:3px;
+      bottom:-3px;
+    }
+    #calendarCard.view-grid .day-callout-time{
+      padding:0 2px;
+    }
   }
   table.calendar{
     width:100%;
@@ -609,6 +628,94 @@
     font-size:1.1rem;
     margin-bottom:4px;
     text-align:right;
+  }
+  .next-event-banner{
+    display:none;
+    margin: 0 22px 18px;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color:#fff;
+    border-radius: 10px;
+    padding: 16px 20px;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .next-event-banner.show{ display:flex; }
+  .neb-label{
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    opacity:0.8;
+    margin-bottom:3px;
+  }
+  .neb-datetime{
+    font-size:1.5rem;
+    font-weight:800;
+    line-height:1.1;
+  }
+  .neb-title{
+    font-size:0.95rem;
+    font-weight:600;
+    margin-top:4px;
+    opacity:0.95;
+  }
+  .neb-arrow{
+    font-size:2rem;
+    animation: nebBounce 1.4s ease-in-out infinite;
+    flex-shrink:0;
+  }
+  @keyframes nebBounce{
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+  table.calendar td.next-event-target{
+    outline: 3px solid var(--gold);
+    outline-offset: -3px;
+    background: #fffaf0;
+  }
+
+  .day-callout-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:6px;
+  }
+  .day-callout{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    background: var(--navy);
+    color:#fff;
+    font-size:0.62rem;
+    font-weight:600;
+    line-height:1;
+    padding:3px 6px;
+    border-radius:5px;
+    position:relative;
+    margin-bottom:9px;
+  }
+  .day-callout::after{
+    content:'';
+    position:absolute;
+    left:50%;
+    bottom:-5px;
+    transform:translateX(-50%);
+    width:0; height:0;
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-top:5px solid var(--navy);
+  }
+  .day-callout-time{
+    background: rgba(255,255,255,0.22);
+    padding:1px 4px;
+    border-radius:3px;
+  }
+  table.calendar td.other-month .day-callout{
+    background:#aab2c0;
+  }
+  table.calendar td.other-month .day-callout::after{
+    border-top-color:#aab2c0;
   }
   table.calendar td.other-month .daynum{
     color:#c3c9d2;
@@ -1118,6 +1225,7 @@
         <button class="print-btn no-print" onclick="window.print()" title="Kalender drucken">🖨️ Drucken</button>
       </div>
     </div>
+    <div class="next-event-banner no-print" id="nextEventBanner"></div>
     <div class="calendar-scroll">
       <table class="calendar">
         <thead>
@@ -1495,7 +1603,7 @@ const monthsData = {
       24: [ {c:'blue', t:'7:30 – Jugendstunde'} ],
       26: [ {c:'gold', t:'Kinderchor üben'}, {c:'blue', t:'10:00 – Hauptgottesdienst und Sonntagsschule'} ],
       29: [ {c:'gold', t:'6:30 – Gitarren üben'}, {c:'blue', t:'7:30 – Gebetsstunde und Kinderstunde'} ],
-      31: [ {c:'blue', t:'7:30 – Jugendstunde in Neustadt'} ],
+      31: [ {c:'grey', t:'Keine Jugendstunde in Rosal'}, {c:'blue', t:'7:30 – Jugendstunde in Neustadt'} ],
     },
     upcoming: [
       { badge:'blue',  icon:'🚌', date:'14. – 16. August 2026', title:'Gemeindeausflug', desc:'Neustädt und Rosal in Sainapuchi' },
@@ -1566,6 +1674,9 @@ const monthsData = {
 };
 
 function dotClass(c){ return 'dot dot-' + c; }
+
+const MONTH_ABBR_DE = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+function monthAbbrevDE(month1to12){ return MONTH_ABBR_DE[month1to12 - 1]; }
 
 // aktueller angezeigter Monat (Standard: Juli 2026)
 let currentYear = 2026;
@@ -1672,9 +1783,26 @@ function renderCalendar(){
       num.className = 'daynum';
       if(colIndex === 0) num.classList.add('sunday');
       num.textContent = cell.d;
-      td.appendChild(num);
 
       const evts = getEventsFor(cell.y, cell.m, cell.d);
+
+      if(evts && evts.length){
+        const dateLabel = cell.d + '.' + monthAbbrevDE(cell.m) + '.';
+        const calloutWrap = document.createElement('div');
+        calloutWrap.className = 'day-callout-wrap';
+        evts.forEach(e=>{
+          const callout = document.createElement('div');
+          callout.className = 'day-callout';
+          const timeMatch = e.t.match(/(\d{1,2}:\d{2})/);
+          callout.innerHTML = '<span class="day-callout-date">' + dateLabel + '</span>' +
+            (timeMatch ? '<span class="day-callout-time">' + timeMatch[1] + '</span>' : '');
+          calloutWrap.appendChild(callout);
+        });
+        td.appendChild(calloutWrap);
+      }
+
+      td.appendChild(num);
+
       if(evts){
         evts.forEach(e=>{
           const row = document.createElement('div');
@@ -1795,27 +1923,73 @@ function renderAgenda(){
   }
 }
 
-// Der Kalender kann von Juni 2026 bis Dezember 2027 durchblättert werden.
+// Der Kalender kann ab Juni 2026 beliebig weit in die Zukunft durchblättert werden.
 // Für Monate ohne echte Termine bleibt das Raster einfach leer -
 // es werden keine erfundenen Ereignisse oder "Zukünftiges" angezeigt.
 const MIN_YEAR = 2026, MIN_MONTH = 6;
-const MAX_YEAR = 2027, MAX_MONTH = 12;
 
 function renderMonth(){
   document.getElementById('monthLabel').textContent = germanMonthLabel(currentYear, currentMonth);
   renderCalendar();
   renderAgenda();
   renderUpcoming();
+  renderNextEventBanner();
   updateNavButtons();
+}
+
+function renderNextEventBanner(){
+  const banner = document.getElementById('nextEventBanner');
+  const jsMonth = currentMonth - 1;
+  const daysInMonth = new Date(currentYear, jsMonth + 1, 0).getDate();
+
+  let foundDay = null, foundEvts = null;
+  for(let d = 1; d <= daysInMonth; d++){
+    const evts = getEventsFor(currentYear, currentMonth, d);
+    if(evts && evts.length){
+      foundDay = d;
+      foundEvts = evts;
+      break;
+    }
+  }
+
+  if(!foundDay){
+    banner.classList.remove('show');
+    banner.innerHTML = '';
+    return;
+  }
+
+  const timeMatch = foundEvts[0].t.match(/(\d{1,2}:\d{2})/);
+  const dateStr = foundDay + '. ' + germanMonthLabel(currentYear, currentMonth).split(' ')[0];
+  const titleStr = foundEvts.map(e => e.t.replace(/^\d{1,2}:\d{2}\s*[–-]\s*/, '')).join(' · ');
+
+  banner.innerHTML =
+    '<div>' +
+      '<div class="neb-label">Nächster Termin diesen Monat</div>' +
+      '<div class="neb-datetime">' + dateStr + (timeMatch ? ', ' + timeMatch[1] : '') + '</div>' +
+      '<div class="neb-title">' + titleStr + '</div>' +
+    '</div>' +
+    '<div class="neb-arrow">⬇️</div>';
+  banner.classList.add('show');
+
+  // Zieltag in der Tabelle hervorheben
+  document.querySelectorAll('table.calendar td.next-event-target').forEach(td=>{
+    td.classList.remove('next-event-target');
+  });
+  const bodyRows = document.querySelectorAll('#calendarBody tr');
+  bodyRows.forEach(tr=>{
+    tr.querySelectorAll('td').forEach(td=>{
+      const numEl = td.querySelector('.daynum');
+      if(numEl && !td.classList.contains('other-month') && parseInt(numEl.textContent, 10) === foundDay){
+        td.classList.add('next-event-target');
+      }
+    });
+  });
 }
 
 function updateNavButtons(){
   const prevBtn = document.getElementById('prevMonthBtn');
-  const nextBtn = document.getElementById('nextMonthBtn');
   const atMin = (currentYear === MIN_YEAR && currentMonth === MIN_MONTH);
-  const atMax = (currentYear === MAX_YEAR && currentMonth === MAX_MONTH);
   if(prevBtn){ prevBtn.disabled = atMin; }
-  if(nextBtn){ nextBtn.disabled = atMax; }
 }
 
 function changeMonth(dir){
@@ -1824,9 +1998,8 @@ function changeMonth(dir){
   if(newMonth === 0){ newMonth = 12; newYear -= 1; }
   if(newMonth === 13){ newMonth = 1; newYear += 1; }
 
-  // Innerhalb der erlaubten Spanne bleiben
+  // Nicht vor Juni 2026 zurückgehen
   if(newYear < MIN_YEAR || (newYear === MIN_YEAR && newMonth < MIN_MONTH)) return;
-  if(newYear > MAX_YEAR || (newYear === MAX_YEAR && newMonth > MAX_MONTH)) return;
 
   currentMonth = newMonth;
   currentYear = newYear;
@@ -2036,4 +2209,3 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
-
