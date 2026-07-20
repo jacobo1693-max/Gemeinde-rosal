@@ -2424,7 +2424,11 @@ async function generateCalendarPDF(){
   const wasAgenda = card.classList.contains('view-agenda');
   if(wasAgenda){ card.classList.remove('view-agenda'); card.classList.add('view-grid'); }
 
-  const target = document.querySelector('.calendar-scroll');
+  // Buttons/Steuerelemente vorübergehend ausblenden, damit sie nicht mit aufs PDF kommen
+  const hiddenEls = document.querySelectorAll('#kalender .no-print');
+  hiddenEls.forEach(el => { el.dataset.pdfHidden = el.style.visibility || 'visible'; el.style.visibility = 'hidden'; });
+
+  const target = document.getElementById('kalender');
 
   try{
     const canvas = await html2canvas(target, { scale: 2, backgroundColor: '#ffffff' });
@@ -2461,6 +2465,7 @@ async function generateCalendarPDF(){
     }
   } finally{
     if(wasAgenda){ card.classList.remove('view-grid'); card.classList.add('view-agenda'); }
+    hiddenEls.forEach(el => { el.style.visibility = el.dataset.pdfHidden || 'visible'; delete el.dataset.pdfHidden; });
     btn.disabled = false;
   }
 }
