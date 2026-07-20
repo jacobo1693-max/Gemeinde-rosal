@@ -1161,6 +1161,22 @@
     color: var(--text);
     background:#fafbfc;
   }
+  .admin-pdf-section{
+    border-top:1px solid var(--border);
+    margin-top:22px;
+    padding-top:18px;
+  }
+  .admin-pdf-title{
+    color: var(--navy);
+    font-size:0.95rem;
+    margin:0 0 6px;
+  }
+  .admin-pdf-status{
+    display:inline-block;
+    margin-left:10px;
+    font-size:0.82rem;
+    color: var(--muted);
+  }
   /* ---------- Fotos ---------- */
   .fotos-section{
     max-width: 1160px;
@@ -1595,8 +1611,18 @@
       <button class="admin-clear-btn" onclick="clearAgenda()">🗑️ Alles löschen</button>
       <textarea id="admExportBox" class="admin-export-box" readonly placeholder="Hier erscheint der Code zum Kopieren..."></textarea>
     </div>
+
+    <div class="admin-pdf-section">
+      <h4 class="admin-pdf-title">📄 Kalender als PDF teilen</h4>
+      <p class="admin-hint">Erstellt ein PDF vom Kalender des aktuell angezeigten Monats. Auf dem Handy öffnet sich direkt das Teilen-Menü (dort WhatsApp auswählen); am Computer wird das PDF heruntergeladen.</p>
+      <button class="admin-add-btn" id="pdfShareBtn" onclick="generateCalendarPDF()">📄 PDF erstellen &amp; teilen</button>
+      <span id="pdfStatus" class="admin-pdf-status"></span>
+    </div>
   </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 // ---------------------------------------------------------------
@@ -2378,6 +2404,64 @@ function copyAgendaCode(){
     alert('Code kopiert! Du kannst ihn jetzt Claude schicken, damit er in den echten Kalender eingetragen wird.');
   }catch(e){
     alert('Code steht unten im Kästchen bereit zum Kopieren.');
+  }
+}
+
+async function generateCalendarPDF(){
+  const btn = document.getElementById('pdfShareBtn');
+  const status = document.getElementById('pdfStatus');
+  const card = document.getElementById('calendarCard');
+
+  if(typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined'){
+    status.textContent = 'PDF-Werkzeuge konnten nicht geladen werden (Internet prüfen).';
+    return;
+  }
+
+  btn.disabled = true;
+  status.textContent = 'PDF wird erstellt …';
+
+  // Sicherstellen, dass die Tabellenansicht sichtbar ist (nicht die Mobil-Listenansicht)
+  const wasAgenda = card.classList.contains('view-agenda');
+  if(wasAgenda){ card.classList.remove('view-agenda'); card.classList.add('view-grid'); }
+
+  const target = document.querySelector('.calendar-scroll');
+
+  try{
+    const canvas = await html2canvas(target, { scale: 2, backgroundColor: '#ffffff' });
+    const imgData = canvas.toDataURL('image/png');
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({
+      orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
+      unit: 'px',
+      format: [canvas.width, canvas.height]
+    });
+    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+
+    const fileName = 'Kalender_' + germanMonthLabel(currentYear, currentMonth).replace(' ', '_') + '.pdf';
+    const pdfBlob = pdf.output('blob');
+    const pdfFile = new File([pdfBlob], fileName, { type: 'application/pdf' });
+
+    if(navigator.canShare && navigator.canShare({ files: [pdfFile] })){
+      await navigator.share({
+        files: [pdfFile],
+        title: 'Gemeindekalender',
+        text: 'Gemeindekalender – ' + germanMonthLabel(currentYear, currentMonth)
+      });
+      status.textContent = 'Geteilt!';
+    } else {
+      pdf.save(fileName);
+      status.textContent = 'PDF heruntergeladen (Teilen-Menü nicht verfügbar auf diesem Gerät).';
+    }
+  } catch(err){
+    if(err && err.name === 'AbortError'){
+      status.textContent = '';
+    } else {
+      status.textContent = 'Fehler beim Erstellen des PDFs.';
+    }
+  } finally{
+    if(wasAgenda){ card.classList.remove('view-grid'); card.classList.add('view-agenda'); }
+    btn.disabled = false;
   }
 }
 
