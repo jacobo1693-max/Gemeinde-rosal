@@ -481,18 +481,35 @@
   }
   .view-toggle-btn:hover{ background: #f2f7fd; }
 
+  @page{
+    size: letter portrait;
+    margin: 12mm;
+  }
   @media print{
     .no-print, header.site-header, .hero, .announcements-section,
-    .bibeltext-section, .team-section, footer.site-footer{
+    .bibeltext-section, .team-section, footer.site-footer,
+    .next-event-banner, .admin-footer-link, .admin-section{
       display:none !important;
     }
-    body{ background:#fff; }
-    .content-grid{ max-width:100%; padding:0; margin:0; }
+    html, body{ background:#fff; }
+    body{ padding-top:0 !important; }
+    .content-grid{ max-width:100%; padding:0; margin:0; gap:0; }
+    #kalender > .card:not(#calendarCard){ display:none !important; }
     #calendarCard{ box-shadow:none; border:none; }
+    .card-header{ padding:0 0 8px; }
+    .card-header .title{ font-size:1rem; }
+    .month-nav{ font-size:0.85rem; }
     .calendar-scroll{ display:block !important; overflow:visible; }
     .calendar-agenda{ display:none !important; }
-    .calendar-scroll table.calendar{ min-width:0; width:100%; }
-    table.calendar td{ min-height:70px; }
+    .calendar-scroll table.calendar{ min-width:0; width:100%; table-layout:fixed; }
+    table.calendar th{ font-size:0.6rem; padding:4px 2px; }
+    table.calendar td{ min-height:0; height:auto; padding:3px 4px; font-size:0.6rem; }
+    table.calendar td .daynum{ font-size:0.75rem; }
+    .day-callout{ font-size:0.42rem; padding:1px 3px; margin-bottom:3px; }
+    .day-callout::after{ border-width:3px; bottom:-3px; }
+    .evt{ margin-top:1px; }
+    .evt .dot{ width:4px; height:4px; margin-top:2px; }
+    .calendar-footer{ display:none !important; }
   }
 
   @media (max-width: 700px){
