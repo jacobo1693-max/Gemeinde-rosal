@@ -2605,10 +2605,15 @@ async function generateCalendarPDF(){
   const hiddenEls = document.querySelectorAll('#kalender .no-print');
   hiddenEls.forEach(el => { el.dataset.pdfHidden = el.style.visibility || 'visible'; el.style.visibility = 'hidden'; });
 
+  // Die großen dreisprachigen Detail-Kästen (falls vorhanden) ausblenden,
+  // damit das PDF kompakt bleibt und nicht zu groß/hoch wird
+  const hiddenSchedules = document.querySelectorAll('#kalender .uld-wrap');
+  hiddenSchedules.forEach(el => { el.dataset.pdfHidden = el.style.display || ''; el.style.display = 'none'; });
+
   const target = document.getElementById('kalender');
 
   try{
-    const canvas = await html2canvas(target, { scale: 2, backgroundColor: '#ffffff' });
+    const canvas = await html2canvas(target, { scale: 2, backgroundColor: '#ffffff', useCORS: true });
     const imgData = canvas.toDataURL('image/png');
 
     const { jsPDF } = window.jspdf;
@@ -2638,11 +2643,13 @@ async function generateCalendarPDF(){
     if(err && err.name === 'AbortError'){
       status.textContent = '';
     } else {
-      status.textContent = 'Fehler beim Erstellen des PDFs.';
+      console.error('PDF-Fehler:', err);
+      status.textContent = 'Fehler: ' + (err && err.message ? err.message : String(err));
     }
   } finally{
     if(wasAgenda){ card.classList.remove('view-grid'); card.classList.add('view-agenda'); }
     hiddenEls.forEach(el => { el.style.visibility = el.dataset.pdfHidden || 'visible'; delete el.dataset.pdfHidden; });
+    hiddenSchedules.forEach(el => { el.style.display = el.dataset.pdfHidden || ''; delete el.dataset.pdfHidden; });
     btn.disabled = false;
   }
 }
