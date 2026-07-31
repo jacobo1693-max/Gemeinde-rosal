@@ -1387,14 +1387,14 @@
 <section class="card announcements-section" id="bekanntmachungen">
   <div class="card-header">
     <div class="title">📢 Bekanntmachungen</div>
-    <div class="ann-date">Sonntag, 26. Juli 2026</div>
+    <div class="ann-date" id="autoAnnDate">Sonntag</div>
   </div>
   <div class="announcements-content">
 
-    <p class="ann-reader"><strong>Bruder Delfino Froese</strong> wird uns den Bibeltext lesen.</p>
+    <p class="ann-reader" id="autoAnnReader"><strong>—</strong> wird uns den Bibeltext lesen.</p>
 
     <h3>Sonntag</h3>
-    <ul>
+    <ul id="autoSonntagList">
       <li>Das Opfer kann wie gewohnt am Ausgang eingelegt werden.
         <ul>
           <li>Der obere Korb ist für die allgemeinen Opfer.</li>
@@ -1402,29 +1402,23 @@
         </ul>
       </li>
       <li>Nach dem Gottesdienst findet die Sonntagsschule statt.</li>
-      <li>Am Mittwoch, den 29. Juli, ist Gitarren üben um 6:30 pm.</li>
-      <li>Am Mittwoch, den 29. Juli, ist Gebetsstunde um 7:30 pm.</li>
-      <li>Diesen Freitag findet keine Jugendstunde in Rosal statt.</li>
-      <li>Nächsten Sonntag ist der Hauptgottesdienst um 10:00 am mit Sonntagsschule.</li>
     </ul>
 
     <h3>Zukünftiges</h3>
-    <div class="ann-subblock">
-      <h4>Gemeindeausflug</h4>
-      <p>Vom 14. bis 16. August findet der gemeinsame Gemeindeausflug der Gemeinden Rosal und Neustadt nach Sainapuchi statt. Bitte meldet euch in der WhatsApp-Gruppe der Gemeinde an. Wenn möglich, bitten wir euch, euch bis zum 31. Juli anzumelden. Die Sonntagsschullehrer möchten gerne wissen, wie viele Kinder teilnehmen werden, damit sie entsprechend planen können.</p>
-    </div>
+    <div id="autoZukunftiges"></div>
 
     <h3>Gebetsanliegen</h3>
     <ul>
-      <li>Wir wollen für alle Kranken beten, besonders für <strong>Isaak Enns</strong>, der inzwischen wieder zu Hause ist und dem es schon viel besser geht. Wir danken Gott dafür und bitten weiterhin um seine Gesundheit. Wir wollen auch für alle anderen Kranken beten.</li>
-      <li>Wir wollen Gott danken für den schönen Regen, den wir schon bekommen haben, und ihn bitten, dass er uns auch weiterhin Regen schenkt.</li>
+      <li>Wir wollen für alle Kranken in unserer Gemeinde beten, dass Gott ihnen Kraft und Genesung schenkt.</li>
+      <li>Wir wollen für unseren Pastor und den Vorstand beten, dass Gott ihnen Weisheit und Leitung schenkt.</li>
+      <li>Wir wollen Gott danken für alles, was er uns in dieser Woche geschenkt hat.</li>
     </ul>
 
     <h3 class="ann-bibeltext-heading">Bibeltext</h3>
-    <p class="ann-verse-ref">3. Johannes 1:1-4 — <a href="#bibeltext" class="ann-verse-link">zum vollständigen Text in 4 Sprachen ↓</a></p>
+    <p class="ann-verse-ref" id="autoAnnVerse">— <a href="#bibeltext" class="ann-verse-link">zum vollständigen Text in 4 Sprachen ↓</a></p>
 
     <div class="ann-closing">
-      <p><span class="ann-blank">(Kinderchor)</span> wird uns ein Lied vortragen.</p>
+      <p><span class="ann-blank">(________________)</span> wird uns ein Lied vortragen.</p>
       <p>Danach folgt die Botschaft von Bruder Hans Klassen.</p>
     </div>
 
@@ -2455,6 +2449,102 @@ function toggleMobileView(){
 })();
 
 renderMonth();
+
+// ---------------------------------------------------------------
+// Bekanntmachungen: Datum, Sonntags-Punkte und Zukünftiges werden
+// automatisch aus dem Kalender erzeugt, basierend auf dem heutigen
+// Datum. Nur Bibeltext (+ Leser) und Gebetsanliegen bleiben manuell.
+// ---------------------------------------------------------------
+function renderAutoAnnouncement(){
+  const today = new Date();
+  const dow = today.getDay(); // 0 = Sonntag
+  const sunday = new Date(today);
+  if(dow !== 0){ sunday.setDate(today.getDate() + (7 - dow)); }
+
+  const mittwoch = new Date(sunday); mittwoch.setDate(sunday.getDate() + 3);
+  const freitag = new Date(sunday); freitag.setDate(sunday.getDate() + 5);
+  const nextSunday = new Date(sunday); nextSunday.setDate(sunday.getDate() + 7);
+
+  function ymd(d){ return { y: d.getFullYear(), m: d.getMonth() + 1, d: d.getDate() }; }
+  function monthName(d){ return germanMonthLabel(d.getFullYear(), d.getMonth() + 1).split(' ')[0]; }
+
+  // Datum im Kopf
+  const sYmd = ymd(sunday);
+  const dateEl = document.getElementById('autoAnnDate');
+  if(dateEl){
+    dateEl.textContent = 'Sonntag, ' + String(sYmd.d).padStart(2,'0') + '. ' + monthName(sunday) + ' ' + sYmd.y;
+  }
+
+  // Sonntags-Liste
+  const listEl = document.getElementById('autoSonntagList');
+  if(listEl){
+    // Heutige Sonderpunkte (z.B. Chor, Gemeinschaftsabend) - ohne den Standard-Hauptgottesdienst
+    const todaysEvents = getEventsFor(sYmd.y, sYmd.m, sYmd.d) || [];
+    todaysEvents
+      .filter(e => !e.t.includes('Hauptgottesdienst'))
+      .forEach(e => addLi(listEl, e.t + '.'));
+
+    addLi(listEl, 'Nach dem Gottesdienst findet die Sonntagsschule statt.');
+
+    // Mittwoch dieser Woche
+    const mYmd = ymd(mittwoch);
+    const mEvents = getEventsFor(mYmd.y, mYmd.m, mYmd.d);
+    if(mEvents){
+      mEvents.forEach(e => addLi(listEl, 'Am Mittwoch, den ' + mYmd.d + '. ' + monthName(mittwoch) + ', ist ' + e.t + '.'));
+    }
+
+    // Freitag dieser Woche
+    const fYmd = ymd(freitag);
+    const fEvents = getEventsFor(fYmd.y, fYmd.m, fYmd.d);
+    if(fEvents){
+      fEvents.forEach(e => addLi(listEl, 'Am Freitag, den ' + fYmd.d + '. ' + monthName(freitag) + ', ist ' + e.t + '.'));
+    }
+
+    // Nächster Sonntag
+    const nsYmd = ymd(nextSunday);
+    const nsEvents = getEventsFor(nsYmd.y, nsYmd.m, nsYmd.d) || [];
+    const hasHauptgottesdienst = nsEvents.some(e => e.t.includes('Hauptgottesdienst'));
+    if(hasHauptgottesdienst || nsEvents.length === 0){
+      addLi(listEl, 'Nächsten Sonntag ist der Hauptgottesdienst um 10:00 am mit Sonntagsschule.');
+    }
+    nsEvents
+      .filter(e => !e.t.includes('Hauptgottesdienst'))
+      .forEach(e => addLi(listEl, 'Nächsten Sonntag: ' + e.t + '.'));
+  }
+
+  // Zukünftiges (gleiche Logik/Liste wie im Kalender, bezogen auf das heutige Datum)
+  const zukEl = document.getElementById('autoZukunftiges');
+  if(zukEl){
+    zukEl.innerHTML = '';
+    let items = GLOBAL_UPCOMING.filter(item =>
+      item.year > sYmd.y || (item.year === sYmd.y && item.month >= sYmd.m)
+    );
+    const cl = getNextCentroLuzEvent(sYmd.y, sYmd.m);
+    if(cl && !items.some(it => it.title === cl.title && it.year === cl.year && it.month === cl.month)) items.push(cl);
+    const ga = getNextGemeinschaftsabend(sYmd.y, sYmd.m);
+    if(ga && !items.some(it => it.title === ga.title && it.year === ga.year && it.month === ga.month)) items.push(ga);
+    items.sort((a,b)=> (a.year-b.year) || (a.month-b.month) || ((a.day||0)-(b.day||0)));
+
+    if(items.length === 0){
+      zukEl.innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Zur Zeit keine weiteren Termine.</p>';
+    } else {
+      items.slice(0, 3).forEach(item=>{
+        const block = document.createElement('div');
+        block.className = 'ann-subblock';
+        block.innerHTML = '<h4>' + item.title + '</h4><p>' + item.date + (item.desc ? ' — ' + item.desc : '') + '</p>';
+        zukEl.appendChild(block);
+      });
+    }
+  }
+}
+
+function addLi(ul, text){
+  const li = document.createElement('li');
+  li.textContent = text;
+  ul.appendChild(li);
+}
+
+renderAutoAnnouncement();
 
 // ---------------------------------------------------------------
 // Admin – Agenda (versteckter Bereich, nur mit Passwort sichtbar)
