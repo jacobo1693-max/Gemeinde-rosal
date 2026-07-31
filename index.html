@@ -2455,11 +2455,45 @@ renderMonth();
 // automatisch aus dem Kalender erzeugt, basierend auf dem heutigen
 // Datum. Nur Bibeltext (+ Leser) und Gebetsanliegen bleiben manuell.
 // ---------------------------------------------------------------
+// Wer liest den Bibeltext, nach Datum (Sonntag). Einfach weitere Zeilen
+// im gleichen Format ergänzen, wenn eine neue Liste kommt.
+const READERS = {
+  '2026-8-2':  'Willy Klassen',
+  '2026-8-9':  'Jacob Wiebe',
+  '2026-8-23': 'Cornelius Fehr',
+  '2026-8-30': 'Willy Friessen',
+  '2026-9-6':  'Johan Neufeld',
+  '2026-9-13': 'Johnny Fehr',
+  '2026-9-20': 'Pancho Thiessen',
+  '2026-9-27': 'Johnny Peters',
+  '2026-10-4':  'Delfino Froesse',
+  '2026-10-11': 'Corny Froesse',
+  '2026-10-18': 'Jacob Wiebe',
+  '2026-10-25': 'Willy Friesen',
+  '2026-11-1':  'Cornelius Fehr',
+  '2026-11-8':  'Erwin Rempel',
+  '2026-11-15': 'Johan Neufeld',
+  '2026-11-22': 'Armando Enns',
+  '2026-11-29': 'Pancho Thiessen',
+  '2026-12-6':  'Peter Peters',
+  '2026-12-13': 'Delfino Froesse',
+  '2026-12-20': 'Martin Wiebe',
+  '2026-12-25': 'Jacob Wiebe',
+  '2026-12-27': 'Pancho Friesen',
+};
+
 function renderAutoAnnouncement(){
   const today = new Date();
-  const dow = today.getDay(); // 0 = Sonntag
+  const dow = today.getDay(); // 0=So, 1=Mo, 2=Di, 3=Mi, 4=Do, 5=Fr, 6=Sa
   const sunday = new Date(today);
-  if(dow !== 0){ sunday.setDate(today.getDate() + (7 - dow)); }
+  if(dow >= 1 && dow <= 3){
+    // Montag–Mittwoch: noch den vergangenen Sonntag zeigen
+    sunday.setDate(today.getDate() - dow);
+  } else if(dow >= 4){
+    // Donnerstag–Samstag: schon auf den kommenden Sonntag umschalten
+    sunday.setDate(today.getDate() + (7 - dow));
+  }
+  // dow === 0 (Sonntag): sunday bleibt heute
 
   const mittwoch = new Date(sunday); mittwoch.setDate(sunday.getDate() + 3);
   const freitag = new Date(sunday); freitag.setDate(sunday.getDate() + 5);
@@ -2473,6 +2507,23 @@ function renderAutoAnnouncement(){
   const dateEl = document.getElementById('autoAnnDate');
   if(dateEl){
     dateEl.textContent = 'Sonntag, ' + String(sYmd.d).padStart(2,'0') + '. ' + monthName(sunday) + ' ' + sYmd.y;
+  }
+
+  // Bibeltext-Leser
+  const readerEl = document.getElementById('autoAnnReader');
+  const sundayEvents = getEventsFor(sYmd.y, sYmd.m, sYmd.d) || [];
+  const keinGottesdienst = sundayEvents.some(e => e.t.toLowerCase().includes('kein gottesdienst'));
+  if(readerEl){
+    if(keinGottesdienst){
+      readerEl.style.display = 'none';
+    } else {
+      readerEl.style.display = '';
+      const readerKey = sYmd.y + '-' + sYmd.m + '-' + sYmd.d;
+      const readerName = READERS[readerKey];
+      readerEl.innerHTML = readerName
+        ? '<strong>Bruder ' + readerName + '</strong> wird uns den Bibeltext lesen.'
+        : '<strong>—</strong> wird uns den Bibeltext lesen.';
+    }
   }
 
   // Sonntags-Liste
