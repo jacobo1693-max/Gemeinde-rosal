@@ -1983,6 +1983,19 @@ function renderCalendar(){
     });
     body.appendChild(tr);
   }
+
+  equalizeCalendarRowHeights();
+}
+
+function equalizeCalendarRowHeights(){
+  const scrollWrap = document.querySelector('.calendar-scroll');
+  if(!scrollWrap || getComputedStyle(scrollWrap).display === 'none') return;
+  const cells = document.querySelectorAll('#calendarBody td');
+  if(!cells.length) return;
+  cells.forEach(td => { td.style.height = ''; });
+  let maxH = 0;
+  cells.forEach(td => { const h = td.offsetHeight; if(h > maxH) maxH = h; });
+  cells.forEach(td => { td.style.height = maxH + 'px'; });
 }
 
 // ---------------------------------------------------------------
@@ -2442,6 +2455,7 @@ function toggleMobileView(){
     card.classList.add('view-grid');
     btn.textContent = '📋 Liste';
     try{ localStorage.setItem('rosal-calendar-view', 'grid'); }catch(e){}
+    equalizeCalendarRowHeights();
   }
 }
 
@@ -2603,6 +2617,15 @@ function addLi(ul, text){
 }
 
 renderAutoAnnouncement();
+
+// Beim Drucken die per JS gleichgesetzten Zeilenhöhen kurz zurücksetzen,
+// damit das kompakte Druck-Layout (@media print) korrekt greift.
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('#calendarBody td').forEach(td => { td.style.height = ''; });
+});
+window.addEventListener('afterprint', () => {
+  equalizeCalendarRowHeights();
+});
 
 // ---------------------------------------------------------------
 // Admin – Agenda (versteckter Bereich, nur mit Passwort sichtbar)
