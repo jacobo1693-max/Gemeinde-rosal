@@ -767,13 +767,10 @@
     border-top-color:#aab2c0;
   }
   table.calendar td.other-month .daynum{
-    color:#c3c9d2;
+    visibility: hidden;
   }
   table.calendar td .daynum.sunday{
     color: var(--red);
-  }
-  table.calendar td.other-month .daynum.sunday{
-    color:#e3b3af;
   }
   table.calendar td.other-month{
     color:#c3c9d2;
@@ -790,12 +787,16 @@
   }
   table.calendar td.is-today .daynum::before{
     content: 'HEUTE';
-    display:block;
-    font-size:0.55rem;
+    display:inline-block;
+    font-size:0.5rem;
     font-weight:700;
-    letter-spacing:0.04em;
+    letter-spacing:0.03em;
     color: var(--blue);
-    text-align:right;
+    background: rgba(47,111,179,0.12);
+    padding:1px 4px;
+    border-radius:3px;
+    margin-right:4px;
+    vertical-align:middle;
   }
   .evt{
     display:flex;
@@ -1799,9 +1800,15 @@ function dotClass(c){ return 'dot dot-' + c; }
 const MONTH_ABBR_DE = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
 function monthAbbrevDE(month1to12){ return MONTH_ABBR_DE[month1to12 - 1]; }
 
-// aktueller angezeigter Monat (Standard: Juli 2026)
-let currentYear = 2026;
-let currentMonth = 7; // 1-12
+// aktueller angezeigter Monat: automatisch der heutige Monat
+// (mit Sicherheitsgrenze, damit nie vor Juni 2026 angezeigt wird)
+const _today = new Date();
+let currentYear = _today.getFullYear();
+let currentMonth = _today.getMonth() + 1; // 1-12
+if(currentYear < 2026 || (currentYear === 2026 && currentMonth < 6)){
+  currentYear = 2026;
+  currentMonth = 6;
+}
 
 function monthKey(y, m){ return y + '-' + m; }
 
@@ -1939,7 +1946,7 @@ function renderCalendar(){
       if(colIndex === 0) num.classList.add('sunday');
       num.textContent = cell.d;
 
-      const evts = getEventsFor(cell.y, cell.m, cell.d);
+      const evts = cell.om ? null : getEventsFor(cell.y, cell.m, cell.d);
 
       if(evts && evts.length){
         const dateLabel = cell.d + '.' + monthAbbrevDE(cell.m) + '.';
