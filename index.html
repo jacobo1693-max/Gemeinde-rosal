@@ -1773,6 +1773,7 @@ const monthsData = {
   "2026-9": {
     label: "September 2026",
     events: {
+      14: [ {c:'green', t:'7:00 pm – Programm Centro Luz en mi Camino (Gruppe 2)'}, {c:'grey', t:'Wenn es dir nicht möglich ist mitzumachen, suche dir bitte selbst einen Ersatz, damit die Gruppe vollständig ist'}, {c:'grey', t:'Bitte bring auch dein Glaubenslieder-Buch mit'} ],
       16: [ {c:'grey', t:'Kein Gottesdienst – Ausflug mit Neustadt zusammen'} ],
       20: [ {c:'gold', t:'Worship-Team singt ein besonderes Lied'}, {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'5:00 pm – Gemeinschaftsabend im Gym: Abendbrot, jeder bringt Essen und Getränke mit, Kaffee wird gestellt'} ],
       23: [ {c:'purple', t:'7:30 pm – Abendversammlung'} ],
@@ -2029,6 +2030,25 @@ function equalizeCalendarRowHeights(){
 // verschwindet ein Juli-Termin von selbst).
 // ---------------------------------------------------------------
 const GLOBAL_UPCOMING = [
+  { year:2026, month:9,  day:14, date:'14. September 2026',         badge:'green',  icon:'🎤', title:'Programm Centro Luz en mi Camino', desc:'7:00 pm – Gruppe 2',
+    schedule: {
+      de: [
+        '7:00 pm – Gruppe 2 ist an der Reihe.',
+        'Wenn es dir nicht möglich ist mitzumachen, suche dir bitte selbst einen Ersatz, damit die Gruppe vollständig ist.',
+        'Bitte bring auch dein Glaubenslieder-Buch mit.'
+      ],
+      es: [
+        '7:00 pm – Le toca al Grupo 2.',
+        'Si no te es posible participar, por favor busca tú mismo un reemplazo, para que el grupo esté completo.',
+        'Trae también tu libro de cantos de fe (Glaubenslieder).'
+      ],
+      en: [
+        '7:00 pm – Group 2\'s turn.',
+        'If you are unable to take part, please find a replacement yourself so the group is complete.',
+        'Please also bring your hymn book (Glaubenslieder).'
+      ]
+    }
+  },
   { year:2026, month:8,  day:14, date:'14. – 16. August 2026',      badge:'blue',   icon:'🚌', title:'Gemeindeausflug',       desc:'Neustädt und Rosal in Sainapuchi',
     schedule: {
       de: [
