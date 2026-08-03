@@ -1873,6 +1873,12 @@ function computeDefaultWeeklyEvent(year, month, day){
     if(nth === 1){
       const choir = (month % 2 === 1) ? 'Gemeindechor üben' : 'Frauenchor üben';
       events.push({c:'gold', t:choir});
+      events.push({c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'});
+      return events;
+    } else if(nth === 2){
+      events.push({c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'});
+      events.push({c:'gold', t:'5:00 pm – Minijugend'});
+      return events;
     } else if(nth === 3){
       events.push({c:'purple', t:'Worship-Team singt ein besonderes Lied'});
       // Gemeinschaftsabend: alle 2 Monate ab Juli 2026, abwechselnd Haus/Gym
