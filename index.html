@@ -412,6 +412,35 @@
     margin:0;
     font-size:1.02rem;
   }
+  .mission-section{
+    max-width: 1160px;
+    margin: 0 auto 30px;
+    padding: 26px 28px;
+  }
+  .mission-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .mission-block{
+    text-align:center;
+    padding: 10px 14px;
+  }
+  .mission-icon{
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .mission-block h3{
+    color: var(--navy);
+    font-size: 1.1rem;
+    margin: 0 0 8px;
+  }
+  .mission-placeholder{
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
   .content-grid{
     display:grid;
     grid-template-columns: 1fr;
@@ -1344,7 +1373,23 @@
   <p>Willkommen auf der offiziellen Webseite<br>der Gemeinde Gottes Rosal.</p>
 </section>
 
+<section class="card mission-section" id="mission">
+  <div class="mission-grid">
+    <div class="mission-block">
+      <div class="mission-icon">🎯</div>
+      <h3>Mission</h3>
+      <p class="mission-placeholder">Hier erscheint bald die Mission unserer Gemeinde. Schick mir den Text, und ich füge ihn hier ein.</p>
+    </div>
+    <div class="mission-block">
+      <div class="mission-icon">🌅</div>
+      <h3>Vision</h3>
+      <p class="mission-placeholder">Hier erscheint bald die Vision unserer Gemeinde. Schick mir den Text, und ich füge ihn hier ein.</p>
+    </div>
+  </div>
+</section>
+
 <div class="content-grid" id="kalender">
+
 
   <div class="card" id="calendarCard">
     <div class="card-header">
