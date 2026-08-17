@@ -1827,6 +1827,7 @@ const monthsData = {
   "2026-12": {
     label: "Dezember 2026",
     events: {
+      17: [ {c:'green', t:'Weihnachtsprogramm der Schule'} ],
       19: [ {c:'grey', t:'Kein Männerfrühstück'} ],
       23: [ {c:'grey', t:'Keine Gebetsstunde'} ],
       25: [ {c:'red', t:'10:00 am – Weihnachtsbotschaft'} ],
@@ -1840,6 +1841,13 @@ const monthsData = {
     events: {
       1: [ {c:'gold', t:'10:00 am – Neujahrsgottesdienst'} ],
       20: [ {c:'gold', t:'6:30 pm – Geschäftsversammlung'} ],
+    }
+  },
+
+  "2027-5": {
+    label: "Mai 2027",
+    events: {
+      12: [ {c:'green', t:'Musikabend der Schule'} ],
     }
   }
 
@@ -2061,6 +2069,8 @@ function equalizeCalendarRowHeights(){
 // verschwindet ein Juli-Termin von selbst).
 // ---------------------------------------------------------------
 const GLOBAL_UPCOMING = [
+  { year:2027, month:5,  day:12, date:'12. Mai 2027',                badge:'green',  icon:'🎵', title:'Musikabend der Schule', desc:'' },
+  { year:2026, month:12, day:17, date:'17. Dezember 2026',           badge:'green',  icon:'🎄', title:'Weihnachtsprogramm der Schule', desc:'' },
   { year:2026, month:11, day:22, date:'22. November 2026',          badge:'purple', icon:'🍞', title:'Verordnung Abendmahl',  desc:'10:00 am – Hauptgottesdienst (keine Sonntagsschule)' },
   { year:2026, month:9,  day:14, date:'14. September 2026',         badge:'green',  icon:'🎤', title:'Programm Centro Luz en mi Camino', desc:'7:00 pm – Gruppe 2',
     schedule: {
