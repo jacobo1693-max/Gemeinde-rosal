@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evangeliums Posaune – Gemeinde Gottes Rosal</title>
+<link rel="icon" type="image/png" href="icon-192.png">
+<style>
+  :root{
+    --navy: #3c2a1e;
+    --navy-dark: #2a1d14;
+    --blue: #6f4e37;
+    --bg: #f6efe3;
+    --card-bg: #ffffff;
+    --text: #2b2620;
+    --muted: #8a8172;
+    --border: #e8e2d3;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header.site-header{
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding: 14px 40px;
+  }
+  header.site-header img{
+    width:40px; height:40px; object-fit:contain;
+  }
+  header.site-header .brand-text .name{
+    font-weight:700;
+    font-size:1.1rem;
+    color: var(--navy);
+    line-height:1.1;
+  }
+  header.site-header a{
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  main{
+    max-width: 640px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align:center;
+  }
+  .icon{
+    font-size:3rem;
+    margin-bottom: 10px;
+  }
+  h1{
+    color: var(--navy);
+    font-size: 1.8rem;
+    margin: 0 0 14px;
+  }
+  p.desc{
+    color: var(--muted);
+    font-size: 1rem;
+    line-height:1.6;
+    margin: 0 0 30px;
+  }
+  .download-card{
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px 24px;
+  }
+  .download-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background: var(--navy);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size:1.05rem;
+  }
+  .download-btn:hover{ background: var(--navy-dark); }
+  .pending-note{
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 18px;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top: 40px;
+    color: var(--blue);
+    text-decoration:none;
+    font-size:0.92rem;
+  }
+  .back-link:hover{ text-decoration:underline; }
+  .issue-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .issue-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    text-align:left;
+  }
+  .issue-info{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .issue-icon{
+    font-size:1.6rem;
+  }
+  .issue-title{
+    font-weight:600;
+    color: var(--navy);
+    font-size:1.02rem;
+  }
+  .issue-dl{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background: var(--navy);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    padding: 9px 18px;
+    border-radius: 7px;
+    font-size:0.92rem;
+    white-space:nowrap;
+  }
+  .issue-dl:hover{ background: var(--navy-dark); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html">
+    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo">
+    <div class="brand-text">
+      <div class="name">Gemeinde Gottes Rosal</div>
+    </div>
+  </a>
+</header>
+
+<main>
+  <div class="icon">📖</div>
+  <h1>Evangeliums Posaune</h1>
+  <p class="desc">Die monatliche Zeitschrift zum Herunterladen.</p>
+
+  <div class="issue-list">
+    <div class="issue-item">
+      <div class="issue-info">
+        <span class="issue-icon">📄</span>
+        <span class="issue-title">August 2026</span>
+      </div>
+      <a class="issue-dl" href="evangeliums-posaune-august-2026.pdf" target="_blank" rel="noopener">⬇ Herunterladen</a>
+    </div>
+  </div>
+
+  <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+</main>
+
+</body>
+</html>
