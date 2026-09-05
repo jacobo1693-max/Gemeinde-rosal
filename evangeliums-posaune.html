@@ -28,134 +28,23 @@
     border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    padding: 14px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 6px rgba(20,30,50,0.06);
-  }
-  .brand{
-    display:flex;
-    align-items:center;
     gap:12px;
-    text-decoration:none;
+    padding: 14px 40px;
   }
-  .logo-img{
-    width:40px; height:40px; object-fit:contain; flex-shrink:0;
+  header.site-header img{
+    width:40px; height:40px; object-fit:contain;
   }
-  .brand-text .name{
+  header.site-header .brand-text .name{
     font-weight:700;
-    font-size:1.15rem;
+    font-size:1.1rem;
     color: var(--navy);
     line-height:1.1;
   }
-  .brand-text .tag{
-    font-size:0.78rem;
-    color: var(--muted);
-  }
-  nav.main-nav{
-    display:flex;
-    gap:32px;
-  }
-  nav.main-nav a{
+  header.site-header a{
     text-decoration:none;
-    color: var(--navy);
-    font-size:0.95rem;
-    font-weight:500;
-  }
-  nav.main-nav a:hover{ color: var(--blue); }
-  .nav-dropdown{ position:relative; }
-  .nav-dropbtn{
-    background:none;
-    border:none;
-    cursor:pointer;
-    font-family: inherit;
-    color: var(--navy);
-    font-size:0.95rem;
-    font-weight:500;
     display:flex;
     align-items:center;
-    gap:4px;
-    padding:0;
-  }
-  .nav-dropbtn:hover{ color: var(--blue); }
-  .nav-caret{ font-size:0.7rem; }
-  .nav-dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    margin-top:8px;
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:8px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.1);
-    min-width:170px;
-    padding:6px 0;
-    z-index:20;
-  }
-  .nav-dropdown-content a{
-    display:block;
-    padding:10px 16px;
-    white-space:nowrap;
-  }
-  .nav-dropdown:hover .nav-dropdown-content,
-  .nav-dropdown.open .nav-dropdown-content{ display:block; }
-  .menu-toggle{
-    display:none;
-    background:none;
-    border:none;
-    cursor:pointer;
-    padding:6px;
-    flex-direction:column;
-    gap:5px;
-  }
-  .menu-toggle span{
-    width:24px;
-    height:3px;
-    background: var(--navy);
-    border-radius:2px;
-    display:block;
-  }
-  @media (max-width: 880px){
-    header.site-header{ padding:14px 18px; flex-wrap:wrap; }
-    .menu-toggle{ display:flex; }
-    nav.main-nav{
-      display:none;
-      width:100%;
-      flex-direction:column;
-      gap:0;
-      order:3;
-      border-top: 1px solid var(--border);
-      margin-top:14px;
-      padding-top:10px;
-    }
-    nav.main-nav.open{ display:flex; }
-    nav.main-nav a{
-      padding:12px 4px;
-      border-bottom:1px solid var(--border);
-    }
-    .nav-dropdown{ width:100%; }
-    .nav-dropbtn{
-      width:100%;
-      justify-content:space-between;
-      padding:12px 4px;
-      border-bottom:1px solid var(--border);
-    }
-    .nav-dropdown-content{
-      display:none;
-      position:static;
-      border:none;
-      box-shadow:none;
-      margin-top:0;
-      padding-left:16px;
-    }
-    .nav-dropdown.open .nav-dropdown-content{ display:block; }
-    .nav-dropdown-content a{
-      padding:10px 4px;
-      border-bottom:1px solid var(--border);
-    }
+    gap:12px;
   }
   main{
     max-width: 640px;
@@ -259,33 +148,12 @@
 <body>
 
 <header class="site-header">
-  <a class="brand" href="index.html">
-    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo" class="logo-img">
+  <a href="index.html">
+    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo">
     <div class="brand-text">
       <div class="name">Gemeinde Gottes Rosal</div>
-      <div class="tag">Offizielle Webseite</div>
     </div>
   </a>
-  <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="main-nav" id="mainNav">
-    <a href="index.html#top">Startseite</a>
-    <div class="nav-dropdown">
-      <button class="nav-dropbtn" type="button">Über uns <span class="nav-caret">▾</span></button>
-      <div class="nav-dropdown-content">
-        <a href="wir-sind.html">Wir sind</a>
-        <a href="wir-glauben.html">Wir glauben</a>
-      </div>
-    </div>
-    <a href="index.html#kalender">Kalender</a>
-    <a href="index.html#bekanntmachungen">Bekanntmachungen</a>
-    <a href="index.html#bibeltext">Bibeltext</a>
-    <a href="index.html#fotos">Fotos</a>
-    <a href="index.html#predigten">Predigten</a>
-    <a href="evangeliums-posaune.html">Evangeliums Posaune</a>
-    <a href="index.html#kontakt">Kontakt</a>
-  </nav>
 </header>
 
 <main>
@@ -294,6 +162,13 @@
   <p class="desc">Die monatliche Zeitschrift zum Herunterladen.</p>
 
   <div class="issue-list">
+    <div class="issue-item">
+      <img class="issue-cover" src="evangeliums-posaune-september-2026-cover.jpg" alt="Evangeliums Posaune September 2026">
+      <div class="issue-info">
+        <span class="issue-title">September 2026</span>
+      </div>
+      <a class="issue-dl" href="evangeliums-posaune-september-2026.pdf" target="_blank" rel="noopener">⬇ Herunterladen</a>
+    </div>
     <div class="issue-item">
       <img class="issue-cover" src="evangeliums-posaune-august-2026-cover.jpg" alt="Evangeliums Posaune August 2026">
       <div class="issue-info">
@@ -305,22 +180,6 @@
 
   <a href="index.html" class="back-link">← Zurück zur Startseite</a>
 </main>
-
-<script>
-  const menuToggle = document.getElementById('menuToggle');
-  const mainNav = document.getElementById('mainNav');
-  menuToggle.addEventListener('click', () => { mainNav.classList.toggle('open'); });
-  mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => mainNav.classList.remove('open'));
-  });
-  document.querySelectorAll('.nav-dropbtn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      btn.parentElement.classList.toggle('open');
-    });
-  });
-</script>
 
 </body>
 </html>
