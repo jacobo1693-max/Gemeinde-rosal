@@ -449,6 +449,85 @@
     margin:0;
     font-size:1.02rem;
   }
+  /* ---------- Herbstversammlung (Einladungsdetails) ---------- */
+  .herbst-section{
+    max-width: 1160px;
+    margin: 0 auto 30px;
+  }
+  .herbst-body{
+    padding: 4px 26px 28px;
+  }
+  .herbst-theme{
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 1.15rem;
+    margin: 0 0 4px;
+  }
+  .herbst-verse{
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0 0 12px;
+  }
+  .herbst-redner{
+    margin: 0 0 20px;
+    font-size: 0.95rem;
+  }
+  .herbst-schedule{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .herbst-row{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #f7f2ea;
+    border-radius: 8px;
+    padding: 10px 14px;
+    flex-wrap: wrap;
+  }
+  .herbst-day{
+    background: var(--navy);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .herbst-time{
+    font-weight: 700;
+    color: var(--blue);
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .herbst-topic{
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+  .herbst-note{
+    background: #eef4fb;
+    border-left: 3px solid var(--blue);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    margin-bottom: 16px;
+  }
+  .herbst-footer{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  @media (max-width: 500px){
+    .herbst-row{ gap: 8px; }
+  }
+
   /* ---------- Rotierendes Banner (Bibel / Herbstversammlung) ---------- */
   .banner-carousel{
     position: relative;
@@ -477,23 +556,6 @@
   .banner-slide.active{
     opacity: 1;
     pointer-events: auto;
-  }
-  .banner-slide[data-slide="0"]{
-    background-size: cover;
-    background-position: center;
-    background-color: #2a1d14;
-  }
-  .banner-overlay{
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(20,15,10,0.4) 0%, rgba(20,15,10,0.72) 100%);
-  }
-  .banner-content{
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   .banner-slide.image-slide{
     cursor: pointer;
@@ -524,14 +586,6 @@
     border-radius: 999px;
     letter-spacing: 0.01em;
     z-index: 3;
-  }
-  .banner-slide[data-slide="0"] .banner-icon{
-    font-size: 3.2rem;
-    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.4));
-  }
-  .banner-slide[data-slide="0"] h3,
-  .banner-slide[data-slide="0"] p{
-    text-shadow: 0 2px 4px rgba(0,0,0,0.45);
   }
   .banner-icon{
     font-size: 2.4rem;
@@ -1591,28 +1645,73 @@
 </section>
 
 <div class="banner-carousel" id="bannerCarousel">
-  <a href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener" class="banner-slide active" data-slide="0" style="background-image:url('https://images.unsplash.com/photo-1572061485545-9399b66acedd?auto=format&amp;fit=crop&amp;w=1200&amp;q=70');">
-    <div class="banner-overlay"></div>
-    <div class="banner-content">
-      <div class="banner-icon">📖</div>
-      <h3>Lese die Plautdietsche Bibel online!</h3>
-      <p>Die ganze Bibel – kostenlos, jederzeit verfügbar →</p>
-    </div>
+  <a href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener" class="banner-slide image-slide active" data-slide="0" aria-label="Lese die Plautdietsche Bibel online">
+    <img src="bibel-foto.jpg" alt="Die Heilige Schrift – Lese die Plautdietsche Bibel online" class="banner-img">
+    <span class="banner-zoom-hint">📖 Lese die Bibel online →</span>
   </a>
-  <div class="banner-slide image-slide" data-slide="1" role="button" tabindex="0" aria-label="Herbstversammlung 23.–27. September 2026 – Flyer auf Deutsch. Antippen für die volle Ansicht." onclick="openLightbox('herbstversammlung-flyer-de.jpg', 'Herbstversammlung 23.–27. September 2026, Thema: Der schmale Weg und der breite Weg, Redner: Br. David Knelsen')">
-    <img src="herbstversammlung-flyer-de.jpg" alt="Herbstversammlung 23.–27. September 2026, Thema: Der schmale Weg und der breite Weg, Redner: Br. David Knelsen" class="banner-img">
-    <span class="banner-zoom-hint">🔍 Antippen zum Vergrößern</span>
-  </div>
-  <div class="banner-slide image-slide" data-slide="2" role="button" tabindex="0" aria-label="Hoafstvesamlungen 23.–27. September 2026 – Flyer op Plautdietsch. Antippen für die volle Ansicht." onclick="openLightbox('herbstversammlung-flyer-pb.jpg', 'Hoafstvesamlungen 23.–27. Septamba 2026, Teema: De schmaula Wajch un de breeda Wajch, Rädna: David Knelsen')">
-    <img src="herbstversammlung-flyer-pb.jpg" alt="Hoafstvesamlungen 23.–27. Septamba 2026, Teema: De schmaula Wajch un de breeda Wajch, Rädna: David Knelsen" class="banner-img">
-    <span class="banner-zoom-hint">🔍 Antippen zum Vergrößern</span>
-  </div>
+  <a href="#herbstversammlung" class="banner-slide image-slide" data-slide="1" aria-label="Herbstversammlung 23.–27. September 2026 – zur vollständigen Einladung">
+    <img src="herbstversammlung-invitacion-de.jpg" alt="Herbstversammlung 23.–27. September 2026, Thema: Der schmale Weg und der breite Weg, Redner: Br. David Knelsen" class="banner-img">
+    <span class="banner-zoom-hint">✝️ Zur vollständigen Einladung →</span>
+  </a>
+  <a href="#herbstversammlung" class="banner-slide image-slide" data-slide="2" aria-label="Hoafstvesamlungen 23.–27. September 2026 – zur vollständigen Einladung">
+    <img src="herbstversammlung-invitacion-pb.jpg" alt="Hoafstvesamlungen 23.–27. Septamba 2026, Teema: De schmaula Wajch un de breeda Wajch, Rädna: David Knelsen" class="banner-img">
+    <span class="banner-zoom-hint">✝️ Zur vollständigen Einladung →</span>
+  </a>
   <div class="banner-dots">
     <span class="banner-dot active" data-dot="0"></span>
     <span class="banner-dot" data-dot="1"></span>
     <span class="banner-dot" data-dot="2"></span>
   </div>
 </div>
+
+<section class="card herbst-section" id="herbstversammlung">
+  <div class="card-header">
+    <div class="title">🍂 Herbstversammlung 2026</div>
+    <div class="ann-date">23. – 27. September</div>
+  </div>
+  <div class="herbst-body">
+    <p class="herbst-theme">Thema: Der schmale Weg und der breite Weg</p>
+    <p class="herbst-verse">„Geht ein durch die enge Pforte ...“ – Matthäus 7,13–14</p>
+    <p class="herbst-redner">Redner: <strong>Br. David Knelsen</strong> (aus Kanada) 🍁</p>
+
+    <div class="herbst-schedule">
+      <div class="herbst-row">
+        <span class="herbst-day">Mittwoch, 23. Sept.</span>
+        <span class="herbst-time">7:30 pm</span>
+        <span class="herbst-topic">Gottes Weg folgen</span>
+      </div>
+      <div class="herbst-row">
+        <span class="herbst-day">Donnerstag, 24. Sept.</span>
+        <span class="herbst-time">7:30 pm</span>
+        <span class="herbst-topic">Auf dem schmalen Weg bleiben</span>
+      </div>
+      <div class="herbst-row">
+        <span class="herbst-day">Freitag, 25. Sept.</span>
+        <span class="herbst-time">7:30 pm</span>
+        <span class="herbst-topic">Die Weisheit der Welt</span>
+      </div>
+      <div class="herbst-row">
+        <span class="herbst-day">Samstag, 26. Sept.</span>
+        <span class="herbst-time">7:00 am</span>
+        <span class="herbst-topic">Nicht sehen wollen (Männerandacht)</span>
+      </div>
+      <div class="herbst-row">
+        <span class="herbst-day">Sonntag, 27. Sept.</span>
+        <span class="herbst-time">10:00 am</span>
+        <span class="herbst-topic">Worauf wartet Jesus?</span>
+      </div>
+    </div>
+
+    <div class="herbst-note">
+      🍽️ Nach dem Gottesdienst am Sonntag, dem 27. September, sind alle herzlich zum <strong>Mittagessen im Gym</strong> eingeladen.
+    </div>
+
+    <div class="herbst-footer">
+      <span>📍 Gemeinde Gottes Rosal – Km. 9, Calle Rosal, #54, Cuauhtémoc</span>
+      <span>♥ Wie frejen ons opp junt! – Wir freuen uns auf euch!</span>
+    </div>
+  </div>
+</section>
 
 <section class="card intro-section">
   <div class="intro-block">
