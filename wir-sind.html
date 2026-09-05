@@ -28,88 +28,179 @@
     border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
-    gap:12px;
+    justify-content:space-between;
     padding: 14px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(20,30,50,0.06);
   }
-  header.site-header img{
-    width:40px; height:40px; object-fit:contain;
-  }
-  header.site-header .brand-text .name{
-    font-weight:700;
-    font-size:1.1rem;
-    color: var(--navy);
-    line-height:1.1;
-  }
-  header.site-header a{
-    text-decoration:none;
+  .brand{
     display:flex;
     align-items:center;
     gap:12px;
+    text-decoration:none;
+  }
+  .logo-img{
+    width:40px; height:40px; object-fit:contain; flex-shrink:0;
+  }
+  .brand-text .name{
+    font-weight:700;
+    font-size:1.15rem;
+    color: var(--navy);
+    line-height:1.1;
+  }
+  .brand-text .tag{
+    font-size:0.78rem;
+    color: var(--muted);
+  }
+  nav.main-nav{
+    display:flex;
+    gap:32px;
+  }
+  nav.main-nav a{
+    text-decoration:none;
+    color: var(--navy);
+    font-size:0.95rem;
+    font-weight:500;
+  }
+  nav.main-nav a:hover{ color: var(--blue); }
+  .nav-dropdown{ position:relative; }
+  .nav-dropbtn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-family: inherit;
+    color: var(--navy);
+    font-size:0.95rem;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    padding:0;
+  }
+  .nav-dropbtn:hover{ color: var(--blue); }
+  .nav-caret{ font-size:0.7rem; }
+  .nav-dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    margin-top:8px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    min-width:170px;
+    padding:6px 0;
+    z-index:20;
+  }
+  .nav-dropdown-content a{
+    display:block;
+    padding:10px 16px;
+    white-space:nowrap;
+  }
+  .nav-dropdown:hover .nav-dropdown-content,
+  .nav-dropdown.open .nav-dropdown-content{ display:block; }
+  .menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:6px;
+    flex-direction:column;
+    gap:5px;
+  }
+  .menu-toggle span{
+    width:24px;
+    height:3px;
+    background: var(--navy);
+    border-radius:2px;
+    display:block;
+  }
+  @media (max-width: 880px){
+    header.site-header{ padding:14px 18px; flex-wrap:wrap; }
+    .menu-toggle{ display:flex; }
+    nav.main-nav{
+      display:none;
+      width:100%;
+      flex-direction:column;
+      gap:0;
+      order:3;
+      border-top: 1px solid var(--border);
+      margin-top:14px;
+      padding-top:10px;
+    }
+    nav.main-nav.open{ display:flex; }
+    nav.main-nav a{
+      padding:12px 4px;
+      border-bottom:1px solid var(--border);
+    }
+    .nav-dropdown{ width:100%; }
+    .nav-dropbtn{
+      width:100%;
+      justify-content:space-between;
+      padding:12px 4px;
+      border-bottom:1px solid var(--border);
+    }
+    .nav-dropdown-content{
+      display:none;
+      position:static;
+      border:none;
+      box-shadow:none;
+      margin-top:0;
+      padding-left:16px;
+    }
+    .nav-dropdown.open .nav-dropdown-content{ display:block; }
+    .nav-dropdown-content a{
+      padding:10px 4px;
+      border-bottom:1px solid var(--border);
+    }
   }
   main{
-    max-width: 760px;
+    max-width: 780px;
     margin: 50px auto;
-    padding: 0 20px;
+    padding: 0 20px 20px;
   }
-  .icon{
-    font-size:3rem;
-    margin-bottom: 6px;
-    text-align:center;
-  }
-  h1.page-title{
+  h1{
     color: var(--navy);
-    font-size: 1.6rem;
-    margin: 0 0 4px;
+    font-size: 1.8rem;
+    margin: 0 0 30px;
     text-align:center;
   }
-  .content-card{
+  .mission-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .mission-block{
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 34px 32px;
-    margin-top: 22px;
-  }
-  .doc-title{
-    color: var(--navy);
-    font-size: 1.8rem;
     text-align:center;
-    margin: 0 0 6px;
+    padding: 26px 20px;
   }
-  .doc-subtitle{
+  .mission-icon{
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .mission-block h3{
+    color: var(--navy);
+    font-size: 1.1rem;
+    margin: 0 0 8px;
+  }
+  .mission-placeholder{
     color: var(--muted);
-    text-align:center;
-    font-size: 1rem;
-    margin: 0 0 26px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
   }
-  .intro-box{
-    background: #f7f2ea;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 18px 20px;
-    margin-bottom: 30px;
-    font-weight:600;
-    color: var(--navy);
-    text-align:center;
-    line-height:1.6;
-  }
-  h2.section-title{
-    color: var(--navy);
-    font-size: 1.15rem;
-    margin: 26px 0 10px;
-    border-bottom: 2px solid var(--blue);
-    display:inline-block;
-    padding-bottom:2px;
-  }
-  .content-card p{
-    line-height:1.7;
-    margin: 0 0 6px;
-  }
-  .verse-ref{
-    display:block;
-    color: var(--muted);
+  .mission-text{
+    color: var(--text);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin: 0;
     font-style: italic;
-    font-size: 0.92rem;
-    margin: 6px 0 22px;
   }
   .back-link{
     display:block;
@@ -125,37 +216,69 @@
 <body>
 
 <header class="site-header">
-  <a href="index.html">
-    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo">
+  <a class="brand" href="index.html">
+    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo" class="logo-img">
     <div class="brand-text">
       <div class="name">Gemeinde Gottes Rosal</div>
+      <div class="tag">Offizielle Webseite</div>
     </div>
   </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="main-nav" id="mainNav">
+    <a href="index.html#top">Startseite</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn" type="button">Über uns <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-content">
+        <a href="wir-sind.html">Wir sind</a>
+        <a href="wir-glauben.html">Wir glauben</a>
+      </div>
+    </div>
+    <a href="index.html#kalender">Kalender</a>
+    <a href="index.html#bekanntmachungen">Bekanntmachungen</a>
+    <a href="index.html#bibeltext">Bibeltext</a>
+    <a href="index.html#fotos">Fotos</a>
+    <a href="index.html#predigten">Predigten</a>
+    <a href="evangeliums-posaune.html">Evangeliums Posaune</a>
+    <a href="index.html#kontakt">Kontakt</a>
+  </nav>
 </header>
 
 <main>
-  <div class="icon">🤝</div>
-  <h1 class="page-title">Wir sind</h1>
+  <h1>Wir sind</h1>
 
-  <div class="content-card">
-    <div class="doc-title">Gemeinde Gottes</div>
-    <div class="doc-subtitle">Eine kurze Erklärung unseres Glaubens</div>
-
-    <div class="intro-box">
-      Obwohl wir Menschen verschiedener Herkunft sind, haben wir ein gemeinsames Ziel: zur Ehre Gottes ein heiliges und gerechtes Leben auf Erden zu führen.
+  <div class="mission-grid">
+    <div class="mission-block">
+      <div class="mission-icon">🎯</div>
+      <h3>Mission</h3>
+      <p class="mission-placeholder">Hier erscheint bald die Mission unserer Gemeinde. Schick mir den Text, und ich füge ihn hier ein.</p>
     </div>
-
-    <h2 class="section-title">Warum tragen wir den Namen „Gemeinde Gottes“?</h2>
-    <p>Wir tragen diesen Namen, weil er im Neuen Testament für die Gemeinde gebraucht wird. Er erinnert uns daran, dass die Gemeinde Gott gehört, dass Jesus Christus ihr Gründer und Erhalter ist und dass alle wiedergeborenen Kinder Gottes miteinander verbunden sind.</p>
-    <span class="verse-ref">(Apostelgeschichte 20,28; 1Korinther 1,2; 15,9; Matthäus 16,18)</span>
-
-    <h2 class="section-title">Mitgliedschaft durch Wiedergeburt</h2>
-    <p>Mitglied der Gemeinde Gottes wird man durch die Wiedergeburt – nicht durch eine bloße formelle Aufnahme. Darum erkennen wir jedes wahrhaft wiedergeborene Kind Gottes als Glied der Gemeinde an. Der Herr selbst kennt die Herzen und führt das Lebensbuch.</p>
-    <span class="verse-ref">(1Samuel 16,7b; Psalm 87,6; Lukas 10,20; Apostelgeschichte 2,47b)</span>
+    <div class="mission-block">
+      <div class="mission-icon">🌅</div>
+      <h3>Vision</h3>
+      <p class="mission-placeholder">Hier erscheint bald die Vision unserer Gemeinde. Schick mir den Text, und ich füge ihn hier ein.</p>
+    </div>
   </div>
 
   <a href="index.html" class="back-link">← Zurück zur Startseite</a>
 </main>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  menuToggle.addEventListener('click', () => { mainNav.classList.toggle('open'); });
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mainNav.classList.remove('open'));
+  });
+  document.querySelectorAll('.nav-dropbtn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+</script>
 
 </body>
 </html>
