@@ -2994,6 +2994,7 @@ function renderAutoAnnouncement(){
   }
   // dow === 0 (Sonntag): sunday bleibt heute
 
+  const montag = new Date(sunday); montag.setDate(sunday.getDate() + 1);
   const mittwoch = new Date(sunday); mittwoch.setDate(sunday.getDate() + 3);
   const freitag = new Date(sunday); freitag.setDate(sunday.getDate() + 5);
   const nextSunday = new Date(sunday); nextSunday.setDate(sunday.getDate() + 7);
@@ -3036,18 +3037,43 @@ function renderAutoAnnouncement(){
 
     addLi(listEl, 'Nach dem Gottesdienst findet die Sonntagsschule statt.');
 
+    // Montag dieser Woche
+    const moYmd = ymd(montag);
+    const moEvents = getEventsFor(moYmd.y, moYmd.m, moYmd.d);
+    if(moEvents){
+      moEvents.forEach((e, idx) => {
+        if(idx === 0){
+          addLi(listEl, 'Am Montag, den ' + moYmd.d + '. ' + monthName(montag) + ', ist ' + e.t + '.');
+        } else {
+          addLi(listEl, e.t + '.');
+        }
+      });
+    }
+
     // Mittwoch dieser Woche
     const mYmd = ymd(mittwoch);
     const mEvents = getEventsFor(mYmd.y, mYmd.m, mYmd.d);
     if(mEvents){
-      mEvents.forEach(e => addLi(listEl, 'Am Mittwoch, den ' + mYmd.d + '. ' + monthName(mittwoch) + ', ist ' + e.t + '.'));
+      mEvents.forEach((e, idx) => {
+        if(idx === 0){
+          addLi(listEl, 'Am Mittwoch, den ' + mYmd.d + '. ' + monthName(mittwoch) + ', ist ' + e.t + '.');
+        } else {
+          addLi(listEl, e.t + '.');
+        }
+      });
     }
 
     // Freitag dieser Woche
     const fYmd = ymd(freitag);
     const fEvents = getEventsFor(fYmd.y, fYmd.m, fYmd.d);
     if(fEvents){
-      fEvents.forEach(e => addLi(listEl, 'Am Freitag, den ' + fYmd.d + '. ' + monthName(freitag) + ', ist ' + e.t + '.'));
+      fEvents.forEach((e, idx) => {
+        if(idx === 0){
+          addLi(listEl, 'Am Freitag, den ' + fYmd.d + '. ' + monthName(freitag) + ', ist ' + e.t + '.');
+        } else {
+          addLi(listEl, e.t + '.');
+        }
+      });
     }
 
     // Nächster Sonntag
