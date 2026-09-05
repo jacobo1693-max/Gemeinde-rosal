@@ -529,7 +529,7 @@
   }
 
   /* ---------- Rotierendes Banner (Bibel / Herbstversammlung) ---------- */
-  .banner-carousel{
+  .home-slider{
     position: relative;
     max-width: 1160px;
     margin: 0 auto 30px;
@@ -538,7 +538,7 @@
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(20,30,50,0.12);
   }
-  .banner-slide{
+  .home-slide{
     position: absolute;
     inset: 0;
     display: flex;
@@ -553,11 +553,11 @@
     pointer-events: none;
     transition: opacity 0.9s ease;
   }
-  .banner-slide.active{
+  .home-slide.active{
     opacity: 1;
     pointer-events: auto;
   }
-  .banner-slide.image-slide{
+  .home-slide.image-slide{
     cursor: pointer;
     background: linear-gradient(135deg, #f6efe3 0%, #e8d9b8 55%, #d9c294 100%);
     padding: 20px;
@@ -565,7 +565,7 @@
     min-height: 0;
     min-width: 0;
   }
-  .banner-img{
+  .home-slide-img{
     width: 100%;
     height: 100%;
     min-height: 0;
@@ -575,7 +575,7 @@
     border-radius: 10px;
     box-shadow: 0 10px 26px rgba(42,29,20,0.35);
   }
-  .banner-zoom-hint{
+  .home-slide-hint{
     position: absolute;
     bottom: 14px;
     left: 50%;
@@ -589,21 +589,21 @@
     letter-spacing: 0.01em;
     z-index: 3;
   }
-  .banner-icon{
+  .home-slide-icon{
     font-size: 2.4rem;
     margin-bottom: 8px;
   }
-  .banner-slide h3{
+  .home-slide h3{
     margin: 0 0 6px;
     font-size: 1.25rem;
     color: #fff;
   }
-  .banner-slide p{
+  .home-slide p{
     margin: 0;
     font-size: 0.92rem;
     opacity: 0.92;
   }
-  .banner-dots{
+  .home-slide-dots{
     position: absolute;
     bottom: 12px;
     left: 50%;
@@ -612,7 +612,7 @@
     gap: 7px;
     z-index: 5;
   }
-  .banner-dot{
+  .home-slide-dot{
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -620,11 +620,11 @@
     cursor: pointer;
     transition: background 0.2s ease;
   }
-  .banner-dot.active{ background: #fff; }
+  .home-slide-dot.active{ background: #fff; }
   @media (max-width: 700px){
-    .banner-carousel{ height: 400px; margin-left: 14px; margin-right: 14px; }
-    .banner-slide h3{ font-size: 1.05rem; }
-    .banner-slide p{ font-size: 0.85rem; }
+    .home-slider{ height: 400px; margin-left: 14px; margin-right: 14px; }
+    .home-slide h3{ font-size: 1.05rem; }
+    .home-slide p{ font-size: 0.85rem; }
   }
 
   .intro-section{
@@ -758,7 +758,7 @@
   @media print{
     .no-print, header.site-header, .hero, .announcements-section,
     .bibeltext-section, .team-section, footer.site-footer,
-    .next-event-banner, .admin-footer-link, .admin-section{
+    .next-event-notice, .admin-footer-link, .admin-section{
       display:none !important;
     }
     html, body{ background:#fff; }
@@ -929,7 +929,7 @@
     margin-bottom:2px;
     text-align:right;
   }
-  .next-event-banner{
+  .next-event-notice{
     display:none;
     margin: 0 22px 18px;
     background: linear-gradient(135deg, var(--navy), var(--blue));
@@ -941,7 +941,7 @@
     gap:14px;
     flex-wrap:wrap;
   }
-  .next-event-banner.show{ display:flex; }
+  .next-event-notice.show{ display:flex; }
   .neb-label{
     font-size:0.68rem;
     text-transform:uppercase;
@@ -1646,23 +1646,23 @@
   <p>Willkommen auf der offiziellen Webseite<br>der Gemeinde Gottes Rosal.</p>
 </section>
 
-<div class="banner-carousel" id="bannerCarousel">
-  <a href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener" class="banner-slide image-slide active" data-slide="0" aria-label="Lese die Plautdietsche Bibel online">
-    <img src="bibel-foto.jpg" alt="Die Heilige Schrift – Lese die Plautdietsche Bibel online" class="banner-img">
-    <span class="banner-zoom-hint">📖 Lese die Bibel online →</span>
+<div class="home-slider" id="homeSlider">
+  <a href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener" class="home-slide image-slide active" data-slide="0" aria-label="Lese die Plautdietsche Bibel online">
+    <img src="bibel-foto.jpg" alt="Die Heilige Schrift – Lese die Plautdietsche Bibel online" class="home-slide-img">
+    <span class="home-slide-hint">📖 Lese die Bibel online →</span>
   </a>
-  <a href="#herbstversammlung" class="banner-slide image-slide" data-slide="1" aria-label="Herbstversammlung 23.–27. September 2026 – zur vollständigen Einladung">
-    <img src="herbstversammlung-invitacion-de.jpg" alt="Herbstversammlung 23.–27. September 2026, Thema: Der schmale Weg und der breite Weg, Redner: Br. David Knelsen" class="banner-img">
-    <span class="banner-zoom-hint">✝️ Zur vollständigen Einladung →</span>
+  <a href="#herbstversammlung" class="home-slide image-slide" data-slide="1" aria-label="Herbstversammlung 23.–27. September 2026 – zur vollständigen Einladung">
+    <img src="herbstversammlung-invitacion-de.jpg" alt="Herbstversammlung 23.–27. September 2026, Thema: Der schmale Weg und der breite Weg, Redner: Br. David Knelsen" class="home-slide-img">
+    <span class="home-slide-hint">✝️ Zur vollständigen Einladung →</span>
   </a>
-  <a href="#herbstversammlung" class="banner-slide image-slide" data-slide="2" aria-label="Hoafstvesamlungen 23.–27. September 2026 – zur vollständigen Einladung">
-    <img src="herbstversammlung-invitacion-pb.jpg" alt="Hoafstvesamlungen 23.–27. Septamba 2026, Teema: De schmaula Wajch un de breeda Wajch, Rädna: David Knelsen" class="banner-img">
-    <span class="banner-zoom-hint">✝️ Zur vollständigen Einladung →</span>
+  <a href="#herbstversammlung" class="home-slide image-slide" data-slide="2" aria-label="Hoafstvesamlungen 23.–27. September 2026 – zur vollständigen Einladung">
+    <img src="herbstversammlung-invitacion-pb.jpg" alt="Hoafstvesamlungen 23.–27. Septamba 2026, Teema: De schmaula Wajch un de breeda Wajch, Rädna: David Knelsen" class="home-slide-img">
+    <span class="home-slide-hint">✝️ Zur vollständigen Einladung →</span>
   </a>
-  <div class="banner-dots">
-    <span class="banner-dot active" data-dot="0"></span>
-    <span class="banner-dot" data-dot="1"></span>
-    <span class="banner-dot" data-dot="2"></span>
+  <div class="home-slide-dots">
+    <span class="home-slide-dot active" data-dot="0"></span>
+    <span class="home-slide-dot" data-dot="1"></span>
+    <span class="home-slide-dot" data-dot="2"></span>
   </div>
 </div>
 
@@ -1755,7 +1755,7 @@
         <button class="print-btn no-print" onclick="window.print()" title="Kalender drucken">🖨️ Drucken</button>
       </div>
     </div>
-    <div class="next-event-banner no-print" id="nextEventBanner"></div>
+    <div class="next-event-notice no-print" id="nextEventNotice"></div>
     <div class="calendar-scroll">
       <table class="calendar">
         <thead>
@@ -2843,7 +2843,7 @@ function scrollToNextEventDay(){
 }
 
 function renderNextEventBanner(){
-  const banner = document.getElementById('nextEventBanner');
+  const notice = document.getElementById('nextEventNotice');
   const jsMonth = currentMonth - 1;
   const daysInMonth = new Date(currentYear, jsMonth + 1, 0).getDate();
 
@@ -2863,8 +2863,8 @@ function renderNextEventBanner(){
   }
 
   if(!foundDay){
-    banner.classList.remove('show');
-    banner.innerHTML = '';
+    notice.classList.remove('show');
+    notice.innerHTML = '';
     return;
   }
 
@@ -2875,14 +2875,14 @@ function renderNextEventBanner(){
     '<div class="neb-event-line"><span class="dot ' + dotClass(e.c) + '"></span>' + e.t + '</div>'
   ).join('');
 
-  banner.innerHTML =
+  notice.innerHTML =
     '<div>' +
       '<div class="neb-label">' + label + '</div>' +
       '<div class="neb-datetime">' + dateStr + '</div>' +
       '<div class="neb-events">' + eventsHtml + '</div>' +
     '</div>' +
     '<div class="neb-arrow" onclick="scrollToNextEventDay()" title="Zum Tag springen">⬇️</div>';
-  banner.classList.add('show');
+  notice.classList.add('show');
 
   // Zieltag in der Tabelle hervorheben
   document.querySelectorAll('table.calendar td.next-event-target').forEach(td=>{
@@ -3123,8 +3123,8 @@ renderAutoAnnouncement();
 // Wechselt automatisch alle paar Sekunden; per Punkt auch manuell wählbar.
 // ---------------------------------------------------------------
 (function initBannerCarousel(){
-  const slides = document.querySelectorAll('.banner-slide');
-  const dots = document.querySelectorAll('.banner-dot');
+  const slides = document.querySelectorAll('.home-slide');
+  const dots = document.querySelectorAll('.home-slide-dot');
   if(!slides.length) return;
   let current = 0;
   let timer = null;
