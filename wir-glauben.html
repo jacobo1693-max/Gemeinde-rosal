@@ -28,139 +28,28 @@
     border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    padding: 14px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 6px rgba(20,30,50,0.06);
-  }
-  .brand{
-    display:flex;
-    align-items:center;
     gap:12px;
-    text-decoration:none;
+    padding: 14px 40px;
   }
-  .logo-img{
-    width:40px; height:40px; object-fit:contain; flex-shrink:0;
+  header.site-header img{
+    width:40px; height:40px; object-fit:contain;
   }
-  .brand-text .name{
+  header.site-header .brand-text .name{
     font-weight:700;
-    font-size:1.15rem;
+    font-size:1.1rem;
     color: var(--navy);
     line-height:1.1;
   }
-  .brand-text .tag{
-    font-size:0.78rem;
-    color: var(--muted);
-  }
-  nav.main-nav{
-    display:flex;
-    gap:32px;
-  }
-  nav.main-nav a{
+  header.site-header a{
     text-decoration:none;
-    color: var(--navy);
-    font-size:0.95rem;
-    font-weight:500;
-  }
-  nav.main-nav a:hover{ color: var(--blue); }
-  .nav-dropdown{ position:relative; }
-  .nav-dropbtn{
-    background:none;
-    border:none;
-    cursor:pointer;
-    font-family: inherit;
-    color: var(--navy);
-    font-size:0.95rem;
-    font-weight:500;
     display:flex;
     align-items:center;
-    gap:4px;
-    padding:0;
-  }
-  .nav-dropbtn:hover{ color: var(--blue); }
-  .nav-caret{ font-size:0.7rem; }
-  .nav-dropdown-content{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    margin-top:8px;
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:8px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.1);
-    min-width:170px;
-    padding:6px 0;
-    z-index:20;
-  }
-  .nav-dropdown-content a{
-    display:block;
-    padding:10px 16px;
-    white-space:nowrap;
-  }
-  .nav-dropdown:hover .nav-dropdown-content,
-  .nav-dropdown.open .nav-dropdown-content{ display:block; }
-  .menu-toggle{
-    display:none;
-    background:none;
-    border:none;
-    cursor:pointer;
-    padding:6px;
-    flex-direction:column;
-    gap:5px;
-  }
-  .menu-toggle span{
-    width:24px;
-    height:3px;
-    background: var(--navy);
-    border-radius:2px;
-    display:block;
-  }
-  @media (max-width: 880px){
-    header.site-header{ padding:14px 18px; flex-wrap:wrap; }
-    .menu-toggle{ display:flex; }
-    nav.main-nav{
-      display:none;
-      width:100%;
-      flex-direction:column;
-      gap:0;
-      order:3;
-      border-top: 1px solid var(--border);
-      margin-top:14px;
-      padding-top:10px;
-    }
-    nav.main-nav.open{ display:flex; }
-    nav.main-nav a{
-      padding:12px 4px;
-      border-bottom:1px solid var(--border);
-    }
-    .nav-dropdown{ width:100%; }
-    .nav-dropbtn{
-      width:100%;
-      justify-content:space-between;
-      padding:12px 4px;
-      border-bottom:1px solid var(--border);
-    }
-    .nav-dropdown-content{
-      display:none;
-      position:static;
-      border:none;
-      box-shadow:none;
-      margin-top:0;
-      padding-left:16px;
-    }
-    .nav-dropdown.open .nav-dropdown-content{ display:block; }
-    .nav-dropdown-content a{
-      padding:10px 4px;
-      border-bottom:1px solid var(--border);
-    }
+    gap:12px;
   }
   main{
-    max-width: 780px;
-    margin: 50px auto;
-    padding: 0 20px 20px;
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 0 20px;
   }
   .icon{
     font-size:3rem;
@@ -170,34 +59,21 @@
   h1{
     color: var(--navy);
     font-size: 1.8rem;
-    margin: 0 0 14px;
+    margin: 0 0 24px;
     text-align:center;
   }
-  p.desc{
-    color: var(--muted);
-    font-size: 1rem;
-    line-height:1.6;
-    margin: 0 0 30px;
-    text-align:center;
-  }
-  .belief-list{
+  .content-card{
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 8px 28px;
+    padding: 30px 28px;
   }
-  .belief-item{
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-    line-height:1.6;
-  }
-  .belief-item:last-child{ border-bottom:none; }
-  .belief-ref{
-    display:block;
-    margin-top:6px;
-    color: var(--blue);
-    font-size:0.88rem;
-    font-style:italic;
+  p.placeholder{
+    color: var(--muted);
+    font-size: 1rem;
+    line-height:1.7;
+    margin: 0;
+    text-align:center;
   }
   .back-link{
     display:block;
@@ -213,94 +89,24 @@
 <body>
 
 <header class="site-header">
-  <a class="brand" href="index.html">
-    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo" class="logo-img">
+  <a href="index.html">
+    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo">
     <div class="brand-text">
       <div class="name">Gemeinde Gottes Rosal</div>
-      <div class="tag">Offizielle Webseite</div>
     </div>
   </a>
-  <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="main-nav" id="mainNav">
-    <a href="index.html#top">Startseite</a>
-    <div class="nav-dropdown">
-      <button class="nav-dropbtn" type="button">Über uns <span class="nav-caret">▾</span></button>
-      <div class="nav-dropdown-content">
-        <a href="wir-sind.html">Wir sind</a>
-        <a href="wir-glauben.html">Wir glauben</a>
-      </div>
-    </div>
-    <a href="index.html#kalender">Kalender</a>
-    <a href="index.html#bekanntmachungen">Bekanntmachungen</a>
-    <a href="index.html#bibeltext">Bibeltext</a>
-    <a href="index.html#fotos">Fotos</a>
-    <a href="index.html#predigten">Predigten</a>
-    <a href="evangeliums-posaune.html">Evangeliums Posaune</a>
-    <a href="index.html#kontakt">Kontakt</a>
-  </nav>
 </header>
 
 <main>
-  <div class="icon">✝️</div>
+  <div class="icon">📖</div>
   <h1>Wir glauben</h1>
-  <p class="desc">Nachfolgende Punkte sind eine Zusammenstellung einiger der wichtigen Lehren der Bibel, für die wir einstehen:</p>
-
-  <div class="belief-list">
-    <div class="belief-item">
-      Die Bibel ist Gottes inspiriertes, heiliges Wort, verbindlich als Richtschnur für alle Fragen in bezug auf göttliche Lehre und Lebenswandel (Matth. 28,20; 2. Tim. 3,16.17)
-    </div>
-    <div class="belief-item">
-      Gott offenbart sich als Dreieinigkeitswesen im Vater, Sohn und Heiligem Geist (Matth. 28, 19)
-    </div>
-    <div class="belief-item">
-      Der Mensch wurde von Gott in Heiligkeit erschaffen, willigte aber aufgrund der Versuchung und seines freien Willens in die Sünde. Alle Menschen kamen dadurch unter die Sünde zu stehen (Röm. 5, 12)
-    </div>
-    <div class="belief-item">
-      Jesus Christus gab als wahrhaftiger Gott und wahrhaftiger Mensch mit dem Kreuzestod sein Leben dahin, damit wir von der Sünde erlöst werden können (1. Petr. 1,18. 19)
-    </div>
-    <div class="belief-item">
-      Jeder Mensch muss sich in Reue und aufrichtiger Buße zu Gott wenden, um das Heil seiner Seele, die Wiedergeburt, zu erleben (Apg. 2,38)
-    </div>
-    <div class="belief-item">
-      Die Erlösung befähigt uns, ein Siegesleben über die Sünde zu führen (Röm. 6,14-18; 1. Joh. 3,6)
-    </div>
-    <div class="belief-item">
-      Eine weitere Erfahrung für Kinder Gottes ist die Heiligung durch den Heiligen Geist (Joh. 14, 16. 17)
-    </div>
-    <div class="belief-item">
-      Alle wahrhaft wiedergeborene Menschen (Kinder Gottes) gehören zur Gemeinde Gottes. Der Augenblick der Annahme beim Herrn ist auch der Augenblick der Aufnahme in die Gemeinde. Der Herr selbst ist die Tür zur Gemeinde. Die Führung des "Mitgliedsbuches" (Lebensbuches), d.h. das Eintragen, sowie Ausstreichen hat sich der Herr selbst vorbehalten (Apg. 2,47; Luk. 10,20; Ps. 87;6)
-    </div>
-    <div class="belief-item">
-      Der Herr gab seiner Gemeinde 3 Verordnungen – keine Sakramente -, die wir befolgen: 1. Die Taufe der Gläubigen (Mark. 16,16).  2. Die Fusswaschung (Joh. 13,14. 15).  3. Das Abendmahl (Luk. 22, 19. 20)
-    </div>
-    <div class="belief-item">
-      Der Herr heilt auch heute noch die Kranken, die im Gebet glaubens- und vertrauensvoll zu ihm kommen (Mark. 11,24; Jak. 5,14. 15)
-    </div>
-    <div class="belief-item">
-      Mit dem jüngsten Tag kommt das Ende der Welt, an dem alle Toten – die Gläubigen und Ungläubigen – auferstehen und alle Menschen gerichtet werden. Der jüngste Tag ist der letzte Tag und somit der Beginn der Ewigkeit (Matth. 25,31. 32; Joh. 5,28. 29)
-    </div>
+  <div class="content-card">
+    <p class="placeholder">Hier erscheint bald unser Glaubensbekenntnis. Schick mir den Text, und ich füge ihn hier ein.</p>
   </div>
 
   <a href="index.html" class="back-link">← Zurück zur Startseite</a>
 </main>
 
-<script>
-  const menuToggle = document.getElementById('menuToggle');
-  const mainNav = document.getElementById('mainNav');
-  menuToggle.addEventListener('click', () => { mainNav.classList.toggle('open'); });
-  mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => mainNav.classList.remove('open'));
-  });
-  document.querySelectorAll('.nav-dropbtn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      btn.parentElement.classList.toggle('open');
-    });
-  });
-</script>
-
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
