@@ -1562,6 +1562,22 @@
     font-size:0.9rem;
     padding: 18px 4px 26px;
   }
+  .fotos-video-wrap{
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .fotos-video-wrap iframe{
+    border-radius: 10px;
+    display: block;
+    max-width: 100%;
+  }
+  .fotos-video-caption{
+    margin: 8px 0 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+  }
 
   /* ---------- Predigten (Audios) ---------- */
   .predigten-section{
@@ -1888,6 +1904,10 @@
         <img src="jugend-ausflug-ruidoso-2026.jpg" alt="Jugend Ausflug Ruidoso 2026" loading="lazy" onclick="openLightbox(this.src, this.alt)">
         <figcaption>Jugend Ausflug Ruidoso 2026</figcaption>
       </figure>
+    </div>
+    <div class="fotos-video-wrap">
+      <iframe src="https://archive.org/embed/church-dedication" width="100%" height="480" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+      <p class="fotos-video-caption">Church Dedication</p>
     </div>
   </div>
 </section>
