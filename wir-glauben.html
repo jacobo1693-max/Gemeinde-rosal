@@ -22,58 +22,229 @@
     font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
+    padding-top: 74px;
   }
   header.site-header{
     background:#fff;
     border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
-    gap:12px;
+    justify-content:space-between;
     padding: 14px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(20,30,50,0.06);
   }
-  header.site-header img{
-    width:40px; height:40px; object-fit:contain;
-  }
-  header.site-header .brand-text .name{
-    font-weight:700;
-    font-size:1.1rem;
-    color: var(--navy);
-    line-height:1.1;
-  }
-  header.site-header a{
-    text-decoration:none;
+  .brand{
     display:flex;
     align-items:center;
     gap:12px;
+    text-decoration:none;
+  }
+  .logo-img{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+    flex-shrink:0;
+  }
+  .brand-text .name{
+    font-weight:700;
+    font-size:1.15rem;
+    color: var(--navy);
+    line-height:1.1;
+  }
+  .brand-text .tag{
+    font-size:0.78rem;
+    color: var(--muted);
+  }
+  nav.main-nav{
+    display:flex;
+    gap:32px;
+  }
+  nav.main-nav a{
+    text-decoration:none;
+    color: var(--navy);
+    font-size:0.95rem;
+    font-weight:500;
+  }
+  nav.main-nav a:hover{ color: var(--blue); }
+  .nav-dropdown{ position:relative; }
+  .nav-dropbtn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-family: inherit;
+    color: var(--navy);
+    font-size:0.95rem;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    padding:0;
+  }
+  .nav-dropbtn:hover{ color: var(--blue); }
+  .nav-caret{ font-size:0.7rem; }
+  .nav-dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    margin-top:8px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    min-width:170px;
+    padding:6px 0;
+    z-index:20;
+  }
+  .nav-dropdown-content a{
+    display:block;
+    padding:10px 16px;
+    white-space:nowrap;
+  }
+  .nav-dropdown:hover .nav-dropdown-content,
+  .nav-dropdown.open .nav-dropdown-content{ display:block; }
+  .menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:6px;
+    flex-direction:column;
+    gap:5px;
+  }
+  .menu-toggle span{
+    width:24px;
+    height:3px;
+    background: var(--navy);
+    border-radius:2px;
+    display:block;
+  }
+  @media (max-width: 880px){
+    header.site-header{ padding:14px 18px; flex-wrap:wrap; }
+    .menu-toggle{ display:flex; }
+    nav.main-nav{
+      display:none;
+      width:100%;
+      flex-direction:column;
+      gap:0;
+      order:3;
+      border-top: 1px solid var(--border);
+      margin-top:14px;
+      padding-top:10px;
+    }
+    nav.main-nav.open{ display:flex; }
+    nav.main-nav a{
+      padding:12px 4px;
+      border-bottom:1px solid var(--border);
+    }
+    .nav-dropdown{ width:100%; }
+    .nav-dropbtn{
+      width:100%;
+      justify-content:space-between;
+      padding:12px 4px;
+      border-bottom:1px solid var(--border);
+    }
+    .nav-dropdown-content{
+      display:none;
+      position:static;
+      border:none;
+      box-shadow:none;
+      margin-top:0;
+      padding-left:16px;
+    }
+    .nav-dropdown.open .nav-dropdown-content{ display:block; }
+    .nav-dropdown-content a{
+      padding:10px 4px;
+      border-bottom:1px solid var(--border);
+    }
   }
   main{
-    max-width: 720px;
-    margin: 60px auto;
+    max-width: 800px;
+    margin: 50px auto;
     padding: 0 20px;
   }
   .icon{
     font-size:3rem;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     text-align:center;
   }
-  h1{
+  h1.page-title{
     color: var(--navy);
-    font-size: 1.8rem;
-    margin: 0 0 24px;
+    font-size: 1.6rem;
+    margin: 0 0 4px;
     text-align:center;
   }
   .content-card{
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 30px 28px;
+    padding: 34px 32px;
+    margin-top: 22px;
   }
-  p.placeholder{
-    color: var(--muted);
-    font-size: 1rem;
-    line-height:1.7;
-    margin: 0;
+  .doc-title{
+    color: #fff;
+    background: var(--navy-dark);
+    font-size: 1.3rem;
+    font-weight: 700;
     text-align:center;
+    margin: 0 0 20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
+  .content-card > p.intro-text{
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.7;
+    margin: 0 0 22px;
+  }
+  .belief-list{
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+  .belief-list li{
+    margin-bottom: 16px;
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.65;
+  }
+  .belief-list li::before{
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .belief-list strong{
+    color: var(--navy);
+  }
+  .belief-list em{
+    display: block;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 2px;
+  }
+  .invite-box{
+    background: #f7f2ea;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    text-align: center;
+    line-height: 1.6;
+  }
+  .contact-line{
+    text-align: center;
+    color: var(--text);
+    font-size: 0.95rem;
   }
   .back-link{
     display:block;
@@ -89,24 +260,104 @@
 <body>
 
 <header class="site-header">
-  <a href="index.html">
-    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo">
+  <a class="brand" href="index.html">
+    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo" class="logo-img">
     <div class="brand-text">
       <div class="name">Gemeinde Gottes Rosal</div>
+      <div class="tag">Offizielle Webseite</div>
     </div>
   </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="main-nav" id="mainNav">
+    <a href="index.html#top">Startseite</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn" type="button">Über uns <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-content">
+        <a href="wir-sind.html">Wir sind</a>
+        <a href="wir-glauben.html">Wir glauben</a>
+      </div>
+    </div>
+    <a href="index.html#kalender">Kalender</a>
+    <a href="index.html#bekanntmachungen">Bekanntmachungen</a>
+    <a href="index.html#bibeltext">Bibeltext</a>
+    <a href="index.html#fotos">Fotos</a>
+    <a href="index.html#predigten">Predigten</a>
+    <a href="evangeliums-posaune.html">Evangeliums Posaune</a>
+    <a href="index.html#kontakt">Kontakt</a>
+  </nav>
 </header>
 
 <main>
   <div class="icon">📖</div>
-  <h1>Wir glauben</h1>
+  <h1 class="page-title">Wir glauben</h1>
+
   <div class="content-card">
-    <p class="placeholder">Hier erscheint bald unser Glaubensbekenntnis. Schick mir den Text, und ich füge ihn hier ein.</p>
+    <div class="doc-title">Wir glauben</div>
+
+    <p class="intro-text">Die Bibel ist unsere Glaubensgrundlage und die verbindliche Richtschnur für Lehre und Lebenswandel. Wir vertrauen dabei nicht auf unsere eigene Kraft, sondern auf die Kraft und Führung des Heiligen Geistes.</p>
+
+    <ul class="belief-list">
+      <li><strong>Die Heilige Schrift:</strong> Die Bibel ist das von Gott inspirierte Wort und maßgebend für Glauben und Leben.
+        <em>(Matthäus 28,20; 2Timotheus 3,16–17)</em>
+      </li>
+      <li><strong>Der dreieinige Gott:</strong> Gott offenbart sich als Vater, Sohn und Heiliger Geist.
+        <em>(Matthäus 28,19)</em>
+      </li>
+      <li><strong>Der Mensch und die Sünde:</strong> Der Mensch wurde von Gott heilig erschaffen, fiel aber durch Sünde; dadurch kamen alle Menschen unter die Sünde.
+        <em>(Römer 5,12)</em>
+      </li>
+      <li><strong>Jesus Christus und die Erlösung:</strong> Jesus Christus, wahrer Gott und wahrer Mensch, gab am Kreuz sein Leben, damit wir von der Sünde erlöst werden können.
+        <em>(1Petrus 1,18–19)</em>
+      </li>
+      <li><strong>Buße und Wiedergeburt:</strong> Jeder Mensch soll sich in Reue und aufrichtiger Buße zu Gott wenden und durch den Glauben an Jesus neues Leben empfangen.
+        <em>(Apostelgeschichte 2,38)</em>
+      </li>
+      <li><strong>Ein heiliges Leben:</strong> Durch Gottes Erlösung und Gnade können wir der Sünde nicht länger dienen, sondern in Gehorsam und Sieg leben.
+        <em>(Römer 6,14–18; 1. Johannes 3,6.9)</em>
+      </li>
+      <li><strong>Die Einheit der Kinder Gottes:</strong> Alle wahrhaft wiedergeborenen Gläubigen gehören zu der einen Gemeinde Christi und sollen diese Einheit in Liebe bewahren.
+        <em>(Johannes 17,20–23; Epheser 4,3–6)</em>
+      </li>
+      <li><strong>Die drei Verordnungen:</strong> Wir befolgen die Taufe der Gläubigen, die Fußwaschung und das Abendmahl. Sie sind Verordnungen des Herrn, keine Sakramente.
+        <em>(Markus 16,16; Johannes 13,14–15; Lukas 22,19–20)</em>
+      </li>
+      <li><strong>Göttliche Heilung:</strong> Wir glauben, dass der Herr auch heute Kranke heilen kann, die vertrauensvoll zu ihm beten.
+        <em>(Markus 11,24; Jakobus 5,14–16)</em>
+      </li>
+      <li><strong>Auferstehung, Gericht und Ewigkeit:</strong> Am jüngsten Tag werden die Toten auferstehen und alle Menschen vor Gott gerichtet; danach beginnt die Ewigkeit.
+        <em>(Matthäus 25,31–32; Johannes 5,28–29)</em>
+      </li>
+    </ul>
+
+    <div class="invite-box">
+      Sie sind herzlich eingeladen, uns kennenzulernen, Fragen zu stellen und gemeinsam mit uns Gottes Wort zu entdecken.
+    </div>
+
+    <p class="contact-line">Wenn ihr weitere Fragen habt, meldet euch gerne bei Pastor Hans Klassen. Mobil/WhatsApp: <strong>625 120 0323</strong></p>
   </div>
 
   <a href="index.html" class="back-link">← Zurück zur Startseite</a>
 </main>
 
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  menuToggle.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+  });
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mainNav.classList.remove('open'));
+  });
+  document.querySelectorAll('.nav-dropbtn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
