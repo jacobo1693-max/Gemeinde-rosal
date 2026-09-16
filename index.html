@@ -1832,7 +1832,7 @@
     <p class="ann-verse-ref" id="autoAnnVerse">Matthäus 13:3-9 — <a href="#bibeltext" class="ann-verse-link">zum vollständigen Text in 4 Sprachen ↓</a></p>
 
     <div class="ann-closing">
-      <p><span class="ann-blank">(________________)</span> wird uns ein Lied vortragen.</p>
+      <p><span class="ann-blank" id="autoAnnSinger">(________________)</span> wird uns ein Lied vortragen.</p>
       <p>Danach wird Br. Sheldon Banman von Neustädt uns im Wort dienen.</p>
     </div>
 
@@ -2219,7 +2219,7 @@ const monthsData = {
       4: [ {c:'grey', t:'Keine Jugendstunde'} ],
       14: [ {c:'green', t:'7:00 pm – Programm Centro Luz en mi Camino (Gruppe 2)'}, {c:'grey', t:'Wenn es dir nicht möglich ist mitzumachen, suche dir bitte selbst einen Ersatz, damit die Gruppe vollständig ist'}, {c:'grey', t:'Bitte bring auch dein Glaubenslieder-Buch mit'} ],
       18: [ {c:'grey', t:'Keine Jugendstunde'} ],
-      20: [ {c:'gold', t:'Worship-Team singt ein besonderes Lied'}, {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'5:00 pm – Gemeinschaftsabend im Gym: Abendbrot, jeder bringt Essen und Getränke mit, Kaffee wird gestellt'} ],
+      20: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'5:00 pm – Gemeinschaftsabend im Gym: Abendbrot, jeder bringt Essen und Getränke mit, Kaffee wird gestellt'} ],
       23: [ {c:'purple', t:'7:30 pm – Abendversammlung mit Br. David Knelsen – Thema: „Gottes Weg folgen"'} ],
       24: [ {c:'gold', t:'9:00 am – Frauenfrühstück und Bibelstudium – Restaurant La Huerta km 10 – mit Karina Knelsen'}, {c:'purple', t:'7:30 pm – Abendversammlung mit Br. David Knelsen – Thema: „Auf dem schmalen Weg bleiben"'} ],
       25: [ {c:'purple', t:'7:30 pm – Abendversammlung mit Br. David Knelsen – Thema: „Die Weisheit der Welt"'}, {c:'gold', t:'Jugendstunde mit Neustadt zusammen nach dem Gottesdienst mit einem kleinen Imbiss in Rosal'} ],
@@ -2334,7 +2334,7 @@ function computeDefaultWeeklyEvent(year, month, day){
       events.push({c:'gold', t:'5:00 pm – Minijugend'});
       return events;
     } else if(nth === 3){
-      events.push({c:'purple', t:'Worship-Team singt ein besonderes Lied'});
+      // Workshipteam singt an diesem Sonntag (steht automatisch bei "wird uns ein Lied vortragen" in den Bekanntmachungen; erscheint absichtlich nicht extra im Kalender)
       // Gemeinschaftsabend: alle 2 Monate ab Juli 2026, abwechselnd Haus/Gym
       const monthsSinceJuly2026 = (year - 2026) * 12 + (month - 7);
       if(monthsSinceJuly2026 >= 0 && monthsSinceJuly2026 % 2 === 0){
@@ -3047,6 +3047,25 @@ function renderAutoAnnouncement(){
     dateEl.textContent = 'Sonntag, ' + String(sYmd.d).padStart(2,'0') + '. ' + monthName(sunday) + ' ' + sYmd.y;
   }
 
+  // Wer singt: automatisch nach Sonntag im Monat bestimmt
+  // (1. Sonntag: Chor, abwechselnd Gemeindechor/Frauenchor; 3. Sonntag: Workshipteam;
+  //  letzter Sonntag: Kinderchor; sonst leer zum manuellen Ausfüllen)
+  const singerEl = document.getElementById('autoAnnSinger');
+  if(singerEl){
+    const nth = Math.ceil(sYmd.d / 7);
+    const daysInSundayMonth = new Date(sYmd.y, sYmd.m, 0).getDate();
+    const isLastSunday = (sYmd.d + 7) > daysInSundayMonth;
+    let singer = null;
+    if(nth === 1){
+      singer = (sYmd.m % 2 === 1) ? 'Gemeindechor' : 'Frauenchor';
+    } else if(isLastSunday){
+      singer = 'Kinderchor';
+    } else if(nth === 3){
+      singer = 'Workshipteam';
+    }
+    singerEl.textContent = singer ? singer : '(________________)';
+  }
+
   // Bibeltext-Leser
   const readerEl = document.getElementById('autoAnnReader');
   const sundayEvents = getEventsFor(sYmd.y, sYmd.m, sYmd.d) || [];
@@ -3067,10 +3086,12 @@ function renderAutoAnnouncement(){
   // Sonntags-Liste
   const listEl = document.getElementById('autoSonntagList');
   if(listEl){
-    // Heutige Sonderpunkte (z.B. Chor, Gemeinschaftsabend) - ohne den Standard-Hauptgottesdienst
+    // Heutige Sonderpunkte (z.B. Gemeinschaftsabend) - ohne Hauptgottesdienst und ohne die Chor/Workshipteam-Hinweise
+    // (die sind nur interne Kalendernotizen; wer singt, steht unten automatisch beim Lied)
     const todaysEvents = getEventsFor(sYmd.y, sYmd.m, sYmd.d) || [];
     todaysEvents
       .filter(e => !e.t.includes('Hauptgottesdienst'))
+      .filter(e => !e.t.includes('Frauenchor üben') && !e.t.includes('Gemeindechor üben') && !e.t.includes('Kinderchor üben') && !e.t.includes('Worship-Team singt'))
       .forEach(e => addLi(listEl, e.t + '.'));
 
     addLi(listEl, 'Nach dem Gottesdienst findet die Sonntagsschule statt.');
