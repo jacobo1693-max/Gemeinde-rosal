@@ -1815,7 +1815,6 @@
           <li>Der untere Korb ist für den Kirchenbau.</li>
         </ul>
       </li>
-      <li>Nach dem Gottesdienst findet die Sonntagsschule statt.</li>
     </ul>
 
     <h3>Zukünftiges</h3>
@@ -2219,7 +2218,7 @@ const monthsData = {
       4: [ {c:'grey', t:'Keine Jugendstunde'} ],
       14: [ {c:'green', t:'7:00 pm – Programm Centro Luz en mi Camino (Gruppe 2)'}, {c:'grey', t:'Wenn es dir nicht möglich ist mitzumachen, suche dir bitte selbst einen Ersatz, damit die Gruppe vollständig ist'}, {c:'grey', t:'Bitte bring auch dein Glaubenslieder-Buch mit'} ],
       18: [ {c:'grey', t:'Keine Jugendstunde'} ],
-      20: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'5:00 pm – Gemeinschaftsabend im Gym: Abendbrot, jeder bringt Essen und Getränke mit, Kaffee wird gestellt'} ],
+      20: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'gold', t:'Heute 5:00 pm – Gemeinschaftsabend im Gym: Abendbrot, jeder bringt Essen und Getränke mit, Kaffee wird gestellt'}, {c:'grey', t:'Diese Woche sind unsere Abendversammlungen. Sie fangen am Mittwoch an. Alle sind herzlich eingeladen — ihr könnt auch Freunde und Familie mitbringen'} ],
       23: [ {c:'purple', t:'7:30 pm – Abendversammlung mit Br. David Knelsen – Thema: „Gottes Weg folgen"'} ],
       24: [ {c:'gold', t:'9:00 am – Frauenfrühstück und Bibelstudium – Restaurant La Huerta km 10 – mit Karina Knelsen'}, {c:'purple', t:'7:30 pm – Abendversammlung mit Br. David Knelsen – Thema: „Auf dem schmalen Weg bleiben"'} ],
       25: [ {c:'purple', t:'7:30 pm – Abendversammlung mit Br. David Knelsen – Thema: „Die Weisheit der Welt"'}, {c:'gold', t:'Jugendstunde mit Neustadt zusammen nach dem Gottesdienst mit einem kleinen Imbiss in Rosal'} ],
@@ -2232,6 +2231,7 @@ const monthsData = {
     label: "Oktober 2026",
     events: {
       17: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück'} ],
+      18: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'blue', t:'3:30 pm – Männer- und Jungsabend im Gymnasium in Neustadt, alle Männer und Jugendliche (Jungs) sind eingeladen teilzunehmen'}, {c:'gold', t:'Gemeinsames Abendbrot'} ],
     },
   },
 
@@ -2489,7 +2489,47 @@ function equalizeCalendarRowHeights(){
 // verschwindet ein Juli-Termin von selbst).
 // ---------------------------------------------------------------
 const GLOBAL_UPCOMING = [
-  { year:2026, month:9,  day:24, date:'24. September 2026',         badge:'gold',   icon:'☕', title:'Frauenfrühstück und Bibelstudium', desc:'9:00 am – Restaurant La Huerta km 10, mit Karina Knelsen' },
+  { year:2026, month:9,  day:24, date:'24. September 2026',         badge:'gold',   icon:'☕', title:'Frauenfrühstück und Bibelstudium', desc:'9:00 am – Restaurant La Huerta km 10, mit Karina Knelsen',
+    schedule: {
+      de: [
+        'Am Donnerstag, den 24. September, findet um 9:00 am ein Frauenfrühstück mit Bibelstudium statt.',
+        'Es ist im Restaurant La Huerta (km 10), mit Karina Knelsen.',
+        'Alle Frauen sind herzlich eingeladen.'
+      ],
+      es: [
+        'El jueves 24 de septiembre, a las 9:00 am, habrá un desayuno de mujeres con estudio bíblico.',
+        'Será en el Restaurante La Huerta (km 10), con Karina Knelsen.',
+        'Todas las mujeres están cordialmente invitadas.'
+      ],
+      en: [
+        'On Thursday, September 24, at 9:00 am, there will be a women\'s breakfast with Bible study.',
+        'It will take place at Restaurant La Huerta (km 10), with Karina Knelsen.',
+        'All women are warmly invited.'
+      ]
+    }
+  },
+  { year:2026, month:10, day:18, date:'18. Oktober 2026',           badge:'blue',   icon:'🧑‍🤝‍🧑', title:'Männer- und Jungsabend', desc:'3:30 pm – Gymnasium in Neustadt, danach gemeinsames Abendbrot',
+    schedule: {
+      de: [
+        'Am Sonntag, den 18. Oktober, findet um 3:30 pm ein Männer- und Jungsabend statt.',
+        'Er ist im Gymnasium in Neustadt.',
+        'Alle Männer und Jugendliche (Jungs) sind eingeladen teilzunehmen.',
+        'Es wird auch ein gemeinsames Abendbrot geben.'
+      ],
+      es: [
+        'El domingo 18 de octubre, a las 3:30 pm, habrá una tarde para hombres y jóvenes (varones).',
+        'Será en el gimnasio en Neustadt.',
+        'Todos los hombres y jóvenes (varones) están invitados a participar.',
+        'También habrá una cena en conjunto.'
+      ],
+      en: [
+        'On Sunday, October 18, at 3:30 pm, there will be a men\'s and boys\' evening.',
+        'It will take place at the gym in Neustadt.',
+        'All men and young men (boys) are invited to take part.',
+        'There will also be a shared supper.'
+      ]
+    }
+  },
   { year:2027, month:5,  day:12, date:'12. Mai 2027',                badge:'green',  icon:'🎵', title:'Musikabend der Schule', desc:'' },
   { year:2026, month:12, day:17, date:'17. Dezember 2026',           badge:'green',  icon:'🎄', title:'Weihnachtsprogramm der Schule', desc:'' },
   { year:2026, month:11, day:22, date:'22. November 2026',          badge:'purple', icon:'🍞', title:'Verordnung Abendmahl',  desc:'10:00 am – Hauptgottesdienst (keine Sonntagsschule)' },
@@ -3034,7 +3074,9 @@ function renderAutoAnnouncement(){
 
   const montag = new Date(sunday); montag.setDate(sunday.getDate() + 1);
   const mittwoch = new Date(sunday); mittwoch.setDate(sunday.getDate() + 3);
+  const donnerstag = new Date(sunday); donnerstag.setDate(sunday.getDate() + 4);
   const freitag = new Date(sunday); freitag.setDate(sunday.getDate() + 5);
+  const samstag = new Date(sunday); samstag.setDate(sunday.getDate() + 6);
   const nextSunday = new Date(sunday); nextSunday.setDate(sunday.getDate() + 7);
 
   function ymd(d){ return { y: d.getFullYear(), m: d.getMonth() + 1, d: d.getDate() }; }
@@ -3086,6 +3128,8 @@ function renderAutoAnnouncement(){
   // Sonntags-Liste
   const listEl = document.getElementById('autoSonntagList');
   if(listEl){
+    addLi(listEl, 'Nach dem Gottesdienst findet die Sonntagsschule statt.');
+
     // Heutige Sonderpunkte (z.B. Gemeinschaftsabend) - ohne Hauptgottesdienst und ohne die Chor/Workshipteam-Hinweise
     // (die sind nur interne Kalendernotizen; wer singt, steht unten automatisch beim Lied)
     const todaysEvents = getEventsFor(sYmd.y, sYmd.m, sYmd.d) || [];
@@ -3094,46 +3138,20 @@ function renderAutoAnnouncement(){
       .filter(e => !e.t.includes('Frauenchor üben') && !e.t.includes('Gemeindechor üben') && !e.t.includes('Kinderchor üben') && !e.t.includes('Worship-Team singt'))
       .forEach(e => addLi(listEl, e.t + '.'));
 
-    addLi(listEl, 'Nach dem Gottesdienst findet die Sonntagsschule statt.');
-
-    // Montag dieser Woche
-    const moYmd = ymd(montag);
-    const moEvents = getEventsFor(moYmd.y, moYmd.m, moYmd.d);
-    if(moEvents){
-      moEvents.forEach((e, idx) => {
-        if(idx === 0){
-          addLi(listEl, 'Am Montag, den ' + moYmd.d + '. ' + monthName(montag) + ', ist ' + e.t + '.');
-        } else {
-          addLi(listEl, e.t + '.');
-        }
-      });
+    // Montag bis Samstag dieser Woche - jeder Tag als EIN Punkt (nicht mehrere),
+    // auch wenn an dem Tag mehrere Sachen stattfinden
+    function addWeekdayLi(weekdayName, dayDate){
+      const dYmd = ymd(dayDate);
+      const events = getEventsFor(dYmd.y, dYmd.m, dYmd.d);
+      if(!events || !events.length) return;
+      const sentence = events.map((e, idx) => idx === 0 ? ('ist ' + e.t + '.') : (e.t + '.')).join(' ');
+      addLi(listEl, 'Am ' + weekdayName + ', den ' + dYmd.d + '. ' + monthName(dayDate) + ', ' + sentence);
     }
-
-    // Mittwoch dieser Woche
-    const mYmd = ymd(mittwoch);
-    const mEvents = getEventsFor(mYmd.y, mYmd.m, mYmd.d);
-    if(mEvents){
-      mEvents.forEach((e, idx) => {
-        if(idx === 0){
-          addLi(listEl, 'Am Mittwoch, den ' + mYmd.d + '. ' + monthName(mittwoch) + ', ist ' + e.t + '.');
-        } else {
-          addLi(listEl, e.t + '.');
-        }
-      });
-    }
-
-    // Freitag dieser Woche
-    const fYmd = ymd(freitag);
-    const fEvents = getEventsFor(fYmd.y, fYmd.m, fYmd.d);
-    if(fEvents){
-      fEvents.forEach((e, idx) => {
-        if(idx === 0){
-          addLi(listEl, 'Am Freitag, den ' + fYmd.d + '. ' + monthName(freitag) + ', ist ' + e.t + '.');
-        } else {
-          addLi(listEl, e.t + '.');
-        }
-      });
-    }
+    addWeekdayLi('Montag', montag);
+    addWeekdayLi('Mittwoch', mittwoch);
+    addWeekdayLi('Donnerstag', donnerstag);
+    addWeekdayLi('Freitag', freitag);
+    addWeekdayLi('Samstag', samstag);
 
     // Nächster Sonntag
     const nsYmd = ymd(nextSunday);
@@ -3147,19 +3165,16 @@ function renderAutoAnnouncement(){
       .forEach(e => addLi(listEl, 'Nächsten Sonntag: ' + e.t + '.'));
   }
 
-  // Zukünftiges (aktuell: September 2026 fest eingestellt, wie gewünscht)
+  // Zukünftiges: für diese Woche geleert, weil schon alles einzeln oben
+  // (Sonntag bis Samstag) steht. Wenn wieder neue Termine für später
+  // angekündigt werden sollen, hier ZUK_YEAR/ZUK_MONTH setzen und die
+  // Zeile "let items = []" wieder durch die Filterlogik ersetzen.
   const zukEl = document.getElementById('autoZukunftiges');
   if(zukEl){
     zukEl.innerHTML = '';
-    const ZUK_YEAR = 2026, ZUK_MONTH = 9; // hier später leicht auf einen anderen Monat umstellen
-    let items = GLOBAL_UPCOMING.filter(item =>
-      item.year === ZUK_YEAR && item.month === ZUK_MONTH
-    );
-    const cl = getNextCentroLuzEvent(ZUK_YEAR, ZUK_MONTH);
-    if(cl && cl.year === ZUK_YEAR && cl.month === ZUK_MONTH && !items.some(it => it.title === cl.title)) items.push(cl);
-    const ga = getNextGemeinschaftsabend(ZUK_YEAR, ZUK_MONTH);
-    if(ga && ga.year === ZUK_YEAR && ga.month === ZUK_MONTH && !items.some(it => it.title === ga.title)) items.push(ga);
-    items.sort((a,b)=> (a.year-b.year) || (a.month-b.month) || ((a.day||0)-(b.day||0)));
+    let items = [
+      { title: 'Männer- und Jungsabend', date: '18. Oktober 2026', desc: '3:30 pm – Gymnasium in Neustadt. Alle Männer und Jugendliche (Jungs) sind eingeladen teilzunehmen. Danach gemeinsames Abendbrot.' }
+    ];
 
     if(items.length === 0){
       zukEl.innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Zur Zeit keine weiteren Termine.</p>';
