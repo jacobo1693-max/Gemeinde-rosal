@@ -267,7 +267,6 @@
 
   /* ---------- Bekanntmachungen: "Foto-Karte" Stil (heller Hintergrund + Bild) ---------- */
   .ann-photo-card{
-    grid-column: 1 / -1;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -3307,13 +3306,13 @@ const CURRENT_BIBELTEXT_REF = '2. Chronik 7:11-16';
 // Jede Karte: key (für später ein eigenes Foto), dateLabel, title, icon (Platzhalter bis
 // ein echtes Foto da ist), und de/es/en als Beschreibungstext.
 const WEEK_CARDS = [
-  { key: 'sonntag-morgenandacht', dateLabel: '20. SEPTEMBER • 10:00 AM', title: 'Morgenandacht', icon: '✝️',
+  { key: 'sonntag-morgenandacht', dateLabel: '20. SEPTEMBER • 10:00 AM', title: 'Morgenandacht', icon: '✝️', image: 'cross-abendversammlung.jpg',
     de: 'und Sonntagschule.', es: 'y Escuela Dominical.', en: 'and Sunday School.' },
-  { key: 'sonntag-gemeinschaftsabend', dateLabel: '20. SEPTEMBER • 5:00 PM', title: 'Gemeinschaftsabend', icon: '🍽️',
+  { key: 'sonntag-gemeinschaftsabend', dateLabel: '20. SEPTEMBER • 5:00 PM', title: 'Gemeinschaftsabend', icon: '🍽️', image: 'cross-abendversammlung.jpg',
     de: 'Im Gym: Abendbrot – jeder bringt Essen und Getränke mit, Kaffee wird gestellt.',
     es: 'En el gimnasio: cena – cada quien trae comida y bebida, se dará café.',
     en: 'In the gym: supper – everyone brings food and drinks, coffee will be provided.' },
-  { key: 'herbstversammlung-einladung', dateLabel: '23.–27. SEPTEMBER', title: 'Herbstversammlungen', icon: '📖',
+  { key: 'herbstversammlung-einladung', dateLabel: '23.–27. SEPTEMBER', title: 'Herbstversammlungen', icon: '📖', image: 'cross-abendversammlung.jpg',
     de: 'Diese Woche sind unsere Abendversammlungen. Sie fangen am Mittwoch an. Alle sind herzlich eingeladen — ihr könnt auch Freunde und Familie mitbringen.',
     es: 'Esta semana son nuestras reuniones vespertinas (Herbstversammlungen). Comienzan el miércoles. Todos están cordialmente invitados — también pueden traer amigos y familiares.',
     en: 'This week are our evening meetings (Herbstversammlungen). They start on Wednesday. Everyone is warmly invited — you can also bring friends and family.' },
@@ -3321,31 +3320,31 @@ const WEEK_CARDS = [
     de: 'Mit Br. David Knelsen. Thema: „Gottes Weg folgen".',
     es: 'Con el hno. David Knelsen. Tema: "Seguir el camino de Dios".',
     en: 'With Br. David Knelsen. Topic: "Following God\'s Path".' },
-  { key: 'donnerstag-frauenfruhstuck', dateLabel: '24. SEPTEMBER • 9:00 AM', title: 'Frauenfrühstück', icon: '☕',
+  { key: 'donnerstag-frauenfruhstuck', dateLabel: '24. SEPTEMBER • 9:00 AM', title: 'Frauenfrühstück', icon: '☕', image: 'cross-abendversammlung.jpg',
     de: 'Restaurant La Huerta km 10, mit Karina Knelsen. Alle Frauen sind herzlich eingeladen.',
     es: 'Restaurante La Huerta km 10, con Karina Knelsen. Todas las mujeres están cordialmente invitadas.',
     en: 'Restaurant La Huerta km 10, with Karina Knelsen. All women are warmly invited.' },
-  { key: 'donnerstag-abendversammlung', dateLabel: '24. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖',
+  { key: 'donnerstag-abendversammlung', dateLabel: '24. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖', image: 'cross-abendversammlung.jpg',
     de: 'Mit Br. David Knelsen. Thema: „Auf dem schmalen Weg bleiben".',
     es: 'Con el hno. David Knelsen. Tema: "Permanecer en el camino angosto".',
     en: 'With Br. David Knelsen. Topic: "Staying on the Narrow Path".' },
-  { key: 'freitag-abendversammlung', dateLabel: '25. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖',
+  { key: 'freitag-abendversammlung', dateLabel: '25. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖', image: 'cross-abendversammlung.jpg',
     de: 'Mit Br. David Knelsen. Thema: „Die Weisheit der Welt".',
     es: 'Con el hno. David Knelsen. Tema: "La sabiduría del mundo".',
     en: 'With Br. David Knelsen. Topic: "The Wisdom of the World".' },
-  { key: 'freitag-jugendstunde', dateLabel: '25. SEPTEMBER', title: 'Jugendstunde', icon: '🎸',
+  { key: 'freitag-jugendstunde', dateLabel: '25. SEPTEMBER', title: 'Jugendstunde', icon: '🎸', image: 'cross-abendversammlung.jpg',
     de: 'Mit Neustadt zusammen, nach dem Gottesdienst, mit einem kleinen Imbiss in Rosal.',
     es: 'Junto con Neustadt, después del culto, con un pequeño refrigerio en Rosal.',
     en: 'Together with Neustadt, after the service, with a small snack in Rosal.' },
-  { key: 'samstag-mannerfruhstuck', dateLabel: '26. SEPTEMBER • 7:00 AM', title: 'Männer-Gebetsfrühstück', icon: '☕',
+  { key: 'samstag-mannerfruhstuck', dateLabel: '26. SEPTEMBER • 7:00 AM', title: 'Männer-Gebetsfrühstück', icon: '☕', image: 'cross-abendversammlung.jpg',
     de: 'Pizzería La Sierra km 6, mit Br. David Knelsen. Thema: „Nicht sehen wollen".',
     es: 'Pizzería La Sierra km 6, con el hno. David Knelsen. Tema: "No querer ver".',
     en: 'Pizzería La Sierra km 6, with Br. David Knelsen. Topic: "Not Wanting to See".' },
-  { key: 'naechster-sonntag-gottesdienst', dateLabel: '27. SEPTEMBER • 10:00 AM', title: 'Gottesdienst', icon: '⛪',
+  { key: 'naechster-sonntag-gottesdienst', dateLabel: '27. SEPTEMBER • 10:00 AM', title: 'Gottesdienst', icon: '⛪', image: 'cross-abendversammlung.jpg',
     de: 'Mit Br. David Knelsen. Thema: „Worauf wartet Jesus?"',
     es: 'Con el hno. David Knelsen. Tema: "¿Qué espera Jesús?"',
     en: 'With Br. David Knelsen. Topic: "What Is Jesus Waiting For?"' },
-  { key: 'naechster-sonntag-mittagessen', dateLabel: '27. SEPTEMBER', title: 'Gemeinsames Mittagessen', icon: '🍽️',
+  { key: 'naechster-sonntag-mittagessen', dateLabel: '27. SEPTEMBER', title: 'Gemeinsames Mittagessen', icon: '🍽️', image: 'cross-abendversammlung.jpg',
     de: 'Nach dem Gottesdienst: gemeinsames Mittagessen in der Gym.',
     es: 'Después del culto: comida en conjunto en el gimnasio.',
     en: 'After the service: shared lunch in the gym.' }
@@ -3457,7 +3456,11 @@ function renderAutoAnnouncement(){
   const listEl = document.getElementById('autoSonntagList');
   const cardsEl = document.getElementById('autoEventCards');
   if(listEl){
-    addLi(listEl, 'Nach dem Gottesdienst findet die Sonntagsschule statt.');
+    const sonntagschuleLi = document.createElement('li');
+    sonntagschuleLi.id = 'sonntagschuleNote';
+    sonntagschuleLi.style.display = 'none';
+    sonntagschuleLi.textContent = 'Nach dem Gottesdienst findet die Sonntagsschule statt.';
+    listEl.appendChild(sonntagschuleLi);
   }
   if(cardsEl){
     cardsEl.innerHTML = '';
@@ -3675,12 +3678,14 @@ function setCardPhoto(key, imageSrc){
 renderAutoAnnouncement();
 
 // Falls in dieser Browser-Sitzung schon vorher als Admin eingeloggt wurde,
-// den Opfer-Hinweis gleich anzeigen (nicht nur für die Öffentlichkeit versteckt)
+// den Opfer-Hinweis und die Sonntagsschule-Zeile gleich anzeigen (nicht nur für die Öffentlichkeit versteckt)
 (function revealOfferingNoteIfAdmin(){
   try{
     if(sessionStorage.getItem('rosal-admin-ok') === 'yes'){
       const el = document.getElementById('offeringNote');
       if(el) el.style.display = '';
+      const el2 = document.getElementById('sonntagschuleNote');
+      if(el2) el2.style.display = '';
     }
   }catch(e){}
 })();
@@ -3762,6 +3767,8 @@ function openAdminPanel(){
   }
   const offeringNoteEl = document.getElementById('offeringNote');
   if(offeringNoteEl) offeringNoteEl.style.display = '';
+  const sonntagschuleNoteEl = document.getElementById('sonntagschuleNote');
+  if(sonntagschuleNoteEl) sonntagschuleNoteEl.style.display = '';
   document.getElementById('adminSection').style.display = 'block';
   renderAgendaList();
   document.getElementById('adminSection').scrollIntoView({behavior:'smooth'});
