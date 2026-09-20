@@ -67,8 +67,19 @@
     font-size: 0.92rem;
     line-height:1.55;
   }
-  .ann-reader{
-    margin-top:0;
+  .ann-reader-box{
+    margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #f7f2ea, #eee2cc);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+  }
+  .ann-reader-icon{
+    font-size: 1.3rem;
+    flex-shrink: 0;
   }
   .announcements-content h3{
     color: var(--navy);
@@ -78,9 +89,32 @@
     display:inline-block;
     padding-bottom:2px;
   }
-  .announcements-content h3.ann-bibeltext-heading{
-    font-size: 1.5rem;
+  .ann-h3{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: none;
+    background: linear-gradient(90deg, var(--navy), var(--blue));
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 999px;
+    width: fit-content;
   }
+  .ann-h3-icon{ font-size: 1.05rem; }
+  .ann-prayer-box{
+    background: linear-gradient(135deg, #eef4fb, #e2edf9);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 4px;
+  }
+  .ann-prayer-list{
+    margin: 0;
+    padding-left: 20px;
+  }
+  .ann-prayer-list li{
+    margin-bottom: 8px;
+  }
+  .ann-prayer-list li:last-child{ margin-bottom: 0; }
   .announcements-content h4{
     color: var(--navy);
     font-size: 0.94rem;
@@ -102,6 +136,36 @@
   .ann-subblock p{
     margin: 2px 0 0;
     color: var(--text);
+  }
+  .ann-subblock-featured{
+    display: flex;
+    gap: 16px;
+    background: #f7f9fc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .ann-subblock-img{
+    width: 140px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(20,15,10,0.2);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .ann-subblock-body{
+    flex: 1;
+    min-width: 200px;
+  }
+  .ann-subblock-body h4{
+    margin: 0 0 4px;
+  }
+  @media (max-width: 480px){
+    .ann-subblock-featured{ flex-direction: column; align-items: center; text-align: center; }
+    .ann-subblock-img{ width: 100%; max-width: 220px; height: auto; aspect-ratio: 3/4; }
   }
   .ann-blank{
     color: var(--muted);
@@ -135,12 +199,128 @@
     margin:0;
   }
   .ann-closing{
-    margin-top: 20px;
-    padding-top: 14px;
-    border-top: 1px solid var(--border);
+    margin-top: 24px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+    border-radius: 12px;
+    color: #fff;
+  }
+  .ann-closing-row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ann-closing-row + .ann-closing-row{
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+  }
+  .ann-closing-icon{
+    font-size: 1.2rem;
+    flex-shrink: 0;
   }
   .ann-closing p{
-    margin: 4px 0;
+    margin: 0;
+  }
+  .ann-closing .ann-blank{
+    color: #ffe28a;
+    border-bottom: 1px dotted rgba(255,255,255,0.5);
+  }
+
+  /* ---------- Bekanntmachungen: visuelle Termin-Karten ---------- */
+  .ann-cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    margin: 14px 0 4px;
+  }
+  .ann-card{
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(20,15,10,0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .ann-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(20,15,10,0.22);
+  }
+  .ann-card .ann-card-icon{
+    font-size: 1.7rem;
+    line-height: 1;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+  }
+  .ann-card .ann-card-text{
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .ann-card-blue{   background: linear-gradient(135deg, var(--blue), var(--navy-dark)); }
+  .ann-card-gold{   background: linear-gradient(135deg, #e0ab45, #a8721c); }
+  .ann-card-green{  background: linear-gradient(135deg, #5fb571, #2e6b3a); }
+  .ann-card-purple{ background: linear-gradient(135deg, #9679d9, #4a3080); }
+  .ann-card-red{    background: linear-gradient(135deg, #d1655e, #7a231e); }
+  .ann-card-grey{   background: linear-gradient(135deg, #a6afbc, #767f8c); }
+
+  /* ---------- Bekanntmachungen: "Foto-Karte" Stil (heller Hintergrund + Bild) ---------- */
+  .ann-photo-card{
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 3px 12px rgba(20,15,10,0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .ann-photo-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(20,15,10,0.14);
+  }
+  .ann-photo-card-content{
+    flex: 1;
+    min-width: 0;
+  }
+  .ann-photo-card-badge{
+    display: inline-block;
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .ann-photo-card-title{
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin: 0 0 6px;
+  }
+  .ann-photo-card-desc{
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .ann-photo-card-img{
+    width: 96px;
+    height: 120px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    object-fit: cover;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+  }
+  .ann-photo-card-img.is-placeholder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    background: linear-gradient(160deg, #2a1d14, #6f4e37);
   }
   @media (max-width: 700px){
     .bible-columns{ gap: 8px; }
@@ -1254,6 +1434,28 @@
     font-size:0.83rem;
     line-height:1.35;
   }
+  .evt-verse{
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #f7f2ea;
+    border-left: 3px solid var(--blue);
+    border-radius: 6px;
+    display: block;
+  }
+  .evt-verse-text{
+    display: block;
+    font-style: italic;
+    color: var(--navy);
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  .evt-verse-ref{
+    display: block;
+    margin-top: 4px;
+    color: var(--blue);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
 
   footer.site-footer{
     background: var(--navy-dark);
@@ -1805,34 +2007,43 @@
   </div>
   <div class="announcements-content">
 
-    <p class="ann-reader" id="autoAnnReader"><strong>—</strong> wird uns den Bibeltext lesen.</p>
+    <p class="ann-reader-box"><span class="ann-reader-icon">📖</span> <span id="autoAnnReader"><strong>—</strong> wird uns den Bibeltext lesen.</span></p>
 
-    <h3>Sonntag</h3>
+    <h3 class="ann-h3"><span class="ann-h3-icon">⛪</span> Sonntag</h3>
     <ul id="autoSonntagList">
-      <li>Das Opfer kann wie gewohnt am Ausgang eingelegt werden.
+      <li id="offeringNote" style="display:none;">Das Opfer kann wie gewohnt am Ausgang eingelegt werden.
         <ul>
           <li>Der obere Korb ist für die allgemeinen Opfer.</li>
           <li>Der untere Korb ist für den Kirchenbau.</li>
         </ul>
       </li>
     </ul>
+    <div class="ann-cards" id="autoEventCards"></div>
 
-    <h3>Zukünftiges</h3>
+    <h3 class="ann-h3"><span class="ann-h3-icon">🔭</span> Zukünftiges</h3>
     <div id="autoZukunftiges"></div>
 
-    <h3>Gebetsanliegen</h3>
-    <ul>
-      <li>Wir wollen für alle Kranken in unserer Gemeinde beten, dass Gott ihnen Kraft und Genesung schenkt.</li>
-      <li>Wir wollen für unseren Pastor und den Vorstand beten, dass Gott ihnen Weisheit und Leitung schenkt.</li>
-      <li>Wir wollen Gott danken für alles, was er uns in dieser Woche geschenkt hat.</li>
-    </ul>
+    <h3 class="ann-h3"><span class="ann-h3-icon">🙏</span> Gebetsanliegen</h3>
+    <div class="ann-prayer-box">
+      <ul class="ann-prayer-list">
+        <li>Wir wollen für alle Kranken in unserer Gemeinde beten, dass Gott ihnen Kraft und Genesung schenkt.</li>
+        <li>Wir wollen für unseren Pastor und den Vorstand beten, dass Gott ihnen Weisheit und Leitung schenkt.</li>
+        <li>Wir wollen Gott danken für alles, was er uns in dieser Woche geschenkt hat.</li>
+      </ul>
+    </div>
 
-    <h3 class="ann-bibeltext-heading">Bibeltext</h3>
+    <h3 class="ann-h3 ann-bibeltext-heading"><span class="ann-h3-icon">📜</span> Bibeltext</h3>
     <p class="ann-verse-ref" id="autoAnnVerse">2. Chronik 7:11-16 — <a href="#bibeltext" class="ann-verse-link">zum vollständigen Text in 4 Sprachen ↓</a></p>
 
     <div class="ann-closing">
-      <p><span class="ann-blank" id="autoAnnSinger">(________________)</span> wird uns ein Lied vortragen.</p>
-      <p>Danach folgt die Botschaft von Pastor Hans Klassen.</p>
+      <div class="ann-closing-row">
+        <span class="ann-closing-icon">🎵</span>
+        <p><span class="ann-blank" id="autoAnnSinger">(________________)</span> wird uns ein Lied vortragen.</p>
+      </div>
+      <div class="ann-closing-row">
+        <span class="ann-closing-icon">🗣️</span>
+        <p>Danach folgt die Botschaft von Pastor Hans Klassen.</p>
+      </div>
     </div>
 
   </div>
@@ -1841,7 +2052,7 @@
 <section class="card bibeltext-section" id="bibeltext">
   <div class="card-header">
     <div class="title">📜 Bibeltext</div>
-    <div class="ann-date">2. Chronik 7:11-16</div>
+    <div class="ann-date" id="bibeltextDate">2. Chronik 7:11-16</div>
   </div>
 
   <div class="bt-wrap">
@@ -2119,6 +2330,13 @@
     </div>
 
     <div class="admin-pdf-section">
+      <h4 class="admin-pdf-title">📋 Bekanntmachungen zum Vorlesen</h4>
+      <p class="admin-hint">Stellt den ganzen Text der aktuellen Bekanntmachungen zusammen (inklusive dem Opfer-Hinweis, der für Besucher versteckt ist), damit du ihn kopieren und ausdrucken kannst, um ihn am Sonntag in der Gemeinde vorzulesen.</p>
+      <button class="admin-add-btn" onclick="generateAnnouncementsText()">📋 Bekanntmachungen zusammenstellen</button>
+      <textarea id="admAnnouncementsBox" class="admin-export-box" readonly placeholder="Hier erscheint der Text zum Kopieren/Drucken..." style="min-height:220px; margin-top:10px;"></textarea>
+    </div>
+
+    <div class="admin-pdf-section">
       <h4 class="admin-pdf-title">📄 Kalender als PDF teilen</h4>
       <p class="admin-hint">Erstellt ein PDF vom Kalender des aktuell angezeigten Monats. Auf dem Handy öffnet sich direkt das Teilen-Menü (dort WhatsApp auswählen); am Computer wird das PDF heruntergeladen.</p>
       <button class="admin-add-btn" id="pdfShareBtn" onclick="generateCalendarPDF()">📄 PDF erstellen &amp; teilen</button>
@@ -2227,7 +2445,7 @@ const monthsData = {
     label: "Oktober 2026",
     events: {
       17: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück'} ],
-      18: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'blue', t:'3:30 pm – Männer- und Jungsabend im Gymnasium in Neustadt, alle Männer und Jugendliche (Jungs) sind eingeladen teilzunehmen'}, {c:'gold', t:'Gemeinsames Abendbrot'} ],
+      18: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'blue', t:'3:30 pm – Männer- und Jungsabend im Gimnasio der Gemeinde Gottes Campo 101, Film „The Forge / La Forga", alle Männer und Jungen ab dem Jugendalter sind eingeladen'}, {c:'gold', t:'Abendessen & Gemeinschaft folgt'} ],
     },
   },
 
@@ -2504,25 +2722,33 @@ const GLOBAL_UPCOMING = [
       ]
     }
   },
-  { year:2026, month:10, day:18, date:'18. Oktober 2026',           badge:'blue',   icon:'🧑‍🤝‍🧑', title:'Männer- und Jungsabend', desc:'3:30 pm – Gymnasium in Neustadt, danach gemeinsames Abendbrot',
+  { year:2026, month:10, day:18, date:'18. Oktober 2026',           badge:'blue',   icon:'🧑‍🤝‍🧑', title:'Männer- und Jungsabend', desc:'3:30 pm – Gimnasio der Gemeinde Gottes Campo 101 – Film: „The Forge / La Forga"',
+    image: 'manner-jungsabend-flyer.jpg',
+    verse: { text: 'Eisen schärft Eisen, und ein Mann schärft den andern.', ref: 'Sprüche 27,17' },
     schedule: {
       de: [
-        'Am Sonntag, den 18. Oktober, findet um 3:30 pm ein Männer- und Jungsabend statt.',
-        'Er ist im Gymnasium in Neustadt.',
-        'Alle Männer und Jugendliche (Jungs) sind eingeladen teilzunehmen.',
-        'Es wird auch ein gemeinsames Abendbrot geben.'
+        'Am Sonntag, den 18. Oktober, um 3:30 pm: Männer- und Jungsabend – alle Männer und Jungen ab dem Jugendalter sind eingeladen.',
+        'Film: „The Forge / La Forga". Danach Abendessen & Gemeinschaft.',
+        'Ort: Gimnasio der Gemeinde Gottes Campo 101.',
+        'Ziel: aufbauende Verbindungen zwischen Männern und Jungen herzustellen, die das geistliche Leben fördern.',
+        '„Eisen schärft Eisen, und ein Mann schärft den andern." (Sprüche 27,17)',
+        'Eintritt ist frei.'
       ],
       es: [
-        'El domingo 18 de octubre, a las 3:30 pm, habrá una tarde para hombres y jóvenes (varones).',
-        'Será en el gimnasio en Neustadt.',
-        'Todos los hombres y jóvenes (varones) están invitados a participar.',
-        'También habrá una cena en conjunto.'
+        'El domingo 18 de octubre, a las 3:30 pm: Tarde de Hombres y Jóvenes – todos los hombres y jóvenes desde la adolescencia están invitados.',
+        'Película: "The Forge / La Forga". Después, cena y convivencia.',
+        'Lugar: Gimnasio de la Gemeinde Gottes Campo 101.',
+        'Objetivo: crear vínculos edificantes entre hombres y jóvenes que fortalezcan la vida espiritual.',
+        '"El hierro con hierro se aguza; y así el hombre aguza el rostro de su amigo." (Proverbios 27:17)',
+        'Entrada libre.'
       ],
       en: [
-        'On Sunday, October 18, at 3:30 pm, there will be a men\'s and boys\' evening.',
-        'It will take place at the gym in Neustadt.',
-        'All men and young men (boys) are invited to take part.',
-        'There will also be a shared supper.'
+        'On Sunday, October 18, at 3:30 pm: Men & Boys Evening – all men and boys from youth age are invited.',
+        'Film: "The Forge / La Forga". Dinner & fellowship follow.',
+        'Location: Gymnasium of Gemeinde Gottes Campo 101.',
+        'Goal: to build up connections between men and boys that foster spiritual life.',
+        '"Iron sharpeneth iron; so a man sharpeneth the countenance of his friend." (Proverbs 27:17)',
+        'Admission is free.'
       ]
     }
   },
@@ -2801,6 +3027,13 @@ function renderUpcoming(){
     textWrap.appendChild(title);
     textWrap.appendChild(desc);
 
+    if(item.verse){
+      const verseBox = document.createElement('div');
+      verseBox.className = 'evt-verse';
+      verseBox.innerHTML = '<span class="evt-verse-text">„' + item.verse.text + '"</span><span class="evt-verse-ref">' + item.verse.ref + '</span>';
+      textWrap.appendChild(verseBox);
+    }
+
     if(item.schedule){
       const schedWrap = document.createElement('div');
       schedWrap.className = 'uld-wrap';
@@ -3045,6 +3278,10 @@ renderMonth();
 // ---------------------------------------------------------------
 // Wer liest den Bibeltext, nach Datum (Sonntag). Einfach weitere Zeilen
 // im gleichen Format ergänzen, wenn eine neue Liste kommt.
+// Der aktuelle Bibeltext dieser Woche - EIN Ort zum Ändern; wird automatisch
+// im Bibelleser-Hinweis, im Datum der Bibeltext-Karte und im Bekanntmachungen-Link verwendet.
+const CURRENT_BIBELTEXT_REF = '2. Chronik 7:11-16';
+
 const READERS = {
   '2026-8-2':  'Willy Klassen',
   '2026-8-9':  'Jacob Wiebe',
@@ -3071,6 +3308,16 @@ const READERS = {
 };
 
 function renderAutoAnnouncement(){
+  // Aktuellen Bibeltext-Verweis an beiden Stellen aus der EINEN Variable setzen
+  const verseEl = document.getElementById('autoAnnVerse');
+  if(verseEl){
+    verseEl.innerHTML = CURRENT_BIBELTEXT_REF + ' — <a href="#bibeltext" class="ann-verse-link">zum vollständigen Text in 4 Sprachen ↓</a>';
+  }
+  const bibeltextDateEl = document.getElementById('bibeltextDate');
+  if(bibeltextDateEl){
+    bibeltextDateEl.textContent = CURRENT_BIBELTEXT_REF;
+  }
+
   const today = new Date();
   const dow = today.getDay(); // 0=So, 1=Mo, 2=Di, 3=Mi, 4=Do, 5=Fr, 6=Sa
   const sunday = new Date(today);
@@ -3121,25 +3368,33 @@ function renderAutoAnnouncement(){
 
   // Bibeltext-Leser
   const readerEl = document.getElementById('autoAnnReader');
+  const readerBoxEl = readerEl ? readerEl.closest('.ann-reader-box') : null;
   const sundayEvents = getEventsFor(sYmd.y, sYmd.m, sYmd.d) || [];
   const keinGottesdienst = sundayEvents.some(e => e.t.toLowerCase().includes('kein gottesdienst'));
   if(readerEl){
     if(keinGottesdienst){
-      readerEl.style.display = 'none';
+      if(readerBoxEl) readerBoxEl.style.display = 'none';
     } else {
-      readerEl.style.display = '';
+      if(readerBoxEl) readerBoxEl.style.display = '';
       const readerKey = sYmd.y + '-' + sYmd.m + '-' + sYmd.d;
       const readerName = READERS[readerKey];
       readerEl.innerHTML = readerName
-        ? '<strong>Bruder ' + readerName + '</strong> wird uns den Bibeltext lesen.'
-        : '<strong>—</strong> wird uns den Bibeltext lesen.';
+        ? '<strong>Bruder ' + readerName + '</strong> wird uns den Bibeltext (' + CURRENT_BIBELTEXT_REF + ') lesen.'
+        : '<strong>—</strong> wird uns den Bibeltext (' + CURRENT_BIBELTEXT_REF + ') lesen.';
     }
   }
 
   // Sonntags-Liste
   const listEl = document.getElementById('autoSonntagList');
+  const cardsEl = document.getElementById('autoEventCards');
   if(listEl){
     addLi(listEl, 'Nach dem Gottesdienst findet die Sonntagsschule statt.');
+  }
+  if(cardsEl){
+    cardsEl.innerHTML = '';
+
+    // Erste Karte: Morgenandacht/Sonntagsschule im neuen "Foto-Karte" Stil
+    addPhotoCard(cardsEl, sYmd, '10:00 AM', 'Morgenandacht', 'und Sonntagschule');
 
     // Heutige Sonderpunkte (z.B. Gemeinschaftsabend) - ohne Hauptgottesdienst und ohne die Chor/Workshipteam-Hinweise
     // (die sind nur interne Kalendernotizen; wer singt, steht unten automatisch beim Lied)
@@ -3147,33 +3402,33 @@ function renderAutoAnnouncement(){
     todaysEvents
       .filter(e => !e.t.includes('Hauptgottesdienst'))
       .filter(e => !e.t.includes('Frauenchor üben') && !e.t.includes('Gemeindechor üben') && !e.t.includes('Kinderchor üben') && !e.t.includes('Worship-Team singt'))
-      .forEach(e => addLi(listEl, e.t + '.'));
+      .forEach(e => addAnnCard(cardsEl, e.t + '.', e.c));
 
-    // Montag bis Samstag dieser Woche - jeder Tag als EIN Punkt (nicht mehrere),
+    // Montag bis Samstag dieser Woche - jeder Tag als EINE Karte (nicht mehrere),
     // auch wenn an dem Tag mehrere Sachen stattfinden
-    function addWeekdayLi(weekdayName, dayDate){
+    function addWeekdayCard(weekdayName, dayDate){
       const dYmd = ymd(dayDate);
       const events = getEventsFor(dYmd.y, dYmd.m, dYmd.d);
       if(!events || !events.length) return;
       const sentence = events.map((e, idx) => idx === 0 ? ('ist ' + e.t + '.') : (e.t + '.')).join(' ');
-      addLi(listEl, 'Am ' + weekdayName + ', den ' + dYmd.d + '. ' + monthName(dayDate) + ', ' + sentence);
+      addAnnCard(cardsEl, 'Am ' + weekdayName + ', den ' + dYmd.d + '. ' + monthName(dayDate) + ', ' + sentence, events[0].c);
     }
-    addWeekdayLi('Montag', montag);
-    addWeekdayLi('Mittwoch', mittwoch);
-    addWeekdayLi('Donnerstag', donnerstag);
-    addWeekdayLi('Freitag', freitag);
-    addWeekdayLi('Samstag', samstag);
+    addWeekdayCard('Montag', montag);
+    addWeekdayCard('Mittwoch', mittwoch);
+    addWeekdayCard('Donnerstag', donnerstag);
+    addWeekdayCard('Freitag', freitag);
+    addWeekdayCard('Samstag', samstag);
 
     // Nächster Sonntag
     const nsYmd = ymd(nextSunday);
     const nsEvents = getEventsFor(nsYmd.y, nsYmd.m, nsYmd.d) || [];
     const hasHauptgottesdienst = nsEvents.some(e => e.t.includes('Hauptgottesdienst'));
     if(hasHauptgottesdienst || nsEvents.length === 0){
-      addLi(listEl, 'Nächsten Sonntag ist der Hauptgottesdienst um 10:00 am mit Sonntagsschule.');
+      addAnnCard(cardsEl, 'Nächsten Sonntag ist der Hauptgottesdienst um 10:00 am mit Sonntagsschule.', 'blue');
     }
     nsEvents
       .filter(e => !e.t.includes('Hauptgottesdienst'))
-      .forEach(e => addLi(listEl, 'Nächsten Sonntag: ' + e.t + '.'));
+      .forEach(e => addAnnCard(cardsEl, 'Nächsten Sonntag: ' + e.t + '.', e.c));
   }
 
   // Zukünftiges: für diese Woche geleert, weil schon alles einzeln oben
@@ -3184,7 +3439,9 @@ function renderAutoAnnouncement(){
   if(zukEl){
     zukEl.innerHTML = '';
     let items = [
-      { title: 'Männer- und Jungsabend', date: '18. Oktober 2026', desc: '3:30 pm – Gymnasium in Neustadt. Alle Männer und Jugendliche (Jungs) sind eingeladen teilzunehmen. Danach gemeinsames Abendbrot.' }
+      { title: 'Männer- und Jungsabend', date: '18. Oktober 2026', desc: '3:30 pm – Gimnasio der Gemeinde Gottes Campo 101 – Film: „The Forge / La Forga" – danach Abendessen & Gemeinschaft. Alle Männer und Jungen ab dem Jugendalter sind eingeladen. Eintritt frei.',
+        image: 'manner-jungsabend-flyer.jpg',
+        verse: { text: 'Eisen schärft Eisen, und ein Mann schärft den andern.', ref: 'Sprüche 27,17' } }
     ];
 
     if(items.length === 0){
@@ -3192,8 +3449,17 @@ function renderAutoAnnouncement(){
     } else {
       items.forEach(item=>{
         const block = document.createElement('div');
-        block.className = 'ann-subblock';
-        block.innerHTML = '<h4>' + item.title + '</h4><p>' + item.date + (item.desc ? ' — ' + item.desc : '') + '</p>';
+        block.className = 'ann-subblock ann-subblock-featured';
+        let html = '';
+        if(item.image){
+          html += '<img src="' + item.image + '" alt="' + item.title + '" class="ann-subblock-img" onclick="openLightbox(this.src, this.alt)">';
+        }
+        html += '<div class="ann-subblock-body"><h4>' + item.title + '</h4><p>' + item.date + (item.desc ? ' — ' + item.desc : '') + '</p>';
+        if(item.verse){
+          html += '<div class="evt-verse"><span class="evt-verse-text">„' + item.verse.text + '"</span><span class="evt-verse-ref">' + item.verse.ref + '</span></div>';
+        }
+        html += '</div>';
+        block.innerHTML = html;
         zukEl.appendChild(block);
       });
     }
@@ -3206,7 +3472,94 @@ function addLi(ul, text){
   ul.appendChild(li);
 }
 
+// Wählt ein passendes Symbol je nach Stichwort im Text der Ankündigung
+function pickAnnIcon(text){
+  const t = text.toLowerCase();
+  if(t.includes('gemeinschaftsabend')) return '🍽️';
+  if(t.includes('abendversammlung')) return '📖';
+  if(t.includes('frauenfrühstück') || t.includes('frühstück') && t.includes('frauen')) return '☕';
+  if(t.includes('männer') && t.includes('frühstück')) return '☕';
+  if(t.includes('gebetsfrühstück')) return '☕';
+  if(t.includes('jugendstunde')) return '🎸';
+  if(t.includes('gebetsstunde')) return '🙏';
+  if(t.includes('kinderstunde') || t.includes('kinderchor')) return '🧒';
+  if(t.includes('sonntagsschule')) return '📚';
+  if(t.includes('gottesdienst')) return '⛪';
+  if(t.includes('geburtstag')) return '🎂';
+  if(t.includes('ausflug')) return '🚌';
+  if(t.includes('taufe')) return '💧';
+  if(t.includes('abendmahl')) return '🍞';
+  return '📌';
+}
+
+// Fügt eine farbige, mit Symbol versehene Karte statt einer normalen Zeile ein
+function addAnnCard(container, text, color){
+  const card = document.createElement('div');
+  card.className = 'ann-card ann-card-' + (color || 'blue');
+  const icon = document.createElement('div');
+  icon.className = 'ann-card-icon';
+  icon.textContent = pickAnnIcon(text);
+  const span = document.createElement('div');
+  span.className = 'ann-card-text';
+  span.textContent = text;
+  card.appendChild(icon);
+  card.appendChild(span);
+  container.appendChild(card);
+}
+
+// Neue "Foto-Karte" im helleren Stil (Datum/Zeit-Etikett + fetter Titel + Beschreibung + Bild rechts).
+// imageSrc ist optional: ohne echtes Foto wird ein einfacher Platzhalter mit Symbol gezeigt.
+function addPhotoCard(container, dYmd, timeLabel, title, desc, imageSrc, imageIcon){
+  const card = document.createElement('div');
+  card.className = 'ann-photo-card';
+
+  const content = document.createElement('div');
+  content.className = 'ann-photo-card-content';
+  const badge = document.createElement('div');
+  badge.className = 'ann-photo-card-badge';
+  badge.textContent = dYmd.d + '. ' + germanMonthLabel(dYmd.y, dYmd.m).split(' ')[0].toUpperCase() + ' • ' + timeLabel;
+  const titleEl = document.createElement('div');
+  titleEl.className = 'ann-photo-card-title';
+  titleEl.textContent = title;
+  const descEl = document.createElement('div');
+  descEl.className = 'ann-photo-card-desc';
+  descEl.textContent = desc;
+  content.appendChild(badge);
+  content.appendChild(titleEl);
+  content.appendChild(descEl);
+
+  let imgEl;
+  if(imageSrc){
+    imgEl = document.createElement('img');
+    imgEl.className = 'ann-photo-card-img';
+    imgEl.src = imageSrc;
+    imgEl.alt = title;
+    imgEl.loading = 'lazy';
+    imgEl.onclick = function(){ openLightbox(imgEl.src, imgEl.alt); };
+    imgEl.style.cursor = 'pointer';
+  } else {
+    imgEl = document.createElement('div');
+    imgEl.className = 'ann-photo-card-img is-placeholder';
+    imgEl.textContent = imageIcon || '✝️';
+  }
+
+  card.appendChild(content);
+  card.appendChild(imgEl);
+  container.appendChild(card);
+}
+
 renderAutoAnnouncement();
+
+// Falls in dieser Browser-Sitzung schon vorher als Admin eingeloggt wurde,
+// den Opfer-Hinweis gleich anzeigen (nicht nur für die Öffentlichkeit versteckt)
+(function revealOfferingNoteIfAdmin(){
+  try{
+    if(sessionStorage.getItem('rosal-admin-ok') === 'yes'){
+      const el = document.getElementById('offeringNote');
+      if(el) el.style.display = '';
+    }
+  }catch(e){}
+})();
 
 // ---------------------------------------------------------------
 // Rotierendes Banner oben auf der Startseite (Bibel / Herbstversammlung).
@@ -3283,6 +3636,8 @@ function openAdminPanel(){
     }
     try{ sessionStorage.setItem('rosal-admin-ok', 'yes'); }catch(e){}
   }
+  const offeringNoteEl = document.getElementById('offeringNote');
+  if(offeringNoteEl) offeringNoteEl.style.display = '';
   document.getElementById('adminSection').style.display = 'block';
   renderAgendaList();
   document.getElementById('adminSection').scrollIntoView({behavior:'smooth'});
@@ -3342,6 +3697,73 @@ function renderAgendaList(){
       '<button class="adm-del" onclick="deleteAgendaItem(' + idx + ')" title="Löschen">✕</button>';
     wrap.appendChild(row);
   });
+}
+
+function generateAnnouncementsText(){
+  const lines = [];
+
+  const dateText = document.getElementById('autoAnnDate');
+  if(dateText) lines.push(dateText.textContent.trim());
+  lines.push('');
+
+  const readerText = document.getElementById('autoAnnReader');
+  if(readerText) lines.push(readerText.textContent.trim());
+  lines.push('');
+
+  lines.push('SONNTAG');
+  const offeringEl = document.getElementById('offeringNote');
+  if(offeringEl){
+    lines.push('- Das Opfer kann wie gewohnt am Ausgang eingelegt werden.');
+    lines.push('   • Der obere Korb ist für die allgemeinen Opfer.');
+    lines.push('   • Der untere Korb ist für den Kirchenbau.');
+  }
+  document.querySelectorAll('#autoSonntagList > li').forEach(li => {
+    if(li.id === 'offeringNote') return;
+    const firstLine = li.childNodes[0] ? li.childNodes[0].textContent.trim() : li.textContent.trim();
+    if(firstLine) lines.push('- ' + firstLine);
+  });
+  document.querySelectorAll('#autoEventCards .ann-card-text').forEach(card => {
+    lines.push('- ' + card.textContent.trim());
+  });
+  lines.push('');
+
+  const zukEl = document.getElementById('autoZukunftiges');
+  if(zukEl && zukEl.children.length){
+    lines.push('ZUKÜNFTIGES');
+    zukEl.querySelectorAll('.ann-subblock, .ann-subblock-featured').forEach(block => {
+      const h4 = block.querySelector('h4');
+      const p = block.querySelector('p');
+      const verseText = block.querySelector('.evt-verse-text');
+      const verseRef = block.querySelector('.evt-verse-ref');
+      if(h4) lines.push('- ' + h4.textContent.trim());
+      if(p) lines.push('  ' + p.textContent.trim());
+      if(verseText) lines.push('  ' + verseText.textContent.trim() + (verseRef ? ' (' + verseRef.textContent.trim() + ')' : ''));
+    });
+    lines.push('');
+  }
+
+  lines.push('GEBETSANLIEGEN');
+  document.querySelectorAll('.ann-prayer-list li').forEach(li => {
+    lines.push('- ' + li.textContent.trim());
+  });
+  lines.push('');
+
+  const verseLine = document.getElementById('autoAnnVerse');
+  if(verseLine) lines.push('BIBELTEXT: ' + verseLine.textContent.trim());
+  lines.push('');
+
+  document.querySelectorAll('.ann-closing-row p').forEach(p => {
+    lines.push(p.textContent.trim());
+  });
+
+  const box = document.getElementById('admAnnouncementsBox');
+  if(box){
+    box.value = lines.join('\n');
+    box.select();
+    try{
+      document.execCommand('copy');
+    }catch(e){}
+  }
 }
 
 function copyAgendaCode(){
