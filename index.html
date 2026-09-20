@@ -322,6 +322,27 @@
     font-size: 2.4rem;
     background: linear-gradient(160deg, #2a1d14, #6f4e37);
   }
+  .ann-lang-tabs{
+    display: flex;
+    gap: 6px;
+    margin: 6px 0 8px;
+  }
+  .ann-lang-tab{
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--navy);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .ann-lang-tab:hover{ border-color: var(--purple); }
+  .ann-lang-tab.active{
+    background: var(--purple);
+    border-color: var(--purple);
+    color: #fff;
+  }
   @media (max-width: 700px){
     .bible-columns{ gap: 8px; }
     .bible-col{ padding: 10px 8px; }
@@ -3282,6 +3303,54 @@ renderMonth();
 // im Bibelleser-Hinweis, im Datum der Bibeltext-Karte und im Bekanntmachungen-Link verwendet.
 const CURRENT_BIBELTEXT_REF = '2. Chronik 7:11-16';
 
+// Karten für "diese Woche" in Bekanntmachungen - von Hand mit Übersetzungen gepflegt.
+// Jede Karte: key (für später ein eigenes Foto), dateLabel, title, icon (Platzhalter bis
+// ein echtes Foto da ist), und de/es/en als Beschreibungstext.
+const WEEK_CARDS = [
+  { key: 'sonntag-morgenandacht', dateLabel: '20. SEPTEMBER • 10:00 AM', title: 'Morgenandacht', icon: '✝️',
+    de: 'und Sonntagschule.', es: 'y Escuela Dominical.', en: 'and Sunday School.' },
+  { key: 'sonntag-gemeinschaftsabend', dateLabel: '20. SEPTEMBER • 5:00 PM', title: 'Gemeinschaftsabend', icon: '🍽️',
+    de: 'Im Gym: Abendbrot – jeder bringt Essen und Getränke mit, Kaffee wird gestellt.',
+    es: 'En el gimnasio: cena – cada quien trae comida y bebida, se dará café.',
+    en: 'In the gym: supper – everyone brings food and drinks, coffee will be provided.' },
+  { key: 'herbstversammlung-einladung', dateLabel: '23.–27. SEPTEMBER', title: 'Herbstversammlungen', icon: '📖',
+    de: 'Diese Woche sind unsere Abendversammlungen. Sie fangen am Mittwoch an. Alle sind herzlich eingeladen — ihr könnt auch Freunde und Familie mitbringen.',
+    es: 'Esta semana son nuestras reuniones vespertinas (Herbstversammlungen). Comienzan el miércoles. Todos están cordialmente invitados — también pueden traer amigos y familiares.',
+    en: 'This week are our evening meetings (Herbstversammlungen). They start on Wednesday. Everyone is warmly invited — you can also bring friends and family.' },
+  { key: 'mittwoch-abendversammlung', dateLabel: '23. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖', image: 'cross-abendversammlung.jpg',
+    de: 'Mit Br. David Knelsen. Thema: „Gottes Weg folgen".',
+    es: 'Con el hno. David Knelsen. Tema: "Seguir el camino de Dios".',
+    en: 'With Br. David Knelsen. Topic: "Following God\'s Path".' },
+  { key: 'donnerstag-frauenfruhstuck', dateLabel: '24. SEPTEMBER • 9:00 AM', title: 'Frauenfrühstück', icon: '☕',
+    de: 'Restaurant La Huerta km 10, mit Karina Knelsen. Alle Frauen sind herzlich eingeladen.',
+    es: 'Restaurante La Huerta km 10, con Karina Knelsen. Todas las mujeres están cordialmente invitadas.',
+    en: 'Restaurant La Huerta km 10, with Karina Knelsen. All women are warmly invited.' },
+  { key: 'donnerstag-abendversammlung', dateLabel: '24. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖',
+    de: 'Mit Br. David Knelsen. Thema: „Auf dem schmalen Weg bleiben".',
+    es: 'Con el hno. David Knelsen. Tema: "Permanecer en el camino angosto".',
+    en: 'With Br. David Knelsen. Topic: "Staying on the Narrow Path".' },
+  { key: 'freitag-abendversammlung', dateLabel: '25. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖',
+    de: 'Mit Br. David Knelsen. Thema: „Die Weisheit der Welt".',
+    es: 'Con el hno. David Knelsen. Tema: "La sabiduría del mundo".',
+    en: 'With Br. David Knelsen. Topic: "The Wisdom of the World".' },
+  { key: 'freitag-jugendstunde', dateLabel: '25. SEPTEMBER', title: 'Jugendstunde', icon: '🎸',
+    de: 'Mit Neustadt zusammen, nach dem Gottesdienst, mit einem kleinen Imbiss in Rosal.',
+    es: 'Junto con Neustadt, después del culto, con un pequeño refrigerio en Rosal.',
+    en: 'Together with Neustadt, after the service, with a small snack in Rosal.' },
+  { key: 'samstag-mannerfruhstuck', dateLabel: '26. SEPTEMBER • 7:00 AM', title: 'Männer-Gebetsfrühstück', icon: '☕',
+    de: 'Pizzería La Sierra km 6, mit Br. David Knelsen. Thema: „Nicht sehen wollen".',
+    es: 'Pizzería La Sierra km 6, con el hno. David Knelsen. Tema: "No querer ver".',
+    en: 'Pizzería La Sierra km 6, with Br. David Knelsen. Topic: "Not Wanting to See".' },
+  { key: 'naechster-sonntag-gottesdienst', dateLabel: '27. SEPTEMBER • 10:00 AM', title: 'Gottesdienst', icon: '⛪',
+    de: 'Mit Br. David Knelsen. Thema: „Worauf wartet Jesus?"',
+    es: 'Con el hno. David Knelsen. Tema: "¿Qué espera Jesús?"',
+    en: 'With Br. David Knelsen. Topic: "What Is Jesus Waiting For?"' },
+  { key: 'naechster-sonntag-mittagessen', dateLabel: '27. SEPTEMBER', title: 'Gemeinsames Mittagessen', icon: '🍽️',
+    de: 'Nach dem Gottesdienst: gemeinsames Mittagessen in der Gym.',
+    es: 'Después del culto: comida en conjunto en el gimnasio.',
+    en: 'After the service: shared lunch in the gym.' }
+];
+
 const READERS = {
   '2026-8-2':  'Willy Klassen',
   '2026-8-9':  'Jacob Wiebe',
@@ -3392,43 +3461,11 @@ function renderAutoAnnouncement(){
   }
   if(cardsEl){
     cardsEl.innerHTML = '';
-
-    // Erste Karte: Morgenandacht/Sonntagsschule im neuen "Foto-Karte" Stil
-    addPhotoCard(cardsEl, sYmd, '10:00 AM', 'Morgenandacht', 'und Sonntagschule');
-
-    // Heutige Sonderpunkte (z.B. Gemeinschaftsabend) - ohne Hauptgottesdienst und ohne die Chor/Workshipteam-Hinweise
-    // (die sind nur interne Kalendernotizen; wer singt, steht unten automatisch beim Lied)
-    const todaysEvents = getEventsFor(sYmd.y, sYmd.m, sYmd.d) || [];
-    todaysEvents
-      .filter(e => !e.t.includes('Hauptgottesdienst'))
-      .filter(e => !e.t.includes('Frauenchor üben') && !e.t.includes('Gemeindechor üben') && !e.t.includes('Kinderchor üben') && !e.t.includes('Worship-Team singt'))
-      .forEach(e => addAnnCard(cardsEl, e.t + '.', e.c));
-
-    // Montag bis Samstag dieser Woche - jeder Tag als EINE Karte (nicht mehrere),
-    // auch wenn an dem Tag mehrere Sachen stattfinden
-    function addWeekdayCard(weekdayName, dayDate){
-      const dYmd = ymd(dayDate);
-      const events = getEventsFor(dYmd.y, dYmd.m, dYmd.d);
-      if(!events || !events.length) return;
-      const sentence = events.map((e, idx) => idx === 0 ? ('ist ' + e.t + '.') : (e.t + '.')).join(' ');
-      addAnnCard(cardsEl, 'Am ' + weekdayName + ', den ' + dYmd.d + '. ' + monthName(dayDate) + ', ' + sentence, events[0].c);
-    }
-    addWeekdayCard('Montag', montag);
-    addWeekdayCard('Mittwoch', mittwoch);
-    addWeekdayCard('Donnerstag', donnerstag);
-    addWeekdayCard('Freitag', freitag);
-    addWeekdayCard('Samstag', samstag);
-
-    // Nächster Sonntag
-    const nsYmd = ymd(nextSunday);
-    const nsEvents = getEventsFor(nsYmd.y, nsYmd.m, nsYmd.d) || [];
-    const hasHauptgottesdienst = nsEvents.some(e => e.t.includes('Hauptgottesdienst'));
-    if(hasHauptgottesdienst || nsEvents.length === 0){
-      addAnnCard(cardsEl, 'Nächsten Sonntag ist der Hauptgottesdienst um 10:00 am mit Sonntagsschule.', 'blue');
-    }
-    nsEvents
-      .filter(e => !e.t.includes('Hauptgottesdienst'))
-      .forEach(e => addAnnCard(cardsEl, 'Nächsten Sonntag: ' + e.t + '.', e.c));
+    // Diese Woche von Hand gepflegt (mit Übersetzungen und je einem eigenen Foto-Platz),
+    // weil automatische Übersetzung nicht zuverlässig ist. Bei WEEK_CARDS.forEach unten
+    // einfach den "key" jeder Karte merken, um später mit setCardPhoto('key', 'datei.jpg')
+    // ein echtes Foto einzusetzen.
+    WEEK_CARDS.forEach(c => addPhotoCardTabs(cardsEl, c));
   }
 
   // Zukünftiges: für diese Woche geleert, weil schon alles einzeln oben
@@ -3546,6 +3583,93 @@ function addPhotoCard(container, dYmd, timeLabel, title, desc, imageSrc, imageIc
   card.appendChild(content);
   card.appendChild(imgEl);
   container.appendChild(card);
+}
+
+// Foto-Karte mit DE/ES/EN Sprachreitern (wie beim Bibeltext). "item" braucht:
+// key, dateLabel, title, icon, de, es, en. Jede Karte bekommt data-photo-key,
+// damit später mit setCardPhoto(key, 'datei.jpg') ein echtes Foto eingesetzt werden kann.
+function addPhotoCardTabs(container, item){
+  const card = document.createElement('div');
+  card.className = 'ann-photo-card';
+  card.dataset.photoKey = item.key;
+
+  const content = document.createElement('div');
+  content.className = 'ann-photo-card-content';
+
+  const badge = document.createElement('div');
+  badge.className = 'ann-photo-card-badge';
+  badge.textContent = item.dateLabel;
+
+  const titleEl = document.createElement('div');
+  titleEl.className = 'ann-photo-card-title';
+  titleEl.textContent = item.title;
+
+  const tabs = document.createElement('div');
+  tabs.className = 'ann-lang-tabs';
+  const langs = [['de','DE'], ['es','ES'], ['en','EN']];
+  langs.forEach(([code, label], idx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'ann-lang-tab' + (idx === 0 ? ' active' : '');
+    btn.dataset.lang = code;
+    btn.textContent = label;
+    tabs.appendChild(btn);
+  });
+
+  const descEl = document.createElement('div');
+  descEl.className = 'ann-photo-card-desc';
+  descEl.textContent = item.de;
+  descEl.dataset.currentLang = 'de';
+
+  tabs.addEventListener('click', (e) => {
+    const btn = e.target.closest('.ann-lang-tab');
+    if(!btn) return;
+    tabs.querySelectorAll('.ann-lang-tab').forEach(b => b.classList.toggle('active', b === btn));
+    const lang = btn.dataset.lang;
+    descEl.textContent = item[lang];
+    descEl.dataset.currentLang = lang;
+  });
+
+  content.appendChild(badge);
+  content.appendChild(titleEl);
+  content.appendChild(tabs);
+  content.appendChild(descEl);
+
+  let imgEl;
+  if(item.image){
+    imgEl = document.createElement('img');
+    imgEl.className = 'ann-photo-card-img';
+    imgEl.src = item.image;
+    imgEl.alt = item.title;
+    imgEl.loading = 'lazy';
+    imgEl.style.cursor = 'pointer';
+    imgEl.onclick = function(){ openLightbox(imgEl.src, imgEl.alt); };
+  } else {
+    imgEl = document.createElement('div');
+    imgEl.className = 'ann-photo-card-img is-placeholder';
+    imgEl.textContent = item.icon || '✝️';
+  }
+
+  card.appendChild(content);
+  card.appendChild(imgEl);
+  container.appendChild(card);
+}
+
+// Später benutzen, um ein echtes Foto in eine Karte einzusetzen, z.B.:
+//   setCardPhoto('mittwoch-abendversammlung', 'abendversammlung-mittwoch.jpg')
+function setCardPhoto(key, imageSrc){
+  const card = document.querySelector('.ann-photo-card[data-photo-key="' + key + '"]');
+  if(!card) return;
+  const oldImg = card.querySelector('.ann-photo-card-img');
+  const title = card.querySelector('.ann-photo-card-title');
+  const newImg = document.createElement('img');
+  newImg.className = 'ann-photo-card-img';
+  newImg.src = imageSrc;
+  newImg.alt = title ? title.textContent : '';
+  newImg.loading = 'lazy';
+  newImg.style.cursor = 'pointer';
+  newImg.onclick = function(){ openLightbox(newImg.src, newImg.alt); };
+  oldImg.replaceWith(newImg);
 }
 
 renderAutoAnnouncement();
