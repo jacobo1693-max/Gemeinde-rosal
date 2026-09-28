@@ -2062,7 +2062,7 @@
       </div>
       <div class="ann-closing-row">
         <span class="ann-closing-icon">🗣️</span>
-        <p>Danach folgt die Botschaft von Pastor Hans Klassen.</p>
+        <p id="autoAnnSpeaker">Danach folgt die Botschaft von Pastor Hans Klassen.</p>
       </div>
     </div>
 
@@ -3302,52 +3302,33 @@ renderMonth();
 // im Bibelleser-Hinweis, im Datum der Bibeltext-Karte und im Bekanntmachungen-Link verwendet.
 const CURRENT_BIBELTEXT_REF = '2. Chronik 7:11-16';
 
+// Wer die Botschaft am Sonntag bringt - EIN Ort zum Ändern (steht im Abschluss der Bekanntmachungen).
+const CURRENT_SPEAKER = 'Br. David Knelsen';
+
 // Karten für "diese Woche" in Bekanntmachungen - von Hand mit Übersetzungen gepflegt.
 // Jede Karte: key (für später ein eigenes Foto), dateLabel, title, icon (Platzhalter bis
 // ein echtes Foto da ist), und de/es/en als Beschreibungstext.
 const WEEK_CARDS = [
-  { key: 'sonntag-morgenandacht', dateLabel: '20. SEPTEMBER • 10:00 AM', title: 'Morgenandacht', icon: '✝️', image: 'cross-abendversammlung.jpg',
-    de: 'und Sonntagschule.', es: 'y Escuela Dominical.', en: 'and Sunday School.' },
-  { key: 'sonntag-gemeinschaftsabend', dateLabel: '20. SEPTEMBER • 5:00 PM', title: 'Gemeinschaftsabend', icon: '🍽️', image: 'cross-abendversammlung.jpg',
-    de: 'Im Gym: Abendbrot – jeder bringt Essen und Getränke mit, Kaffee wird gestellt.',
-    es: 'En el gimnasio: cena – cada quien trae comida y bebida, se dará café.',
-    en: 'In the gym: supper – everyone brings food and drinks, coffee will be provided.' },
-  { key: 'herbstversammlung-einladung', dateLabel: '23.–27. SEPTEMBER', title: 'Herbstversammlungen', icon: '📖', image: 'cross-abendversammlung.jpg',
-    de: 'Diese Woche sind unsere Abendversammlungen. Sie fangen am Mittwoch an. Alle sind herzlich eingeladen — ihr könnt auch Freunde und Familie mitbringen.',
-    es: 'Esta semana son nuestras reuniones vespertinas (Herbstversammlungen). Comienzan el miércoles. Todos están cordialmente invitados — también pueden traer amigos y familiares.',
-    en: 'This week are our evening meetings (Herbstversammlungen). They start on Wednesday. Everyone is warmly invited — you can also bring friends and family.' },
-  { key: 'mittwoch-abendversammlung', dateLabel: '23. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖', image: 'cross-abendversammlung.jpg',
-    de: 'Mit Br. David Knelsen. Thema: „Gottes Weg folgen".',
-    es: 'Con el hno. David Knelsen. Tema: "Seguir el camino de Dios".',
-    en: 'With Br. David Knelsen. Topic: "Following God\'s Path".' },
-  { key: 'donnerstag-frauenfruhstuck', dateLabel: '24. SEPTEMBER • 9:00 AM', title: 'Frauenfrühstück', icon: '☕', image: 'cross-abendversammlung.jpg',
-    de: 'Restaurant La Huerta km 10, mit Karina Knelsen. Alle Frauen sind herzlich eingeladen.',
-    es: 'Restaurante La Huerta km 10, con Karina Knelsen. Todas las mujeres están cordialmente invitadas.',
-    en: 'Restaurant La Huerta km 10, with Karina Knelsen. All women are warmly invited.' },
-  { key: 'donnerstag-abendversammlung', dateLabel: '24. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖', image: 'cross-abendversammlung.jpg',
-    de: 'Mit Br. David Knelsen. Thema: „Auf dem schmalen Weg bleiben".',
-    es: 'Con el hno. David Knelsen. Tema: "Permanecer en el camino angosto".',
-    en: 'With Br. David Knelsen. Topic: "Staying on the Narrow Path".' },
-  { key: 'freitag-abendversammlung', dateLabel: '25. SEPTEMBER • 7:30 PM', title: 'Abendversammlung', icon: '📖', image: 'cross-abendversammlung.jpg',
-    de: 'Mit Br. David Knelsen. Thema: „Die Weisheit der Welt".',
-    es: 'Con el hno. David Knelsen. Tema: "La sabiduría del mundo".',
-    en: 'With Br. David Knelsen. Topic: "The Wisdom of the World".' },
-  { key: 'freitag-jugendstunde', dateLabel: '25. SEPTEMBER', title: 'Jugendstunde', icon: '🎸', image: 'cross-abendversammlung.jpg',
-    de: 'Mit Neustadt zusammen, nach dem Gottesdienst, mit einem kleinen Imbiss in Rosal.',
-    es: 'Junto con Neustadt, después del culto, con un pequeño refrigerio en Rosal.',
-    en: 'Together with Neustadt, after the service, with a small snack in Rosal.' },
-  { key: 'samstag-mannerfruhstuck', dateLabel: '26. SEPTEMBER • 7:00 AM', title: 'Männer-Gebetsfrühstück', icon: '☕', image: 'cross-abendversammlung.jpg',
-    de: 'Pizzería La Sierra km 6, mit Br. David Knelsen. Thema: „Nicht sehen wollen".',
-    es: 'Pizzería La Sierra km 6, con el hno. David Knelsen. Tema: "No querer ver".',
-    en: 'Pizzería La Sierra km 6, with Br. David Knelsen. Topic: "Not Wanting to See".' },
-  { key: 'naechster-sonntag-gottesdienst', dateLabel: '27. SEPTEMBER • 10:00 AM', title: 'Gottesdienst', icon: '⛪', image: 'cross-abendversammlung.jpg',
+  { key: 'sonntag-gottesdienst', dateLabel: '27. SEPTEMBER • 10:00 AM', title: 'Gottesdienst', icon: '⛪', image: 'cross-abendversammlung.jpg',
     de: 'Mit Br. David Knelsen. Thema: „Worauf wartet Jesus?"',
     es: 'Con el hno. David Knelsen. Tema: "¿Qué espera Jesús?"',
     en: 'With Br. David Knelsen. Topic: "What Is Jesus Waiting For?"' },
-  { key: 'naechster-sonntag-mittagessen', dateLabel: '27. SEPTEMBER', title: 'Gemeinsames Mittagessen', icon: '🍽️', image: 'cross-abendversammlung.jpg',
-    de: 'Nach dem Gottesdienst: gemeinsames Mittagessen in der Gym.',
-    es: 'Después del culto: comida en conjunto en el gimnasio.',
-    en: 'After the service: shared lunch in the gym.' }
+  { key: 'sonntag-mittagessen', dateLabel: '27. SEPTEMBER', title: 'Gemeinsames Mittagessen', icon: '🍽️', image: 'cross-abendversammlung.jpg',
+    de: 'Nach dem Gottesdienst sind alle herzlich zum gemeinsamen Mittagessen in der Gym eingeladen.',
+    es: 'Después del culto, todos están cordialmente invitados a la comida en conjunto en el gimnasio.',
+    en: 'After the service, everyone is warmly invited to the shared lunch in the gym.' },
+  { key: 'mittwoch-gebetsstunde', dateLabel: '30. SEPTEMBER • 7:30 PM', title: 'Gebetsstunde', icon: '🙏', image: 'cross-abendversammlung.jpg',
+    de: 'Am Mittwoch, den 30. September, um 7:30 pm.',
+    es: 'El miércoles 30 de septiembre, a las 7:30 pm.',
+    en: 'On Wednesday, September 30, at 7:30 pm.' },
+  { key: 'freitag-jugendstunde', dateLabel: '2. OKTOBER • 7:30 PM', title: 'Jugendstunde', icon: '🎸', image: 'cross-abendversammlung.jpg',
+    de: 'Am Freitag, den 2. Oktober, um 7:30 pm.',
+    es: 'El viernes 2 de octubre, a las 7:30 pm.',
+    en: 'On Friday, October 2, at 7:30 pm.' },
+  { key: 'naechster-sonntag-gottesdienst', dateLabel: '4. OKTOBER • 10:00 AM', title: 'Hauptgottesdienst', icon: '⛪', image: 'cross-abendversammlung.jpg',
+    de: 'Nächsten Sonntag: Hauptgottesdienst mit Sonntagsschule.',
+    es: 'El próximo domingo: culto principal con escuela dominical.',
+    en: 'Next Sunday: main service with Sunday school.' }
 ];
 
 const READERS = {
@@ -3380,6 +3361,10 @@ function renderAutoAnnouncement(){
   const verseEl = document.getElementById('autoAnnVerse');
   if(verseEl){
     verseEl.innerHTML = CURRENT_BIBELTEXT_REF + ' — <a href="#bibeltext" class="ann-verse-link">zum vollständigen Text in 4 Sprachen ↓</a>';
+  }
+  const speakerEl = document.getElementById('autoAnnSpeaker');
+  if(speakerEl){
+    speakerEl.textContent = 'Danach folgt die Botschaft von ' + CURRENT_SPEAKER + '.';
   }
   const bibeltextDateEl = document.getElementById('bibeltextDate');
   if(bibeltextDateEl){
