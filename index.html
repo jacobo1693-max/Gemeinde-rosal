@@ -1978,19 +1978,6 @@
   </div>
 </section>
 
-<div class="content-grid" id="zukunftiges-preview">
-
-  <div class="card">
-    <div class="card-header">
-      <div class="title">📖 Zukünftiges</div>
-      <a href="kalender.html" class="btn-outline" style="padding:6px 14px; font-size:0.8rem;">📅 Zum Kalender</a>
-    </div>
-    <div class="upcoming-list" id="upcomingList">
-    </div>
-  </div>
-
-</div>
-
 <section class="card announcements-section" id="bekanntmachungen">
   <div class="card-header">
     <div class="title">📢 Bekanntmachungen</div>
@@ -2316,112 +2303,6 @@
 
 <script src="calendar-data.js"></script>
 <script>
-// Für die Startseite (Zukünftiges-Karte) reicht das heutige Jahr/Monat -
-// hier gibt es keine Kalendernavigation wie auf der Kalender-Seite.
-const currentYear = new Date().getFullYear();
-const currentMonth = new Date().getMonth() + 1;
-
-function renderUpcoming(){
-  const list = document.getElementById('upcomingList');
-  list.innerHTML = '';
-
-  let items = GLOBAL_UPCOMING.filter(item =>
-    item.year > currentYear || (item.year === currentYear && item.month >= currentMonth)
-  );
-
-  const isDuplicate = (candidate) => items.some(it => it.title === candidate.title && it.year === candidate.year && it.month === candidate.month);
-
-  const centroLuz = getNextCentroLuzEvent(currentYear, currentMonth);
-  if(centroLuz && !isDuplicate(centroLuz)) items.push(centroLuz);
-
-  const gemeinschaftsabend = getNextGemeinschaftsabend(currentYear, currentMonth);
-  if(gemeinschaftsabend && !isDuplicate(gemeinschaftsabend)) items.push(gemeinschaftsabend);
-
-  items.sort((a, b) => (a.year - b.year) || (a.month - b.month) || ((a.day||0) - (b.day||0)));
-
-  if(items.length === 0){
-    const empty = document.createElement('p');
-    empty.style.color = 'var(--muted)';
-    empty.style.fontSize = '0.88rem';
-    empty.style.padding = '4px 4px 16px';
-    empty.textContent = 'Für diesen Monat sind noch keine weiteren Termine eingetragen.';
-    list.appendChild(empty);
-    return;
-  }
-
-  items.forEach(item=>{
-    const wrap = document.createElement('div');
-    wrap.className = 'upcoming-item' + (item.image ? ' has-image' : '') + (item.schedule ? ' has-schedule' : '');
-
-    if(item.image){
-      const img = document.createElement('img');
-      img.className = 'upcoming-poster';
-      img.src = item.image;
-      img.alt = item.title;
-      img.onclick = function(){ openLightbox(img.src, img.alt); };
-      wrap.appendChild(img);
-    }
-
-    const badge = document.createElement('div');
-    badge.className = 'icon-badge badge-' + item.badge;
-    badge.textContent = item.icon;
-
-    const textWrap = document.createElement('div');
-    if(item.schedule) textWrap.style.width = '100%';
-
-    const date = document.createElement('div');
-    date.className = 'date ' + item.badge;
-    date.textContent = item.date;
-
-    const title = document.createElement('div');
-    title.className = 'evt-title';
-    title.textContent = item.title;
-
-    const desc = document.createElement('div');
-    desc.className = 'evt-desc';
-    desc.textContent = item.desc;
-
-    textWrap.appendChild(date);
-    textWrap.appendChild(title);
-    textWrap.appendChild(desc);
-
-    if(item.verse){
-      const verseBox = document.createElement('div');
-      verseBox.className = 'evt-verse';
-      verseBox.innerHTML = '<span class="evt-verse-text">„' + item.verse.text + '"</span><span class="evt-verse-ref">' + item.verse.ref + '</span>';
-      textWrap.appendChild(verseBox);
-    }
-
-    if(item.schedule){
-      const schedWrap = document.createElement('div');
-      schedWrap.className = 'uld-wrap';
-      const langs = [ ['de','Deutsch'], ['es','Español'], ['en','English'] ];
-      langs.forEach(([code, label])=>{
-        const block = document.createElement('div');
-        block.className = 'uld-lang-block';
-        const lbl = document.createElement('div');
-        lbl.className = 'uld-lang-label';
-        lbl.textContent = label;
-        block.appendChild(lbl);
-        const ul = document.createElement('ul');
-        ul.className = 'uld-list';
-        item.schedule[code].forEach(line=>{
-          const li = document.createElement('li');
-          li.textContent = line;
-          ul.appendChild(li);
-        });
-        block.appendChild(ul);
-        schedWrap.appendChild(block);
-      });
-      textWrap.appendChild(schedWrap);
-    }
-
-    wrap.appendChild(badge);
-    wrap.appendChild(textWrap);
-    list.appendChild(wrap);
-  });
-}
-
 function openLightbox(src, alt){
   const overlay = document.getElementById('lightboxOverlay');
   const img = document.getElementById('lightboxImg');
@@ -2770,7 +2651,6 @@ function setCardPhoto(key, imageSrc){
   oldImg.replaceWith(newImg);
 }
 
-renderUpcoming();
 renderAutoAnnouncement();
 
 (function revealOfferingNoteIfAdmin(){
