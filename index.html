@@ -2349,77 +2349,84 @@ function renderUpcoming(){
     return;
   }
 
-  items.forEach(item=>{
-    const wrap = document.createElement('div');
-    wrap.className = 'upcoming-item' + (item.image ? ' has-image' : '') + (item.schedule ? ' has-schedule' : '');
+  items.forEach(item=> addUpcomingCard(list, item));
+}
 
-    if(item.image){
-      const img = document.createElement('img');
-      img.className = 'upcoming-poster';
-      img.src = item.image;
-      img.alt = item.title;
-      img.onclick = function(){ openLightbox(img.src, img.alt); };
-      wrap.appendChild(img);
-    }
+// Baut eine Zukünftiges-Karte im "Foto-Karte" Stil (wie bei den Wochenkarten in
+// Bekanntmachungen). Nutzt automatisch die Kreuz-Foto als Standardbild, wenn der
+// Termin noch kein eigenes Foto hat (item.image).
+function addUpcomingCard(container, item){
+  const card = document.createElement('div');
+  card.className = 'ann-photo-card';
 
-    const badge = document.createElement('div');
-    badge.className = 'icon-badge badge-' + item.badge;
-    badge.textContent = item.icon;
+  const content = document.createElement('div');
+  content.className = 'ann-photo-card-content';
 
-    const textWrap = document.createElement('div');
-    if(item.schedule) textWrap.style.width = '100%';
+  const badge = document.createElement('div');
+  badge.className = 'ann-photo-card-badge';
+  badge.textContent = item.date.toUpperCase();
 
-    const date = document.createElement('div');
-    date.className = 'date ' + item.badge;
-    date.textContent = item.date;
+  const titleEl = document.createElement('div');
+  titleEl.className = 'ann-photo-card-title';
+  titleEl.textContent = item.title;
 
-    const title = document.createElement('div');
-    title.className = 'evt-title';
-    title.textContent = item.title;
+  content.appendChild(badge);
+  content.appendChild(titleEl);
 
-    const desc = document.createElement('div');
-    desc.className = 'evt-desc';
-    desc.textContent = item.desc;
+  if(item.schedule){
+    const tabs = document.createElement('div');
+    tabs.className = 'ann-lang-tabs';
+    const langs = [['de','DE'], ['es','ES'], ['en','EN']];
+    const texts = {
+      de: item.schedule.de.join(' '),
+      es: item.schedule.es.join(' '),
+      en: item.schedule.en.join(' ')
+    };
+    langs.forEach(([code, label], idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ann-lang-tab' + (idx === 0 ? ' active' : '');
+      btn.dataset.lang = code;
+      btn.textContent = label;
+      tabs.appendChild(btn);
+    });
+    const descEl = document.createElement('div');
+    descEl.className = 'ann-photo-card-desc';
+    descEl.textContent = texts.de;
+    tabs.addEventListener('click', (e) => {
+      const btn = e.target.closest('.ann-lang-tab');
+      if(!btn) return;
+      tabs.querySelectorAll('.ann-lang-tab').forEach(b => b.classList.toggle('active', b === btn));
+      descEl.textContent = texts[btn.dataset.lang];
+    });
+    content.appendChild(tabs);
+    content.appendChild(descEl);
+  } else if(item.desc){
+    const descEl = document.createElement('div');
+    descEl.className = 'ann-photo-card-desc';
+    descEl.textContent = item.desc;
+    content.appendChild(descEl);
+  }
 
-    textWrap.appendChild(date);
-    textWrap.appendChild(title);
-    textWrap.appendChild(desc);
+  if(item.verse){
+    const verseBox = document.createElement('div');
+    verseBox.className = 'evt-verse';
+    verseBox.innerHTML = '<span class="evt-verse-text">„' + item.verse.text + '"</span><span class="evt-verse-ref">' + item.verse.ref + '</span>';
+    content.appendChild(verseBox);
+  }
 
-    if(item.verse){
-      const verseBox = document.createElement('div');
-      verseBox.className = 'evt-verse';
-      verseBox.innerHTML = '<span class="evt-verse-text">„' + item.verse.text + '"</span><span class="evt-verse-ref">' + item.verse.ref + '</span>';
-      textWrap.appendChild(verseBox);
-    }
+  const imgSrc = item.image || 'cross-abendversammlung.jpg';
+  const img = document.createElement('img');
+  img.className = 'ann-photo-card-img';
+  img.src = imgSrc;
+  img.alt = item.title;
+  img.loading = 'lazy';
+  img.style.cursor = 'pointer';
+  img.onclick = function(){ openLightbox(img.src, img.alt); };
 
-    if(item.schedule){
-      const schedWrap = document.createElement('div');
-      schedWrap.className = 'uld-wrap';
-      const langs = [ ['de','Deutsch'], ['es','Español'], ['en','English'] ];
-      langs.forEach(([code, label])=>{
-        const block = document.createElement('div');
-        block.className = 'uld-lang-block';
-        const lbl = document.createElement('div');
-        lbl.className = 'uld-lang-label';
-        lbl.textContent = label;
-        block.appendChild(lbl);
-        const ul = document.createElement('ul');
-        ul.className = 'uld-list';
-        item.schedule[code].forEach(line=>{
-          const li = document.createElement('li');
-          li.textContent = line;
-          ul.appendChild(li);
-        });
-        block.appendChild(ul);
-        schedWrap.appendChild(block);
-      });
-      textWrap.appendChild(schedWrap);
-    }
-
-    wrap.appendChild(badge);
-    wrap.appendChild(textWrap);
-    list.appendChild(wrap);
-  });
+  card.appendChild(content);
+  card.appendChild(img);
+  container.appendChild(card);
 }
 
 function openLightbox(src, alt){
