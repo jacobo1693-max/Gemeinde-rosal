@@ -4006,6 +4006,31 @@ async function generateCalendarPDF(){
   }
 }
 
+// Predigten-Player: Wenn die Verbindung zu archive.org kurz abbricht, startet der Browser
+// beim erneuten Drücken auf Play sonst wieder bei 0:00. Hier merken wir uns die letzte
+// Position und springen nach dem Neuladen automatisch wieder dorthin.
+(function keepAudioPosition(){
+  document.querySelectorAll('#predigtenList audio').forEach(audio => {
+    let lastTime = 0;
+    let resumeAt = 0;
+    audio.addEventListener('timeupdate', () => {
+      if(audio.currentTime > 0 && !audio.error) lastTime = audio.currentTime;
+    });
+    audio.addEventListener('ended', () => { lastTime = 0; resumeAt = 0; });
+    audio.addEventListener('error', () => { if(lastTime > 3) resumeAt = lastTime; });
+    audio.addEventListener('emptied', () => { if(lastTime > 3) resumeAt = lastTime; });
+    audio.addEventListener('play', () => {
+      if(resumeAt > 3 && audio.currentTime < 1){
+        const target = resumeAt;
+        resumeAt = 0;
+        const seek = () => { try{ audio.currentTime = target; }catch(e){} };
+        if(audio.readyState >= 1) seek();
+        else audio.addEventListener('loadedmetadata', seek, { once: true });
+      }
+    });
+  });
+})();
+
 const menuToggle = document.getElementById('menuToggle');
 const mainNav = document.getElementById('mainNav');
 menuToggle.addEventListener('click', () => {
