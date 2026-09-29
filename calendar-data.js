@@ -100,7 +100,11 @@ const monthsData = {
     label: "Oktober 2026",
     events: {
       2: [ {c:'grey', t:'Keine Jugendstunde'} ],
+      9: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
+      16: [ {c:'grey', t:'Keine Jugendstunde'} ],
       17: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück'} ],
+      23: [ {c:'grey', t:'Die Jugendleiter werden wissen lassen, was geplant ist'} ],
+      30: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
       18: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'blue', t:'3:30 pm – Männer- und Jungsabend im Gimnasio der Gemeinde Gottes Campo 101, Film „The Forge / La Forga", alle Männer und Jungen ab dem Jugendalter sind eingeladen'}, {c:'gold', t:'Abendessen & Gemeinschaft folgt'} ],
     },
   },
@@ -108,9 +112,13 @@ const monthsData = {
   "2026-11": {
     label: "November 2026",
     events: {
+      6: [ {c:'grey', t:'Keine Jugendstunde'} ],
       8: [ {c:'red', t:'10:00 am – Erntedankfest'}, {c:'gold', t:'Gemeinsames Mittagessen für die ganze Gemeinde'} ],
+      13: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
+      20: [ {c:'grey', t:'Keine Jugendstunde'} ],
       21: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück'} ],
       22: [ {c:'gold', t:'Kinderchor üben'}, {c:'blue', t:'10:00 am – Hauptgottesdienst (keine Sonntagsschule)'}, {c:'purple', t:'Verordnung Abendmahl'} ],
+      27: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
     },
   },
 
@@ -229,7 +237,14 @@ function computeDefaultWeeklyEvent(year, month, day){
     return events;
   }
   if(weekday === 5){
-    return [ {c:'blue', t:'7:30 pm – Jugendstunde'} ];
+    // Ab Oktober 2026 wird jeder Freitag von Hand in monthsData eingetragen
+    // (auch "normale" Jugendstunde-Freitage), damit z.B. Dezember wirklich leer
+    // bleiben kann, statt automatisch aufgefüllt zu werden.
+    const isBeforeOct2026 = (year < 2026) || (year === 2026 && month < 10);
+    if(isBeforeOct2026){
+      return [ {c:'blue', t:'7:30 pm – Jugendstunde'} ];
+    }
+    return null;
   }
   return null;
 }
