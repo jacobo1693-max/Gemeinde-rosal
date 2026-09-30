@@ -99,12 +99,12 @@ const monthsData = {
   "2026-10": {
     label: "Oktober 2026",
     events: {
-      2: [ {c:'grey', t:'Keine Jugendstunde'} ],
-      9: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
-      16: [ {c:'grey', t:'Keine Jugendstunde'} ],
+      2: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
+      9: [ {c:'grey', t:'Keine Jugendstunde'} ],
+      16: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
       17: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück'} ],
-      23: [ {c:'grey', t:'Die Jugendleiter werden wissen lassen, was geplant ist'} ],
-      30: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
+      23: [ {c:'grey', t:'Keine Jugendstunde'} ],
+      30: [ {c:'blue', t:'7:00 pm – Jugendstunde in Neustadt'} ],
       18: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'blue', t:'3:30 pm – Männer- und Jungsabend im Gimnasio der Gemeinde Gottes Campo 101, Film „The Forge / La Forga", alle Männer und Jungen ab dem Jugendalter sind eingeladen'}, {c:'gold', t:'Abendessen & Gemeinschaft folgt'} ],
     },
   },
