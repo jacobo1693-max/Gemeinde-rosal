@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gemeinde-rosal-v2';
+const CACHE_NAME = 'gemeinde-rosal-v3';
 const FILES_TO_CACHE = [
   './',
   './index.html',
@@ -25,11 +25,16 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  const isHTML = event.request.mode === 'navigate' ||
+  // "Immer zuerst im Netz nachsehen" gilt für Seiten (HTML) UND für die
+  // Datendateien (.js), da calendar-data.js sich regelmäßig ändert und
+  // Besucher sonst eine alte Kopie vom Service Worker vorgesetzt bekommen,
+  // selbst nachdem eine neue Version hochgeladen wurde.
+  const needsFreshContent = event.request.mode === 'navigate' ||
                  event.request.url.endsWith('.html') ||
+                 event.request.url.endsWith('.js') ||
                  event.request.url.endsWith('/');
 
-  if (isHTML) {
+  if (needsFreshContent) {
     // Network-first: siempre intenta traer la versión más nueva primero.
     // Así ves los cambios apenas subes una actualización, sin tener que
     // desinstalar nada. Solo usa la copia guardada si no hay internet.
@@ -58,4 +63,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
