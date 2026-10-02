@@ -126,6 +126,7 @@ const monthsData = {
   "2026-12": {
     label: "Dezember 2026",
     events: {
+      13: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'purple', t:'5:00 pm – Singabend in der Kirche, nach dem Abendbrot im Gym'} ],
       17: [ {c:'green', t:'Weihnachtsprogramm der Schule'} ],
       19: [ {c:'grey', t:'Kein Männerfrühstück'} ],
       23: [ {c:'grey', t:'Keine Gebetsstunde'} ],
