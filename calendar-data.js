@@ -119,6 +119,7 @@ const monthsData = {
       20: [ {c:'grey', t:'Keine Jugendstunde'} ],
       21: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück'} ],
       22: [ {c:'gold', t:'Kinderchor üben'}, {c:'blue', t:'10:00 am – Hauptgottesdienst (keine Sonntagsschule)'}, {c:'purple', t:'Verordnung Abendmahl'} ],
+      24: [ {c:'gold', t:'9:00 am – Frauenstunde'} ],
       27: [ {c:'blue', t:'7:00 pm – Jugendstunde in Neustadt'} ],
     },
   },
