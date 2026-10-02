@@ -257,6 +257,22 @@ function getEventsFor(y, m, day){
   return computeDefaultWeeklyEvent(y, m, day);
 }
 const GLOBAL_UPCOMING = [
+  { year:2026, month:12, day:13, date:'13. Dezember 2026',          badge:'purple', icon:'🎵', title:'Singabend', desc:'5:00 pm – in der Kirche, nach dem Abendbrot im Gym',
+    schedule: {
+      de: [
+        'Am Sonntag, den 13. Dezember, um 5:00 pm: Singabend in der Kirche.',
+        'Er findet nach dem Abendbrot im Gym statt.'
+      ],
+      es: [
+        'El domingo 13 de diciembre, a las 5:00 pm: noche de cantos en la iglesia.',
+        'Será después de la cena en el gimnasio.'
+      ],
+      en: [
+        'On Sunday, December 13, at 5:00 pm: evening of singing in the church.',
+        'It will take place after supper in the gym.'
+      ]
+    }
+  },
   { year:2026, month:9,  day:24, date:'24. September 2026',         badge:'gold',   icon:'☕', title:'Frauenfrühstück und Bibelstudium', desc:'9:00 am – Restaurant La Huerta km 10, mit Karina Knelsen',
     schedule: {
       de: [
