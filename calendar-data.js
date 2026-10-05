@@ -533,10 +533,10 @@ function getNextGemeinschaftsabend(fromYear, fromMonth){
   }
   return null;
 }
-const CURRENT_BIBELTEXT_REF = '2. Chronik 7:11-16';
+const CURRENT_BIBELTEXT_REF = 'Kolosser 3:12-17';
 
 // Wer die Botschaft am Sonntag bringt - EIN Ort zum Ändern (steht im Abschluss der Bekanntmachungen).
-const CURRENT_SPEAKER = 'Br. David Knelsen';
+const CURRENT_SPEAKER = 'Pastor Hans Klassen';
 
 // Karten für "diese Woche" in Bekanntmachungen - von Hand mit Übersetzungen gepflegt.
 // Jede Karte: key (für später ein eigenes Foto), dateLabel, title, icon (Platzhalter bis
