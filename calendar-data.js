@@ -127,7 +127,7 @@ const monthsData = {
   "2026-12": {
     label: "Dezember 2026",
     events: {
-      13: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'purple', t:'5:00 pm – Singabend in der Kirche, nach dem Abendbrot im Gym'} ],
+      13: [ {c:'blue', t:'10:00 am – Hauptgottesdienst und Sonntagsschule'}, {c:'purple', t:'5:00 pm – Singabend in der Kirche, danach Abendbrot im Gym'} ],
       17: [ {c:'green', t:'Weihnachtsprogramm der Schule'} ],
       19: [ {c:'grey', t:'Kein Männerfrühstück'} ],
       23: [ {c:'grey', t:'Keine Gebetsstunde'} ],
@@ -258,19 +258,19 @@ function getEventsFor(y, m, day){
   return computeDefaultWeeklyEvent(y, m, day);
 }
 const GLOBAL_UPCOMING = [
-  { year:2026, month:12, day:13, date:'13. Dezember 2026',          badge:'purple', icon:'🎵', title:'Singabend', desc:'5:00 pm – in der Kirche, nach dem Abendbrot im Gym',
+  { year:2026, month:12, day:13, date:'13. Dezember 2026',          badge:'purple', icon:'🎵', title:'Singabend', desc:'5:00 pm – in der Kirche, danach Abendbrot im Gym',
     schedule: {
       de: [
         'Am Sonntag, den 13. Dezember, um 5:00 pm: Singabend in der Kirche.',
-        'Er findet nach dem Abendbrot im Gym statt.'
+        'Danach gibt es Abendbrot im Gym.'
       ],
       es: [
         'El domingo 13 de diciembre, a las 5:00 pm: noche de cantos en la iglesia.',
-        'Será después de la cena en el gimnasio.'
+        'Después habrá cena en el gimnasio.'
       ],
       en: [
         'On Sunday, December 13, at 5:00 pm: evening of singing in the church.',
-        'It will take place after supper in the gym.'
+        'Afterwards there will be supper in the gym.'
       ]
     }
   },
