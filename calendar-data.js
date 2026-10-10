@@ -533,7 +533,7 @@ function getNextGemeinschaftsabend(fromYear, fromMonth){
   }
   return null;
 }
-const CURRENT_BIBELTEXT_REF = 'Kolosser 3:12-17';
+const CURRENT_BIBELTEXT_REF = 'Kolosser 3:1-10';
 
 // Wer die Botschaft am Sonntag bringt - EIN Ort zum Ändern (steht im Abschluss der Bekanntmachungen).
 const CURRENT_SPEAKER = 'Pastor Hans Klassen';
