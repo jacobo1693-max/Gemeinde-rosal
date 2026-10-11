@@ -102,7 +102,7 @@ const monthsData = {
       2: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
       9: [ {c:'grey', t:'Keine Jugendstunde'} ],
       16: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
-      17: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück'} ],
+      17: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück – Pizzería La Sierra km 6'} ],
       23: [ {c:'grey', t:'Keine Jugendstunde'} ],
       27: [ {c:'gold', t:'9:00 am – Frauenstunde'} ],
       30: [ {c:'blue', t:'7:00 pm – Jugendstunde in Neustadt'} ],
@@ -458,19 +458,19 @@ const GLOBAL_UPCOMING = [
       ]
     }
   },
-  { year:2026, month:10, day:17, date:'17. Oktober 2026',           badge:'gold',   icon:'☕', title:'Männer-Gebetsfrühstück', desc:'7:00 am',
+  { year:2026, month:10, day:17, date:'17. Oktober 2026',           badge:'gold',   icon:'☕', title:'Männer-Gebetsfrühstück', desc:'7:00 am – Pizzería La Sierra km 6',
     schedule: {
       de: [
         'Am Samstag, den 17. Oktober, sind alle Männer herzlich zu einem gemeinsamen Männer-Gebetsfrühstück eingeladen.',
-        'Es findet um 7:00 am statt.'
+        'Es findet um 7:00 am in der Pizzería La Sierra (km 6) statt.'
       ],
       es: [
         'El sábado 17 de octubre, todos los hombres están cordialmente invitados a un desayuno de oración para varones.',
-        'Será a las 7:00 am.'
+        'Será a las 7:00 am en la Pizzería La Sierra, km 6.'
       ],
       en: [
         'On Saturday, October 17, all men are warmly invited to a men\'s prayer breakfast together.',
-        'It will take place at 7:00 am.'
+        'It will take place at 7:00 am at Pizzería La Sierra, km 6.'
       ]
     }
   },
