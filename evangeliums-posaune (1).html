@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evangeliums Posaune – Gemeinde Gottes Rosal</title>
+<link rel="icon" type="image/png" href="icon-192.png">
+<style>
+  :root{
+    --navy: #3c2a1e;
+    --navy-dark: #2a1d14;
+    --blue: #6f4e37;
+    --bg: #f6efe3;
+    --card-bg: #ffffff;
+    --text: #2b2620;
+    --muted: #8a8172;
+    --border: #e8e2d3;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding-top: 74px;
+  }
+  header.site-header{
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 14px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(20,30,50,0.06);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+  }
+  .logo-img{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+    flex-shrink:0;
+  }
+  .brand-text .name{
+    font-weight:700;
+    font-size:1.15rem;
+    color: var(--navy);
+    line-height:1.1;
+  }
+  .brand-text .tag{
+    font-size:0.78rem;
+    color: var(--muted);
+  }
+  nav.main-nav{
+    display:flex;
+    gap:32px;
+  }
+  nav.main-nav a{
+    text-decoration:none;
+    color: var(--navy);
+    font-size:0.95rem;
+    font-weight:500;
+  }
+  nav.main-nav a:hover{ color: var(--blue); }
+  .nav-dropdown{ position:relative; }
+  .nav-dropbtn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-family: inherit;
+    color: var(--navy);
+    font-size:0.95rem;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    padding:0;
+  }
+  .nav-dropbtn:hover{ color: var(--blue); }
+  .nav-caret{ font-size:0.7rem; }
+  .nav-dropdown-content{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    margin-top:8px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    min-width:170px;
+    padding:6px 0;
+    z-index:20;
+  }
+  .nav-dropdown-content a{
+    display:block;
+    padding:10px 16px;
+    white-space:nowrap;
+  }
+  .nav-dropdown:hover .nav-dropdown-content,
+  .nav-dropdown.open .nav-dropdown-content{ display:block; }
+  .menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:6px;
+    flex-direction:column;
+    gap:5px;
+  }
+  .menu-toggle span{
+    width:24px;
+    height:3px;
+    background: var(--navy);
+    border-radius:2px;
+    display:block;
+  }
+  @media (max-width: 880px){
+    header.site-header{ padding:14px 18px; flex-wrap:wrap; }
+    .menu-toggle{ display:flex; }
+    nav.main-nav{
+      display:none;
+      width:100%;
+      flex-direction:column;
+      gap:0;
+      order:3;
+      border-top: 1px solid var(--border);
+      margin-top:14px;
+      padding-top:10px;
+    }
+    nav.main-nav.open{ display:flex; }
+    nav.main-nav a{
+      padding:12px 4px;
+      border-bottom:1px solid var(--border);
+    }
+    .nav-dropdown{ width:100%; }
+    .nav-dropbtn{
+      width:100%;
+      justify-content:space-between;
+      padding:12px 4px;
+      border-bottom:1px solid var(--border);
+    }
+    .nav-dropdown-content{
+      display:none;
+      position:static;
+      border:none;
+      box-shadow:none;
+      margin-top:0;
+      padding-left:16px;
+    }
+    .nav-dropdown.open .nav-dropdown-content{ display:block; }
+    .nav-dropdown-content a{
+      padding:10px 4px;
+      border-bottom:1px solid var(--border);
+    }
+  }
+  main{
+    max-width: 640px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align:center;
+  }
+  .icon{
+    font-size:3rem;
+    margin-bottom: 10px;
+  }
+  h1{
+    color: var(--navy);
+    font-size: 1.8rem;
+    margin: 0 0 14px;
+  }
+  p.desc{
+    color: var(--muted);
+    font-size: 1rem;
+    line-height:1.6;
+    margin: 0 0 30px;
+  }
+  .download-card{
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px 24px;
+  }
+  .download-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background: var(--navy);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size:1.05rem;
+  }
+  .download-btn:hover{ background: var(--navy-dark); }
+  .pending-note{
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 18px;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top: 40px;
+    color: var(--blue);
+    text-decoration:none;
+    font-size:0.92rem;
+  }
+  .back-link:hover{ text-decoration:underline; }
+  .issue-list{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap:22px;
+  }
+  .issue-item{
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow:hidden;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+  }
+  .issue-cover{
+    width:100%;
+    aspect-ratio: 3/4;
+    object-fit:cover;
+    display:block;
+    background: var(--border);
+  }
+  .issue-info{
+    padding: 14px 16px 4px;
+  }
+  .issue-title{
+    font-weight:600;
+    color: var(--navy);
+    font-size:1.02rem;
+  }
+  .issue-dl{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    background: var(--navy);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    padding: 10px 18px;
+    margin: 12px 16px 16px;
+    border-radius: 7px;
+    font-size:0.92rem;
+  }
+  .issue-dl:hover{ background: var(--navy-dark); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <img src="logo.png" alt="Gemeinde Gottes Rosal Logo" class="logo-img">
+    <div class="brand-text">
+      <div class="name">Gemeinde Gottes Rosal</div>
+      <div class="tag">Offizielle Webseite</div>
+    </div>
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="main-nav" id="mainNav">
+    <a href="index.html#top">Startseite</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn" type="button">Über uns <span class="nav-caret">▾</span></button>
+      <div class="nav-dropdown-content">
+        <a href="wir-sind.html">Wir sind</a>
+        <a href="wir-glauben.html">Wir glauben</a>
+      </div>
+    </div>
+    <a href="kalender.html">Kalender</a>
+    <a href="index.html#bekanntmachungen">Bekanntmachungen</a>
+    <a href="index.html#bibeltext">Bibeltext</a>
+    <a href="index.html#fotos">Fotos</a>
+    <a href="index.html#predigten">Predigten</a>
+    <a href="evangeliums-posaune.html">Evangeliums Posaune</a>
+    <a href="index.html#kontakt">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+  <div class="icon">📖</div>
+  <h1>Evangeliums Posaune</h1>
+  <p class="desc">Die monatliche Zeitschrift zum Herunterladen.</p>
+
+  <div class="issue-list">
+    <div class="issue-item">
+      <img class="issue-cover" src="evangeliums-posaune-oktober-2026-cover.jpg" alt="Evangeliums Posaune Oktober 2026">
+      <div class="issue-info">
+        <span class="issue-title">Oktober 2026</span>
+      </div>
+      <a class="issue-dl" href="evangeliums-posaune-oktober-2026.pdf" target="_blank" rel="noopener">⬇ Herunterladen</a>
+    </div>
+    <div class="issue-item">
+      <img class="issue-cover" src="evangeliums-posaune-september-2026-cover.jpg" alt="Evangeliums Posaune September 2026">
+      <div class="issue-info">
+        <span class="issue-title">September 2026</span>
+      </div>
+      <a class="issue-dl" href="evangeliums-posaune-september-2026.pdf" target="_blank" rel="noopener">⬇ Herunterladen</a>
+    </div>
+    <div class="issue-item">
+      <img class="issue-cover" src="evangeliums-posaune-august-2026-cover.jpg" alt="Evangeliums Posaune August 2026">
+      <div class="issue-info">
+        <span class="issue-title">August 2026</span>
+      </div>
+      <a class="issue-dl" href="evangeliums-posaune-august-2026.pdf" target="_blank" rel="noopener">⬇ Herunterladen</a>
+    </div>
+  </div>
+
+  <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+</main>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  menuToggle.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+  });
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mainNav.classList.remove('open'));
+  });
+  document.querySelectorAll('.nav-dropbtn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
