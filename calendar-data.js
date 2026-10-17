@@ -533,7 +533,7 @@ function getNextGemeinschaftsabend(fromYear, fromMonth){
   }
   return null;
 }
-const CURRENT_BIBELTEXT_REF = 'Kolosser 3:1-10';
+const CURRENT_BIBELTEXT_REF = 'Epheser 6:10-20';
 
 // Wer die Botschaft am Sonntag bringt - EIN Ort zum Ändern (steht im Abschluss der Bekanntmachungen).
 const CURRENT_SPEAKER = 'Pastor Hans Klassen';
@@ -554,7 +554,7 @@ const READERS = {
   '2026-10-11': 'Corny Froesse',
   '2026-10-18': 'Jacob Wiebe',
   '2026-10-25': 'Willy Friesen',
-  '2026-11-1':  'Cornelius Fehr',
+  '2026-11-1':  'Johny Peters',
   '2026-11-8':  'Erwin Rempel',
   '2026-11-15': 'Johan Neufeld',
   '2026-11-22': 'Armando Enns',
