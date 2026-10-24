@@ -1927,6 +1927,20 @@
   .nh-hero{ padding-top:130px !important; }
   .nh-hero-inner{ margin-top:-120px !important; }
   @media (max-width:880px){ header.site-header nav.main-nav a, header.site-header .nav-dropbtn{ color:var(--navy); text-shadow:none; } .nh-hero{ padding-top:110px !important; } }
+
+  .nh-inv{ max-width:1100px; margin:0 auto 40px; padding:0 14px; }
+  .nh-inv-hint{ color:var(--muted); margin:8px 0 14px; font-size:.92rem; }
+  .nh-inv-top{ display:flex; gap:12px; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:16px; }
+  .nh-inv-chips{ display:flex; gap:8px; flex-wrap:wrap; }
+  .nh-inv-chips button, .nh-inv-langs button{ border:1px solid var(--blue); background:#fff; color:var(--blue); padding:8px 14px; border-radius:20px; font-weight:600; cursor:pointer; font-family:inherit; font-size:.85rem; }
+  .nh-inv-chips button.on, .nh-inv-langs button.on{ background:var(--blue); color:#fff; }
+  .nh-inv-langs{ display:flex; gap:6px; }
+  .nh-inv-body{ display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap; }
+  #invCanvas{ width:100%; max-width:430px; height:auto; border-radius:10px; box-shadow:0 8px 24px rgba(36,70,92,.2); background:#fff; }
+  .nh-inv-actions{ display:flex; flex-direction:column; gap:12px; align-items:flex-start; padding-top:10px; }
+  .nh-inv-actions .nh-btn{ border:none; cursor:pointer; font-family:inherit; }
+  .nh-btn-wa{ background:#25a244 !important; }
+  .nh-inv-note{ color:var(--muted); font-size:.82rem; max-width:320px; margin:0; }
 </style>
 </head>
 <body>
@@ -1987,6 +2001,23 @@
   <a class="nh-tile" href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener"><img src="bibel-foto.jpg" alt=""><span class="nh-tile-label">Plautdietsche Bibel</span></a>
   <a class="nh-tile" href="#predigten"><img src="cross-abendversammlung.jpg" alt="" style="object-position:30% 70%;filter:grayscale(.6)"><span class="nh-tile-label">Predigten</span></a>
 </div>
+
+<section class="nh-inv" id="einladungen">
+  <h2 class="nh-h">Einladungen zum Teilen</h2>
+  <p class="nh-inv-hint">Wähle einen Anlass – lade die Einladung herunter oder schicke sie per WhatsApp.</p>
+  <div class="nh-inv-top">
+    <div class="nh-inv-chips" id="invChips"></div>
+    <div class="nh-inv-langs" id="invLangs"><button data-l="de" class="on">DE</button><button data-l="es">ES</button><button data-l="en">EN</button></div>
+  </div>
+  <div class="nh-inv-body">
+    <canvas id="invCanvas" width="1080" height="1350"></canvas>
+    <div class="nh-inv-actions">
+      <button class="nh-btn" id="invDl">⬇ Herunterladen</button>
+      <button class="nh-btn nh-btn-wa" id="invWa">💬 Per WhatsApp teilen</button>
+      <p class="nh-inv-note" id="invNote"></p>
+    </div>
+  </div>
+</section>
 
 <div class="nh-cols">
   <div class="nh-col">
@@ -3003,6 +3034,106 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('scroll',upd,{passive:true}); upd();
   const t=document.getElementById('menuToggle');
   if(t) t.addEventListener('click',()=>setTimeout(()=>h.classList.toggle('menu-open',document.getElementById('mainNav').classList.contains('open')),0));
+})();
+
+// ===== Einladungen (Bild-Generator) =====
+(function invInit(){
+  const EVENTS=[
+   {id:'ernte',y:2026,m:11,d:8,c1:'#f7c85e',c2:'#fff4d6',ink:'#7a4a0e',icon:'🌾',
+    de:{t:'Erntedankfest',w:'Sonntag, 8. November 2026',z:'10:00 Uhr',x:'Mit gemeinsamem Mittagessen für die ganze Gemeinde',v:'„Danket dem HERRN; denn er ist freundlich, und seine Güte währet ewiglich!“',r:'Psalm 107,1'},
+    es:{t:'Fiesta de Acción de Gracias',w:'Domingo, 8 de noviembre de 2026',z:'10:00 am',x:'Con comida compartida para toda la congregación',v:'“Alabad á Jehová, porque él es bueno; porque para siempre es su misericordia.”',r:'Salmo 107:1'},
+    en:{t:'Thanksgiving Service',w:'Sunday, November 8, 2026',z:'10:00 am',x:'With a shared lunch for the whole congregation',v:'“O give thanks unto the LORD, for he is good: for his mercy endureth for ever.”',r:'Psalm 107:1'}},
+   {id:'sing',y:2026,m:12,d:13,c1:'#8ecae6',c2:'#eef8fd',ink:'#1d4e66',icon:'🎵',
+    de:{t:'Singabend',w:'Sonntag, 13. Dezember 2026',z:'17:00 Uhr',x:'In der Kirche – danach Abendbrot im Gym',v:'„…mit Psalmen, Lobgesängen und geistlichen Liedern singt Gott dankbar in euren Herzen.“',r:'Kolosser 3,16'},
+    es:{t:'Noche de Cantos',w:'Domingo, 13 de diciembre de 2026',z:'5:00 pm',x:'En la iglesia – después cena en el gimnasio',v:'“…con salmos é himnos y canciones espirituales, con gracia cantando en vuestros corazones al Señor.”',r:'Colosenses 3:16'},
+    en:{t:'Singing Evening',w:'Sunday, December 13, 2026',z:'5:00 pm',x:'At the church – supper in the gym afterwards',v:'“…in psalms and hymns and spiritual songs, singing with grace in your hearts to the Lord.”',r:'Colossians 3:16'}},
+   {id:'xmas',y:2026,m:12,d:25,c1:'#f2a4a0',c2:'#fff2f0',ink:'#7d2a26',icon:'🎄',
+    de:{t:'Weihnachtsbotschaft',w:'Freitag, 25. Dezember 2026',z:'10:00 Uhr',x:'Gottesdienst zur Geburt unseres Herrn',v:'„Denn euch ist heute der Heiland geboren, welcher ist Christus, der Herr.“',r:'Lukas 2,11'},
+    es:{t:'Mensaje de Navidad',w:'Viernes, 25 de diciembre de 2026',z:'10:00 am',x:'Servicio por el nacimiento de nuestro Señor',v:'“Que os ha nacido hoy un Salvador, que es Cristo el Señor.”',r:'Lucas 2:11'},
+    en:{t:'Christmas Message',w:'Friday, December 25, 2026',z:'10:00 am',x:'Service for the birth of our Lord',v:'“For unto you is born this day a Saviour, which is Christ the Lord.”',r:'Luke 2:11'}},
+   {id:'silv',y:2026,m:12,d:31,c1:'#b9a8e6',c2:'#f6f2ff',ink:'#3f2f73',icon:'🎉',
+    de:{t:'Silvesterabend',w:'Donnerstag, 31. Dezember 2026',z:'18:00 Uhr',x:'Gemeinsam das Jahr beschließen',v:'„Der HERR behüte deinen Ausgang und Eingang von nun an bis in Ewigkeit!“',r:'Psalm 121,8'},
+    es:{t:'Noche de Fin de Año',w:'Jueves, 31 de diciembre de 2026',z:'6:00 pm',x:'Despedimos el año juntos',v:'“Jehová guardará tu salida y tu entrada, desde ahora y para siempre.”',r:'Salmo 121:8'},
+    en:{t:'New Year’s Eve Service',w:'Thursday, December 31, 2026',z:'6:00 pm',x:'Closing the year together',v:'“The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.”',r:'Psalm 121:8'}}
+  ];
+  const UI={
+   de:{inv:'HERZLICHE EINLADUNG',all:'Alle sind herzlich willkommen!',loc:'Calle del Rosal 54, Cuauhtémoc, Chih.',dl:'Einladung',share:'Herzliche Einladung',note:'Auf dem Handy öffnet „Per WhatsApp teilen“ direkt das Teilen-Menü mit dem Bild.'},
+   es:{inv:'CORDIAL INVITACIÓN',all:'¡Todos son bienvenidos!',loc:'Calle del Rosal 54, Cuauhtémoc, Chih.',dl:'Invitacion',share:'Cordial invitación',note:'En el celular, “Compartir por WhatsApp” abre el menú de compartir con la imagen.'},
+   en:{inv:'WARM INVITATION',all:'Everyone is welcome!',loc:'Calle del Rosal 54, Cuauhtémoc, Chih.',dl:'Invitation',share:'Warm invitation',note:'On a phone, “Share via WhatsApp” opens the share menu with the image.'}};
+  const cv=document.getElementById('invCanvas'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  let cur=null, lang='de', photo=null, logo=null, usePhoto=true;
+  const now=new Date(); now.setHours(0,0,0,0);
+  const upcoming=EVENTS.filter(e=>new Date(e.y,e.m-1,e.d)>=now);
+  const list=upcoming.length?upcoming:EVENTS;
+  cur=list[0];
+  const chips=document.getElementById('invChips');
+  function drawChips(){
+    chips.innerHTML='';
+    list.forEach(e=>{ const b=document.createElement('button'); b.textContent=e.icon+' '+e[lang].t; if(e===cur) b.className='on';
+      b.onclick=()=>{cur=e;drawChips();draw();}; chips.appendChild(b); });
+  }
+  function wrap(text,x,y,maxW,lh,font,color,align){
+    ctx.font=font; ctx.fillStyle=color; ctx.textAlign=align||'center';
+    const words=text.split(' '); let line=''; const lines=[];
+    words.forEach(w=>{ const t=line?line+' '+w:w; if(ctx.measureText(t).width>maxW && line){lines.push(line);line=w;} else line=t; });
+    if(line) lines.push(line);
+    lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lh));
+    return y+lines.length*lh;
+  }
+  function rr(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+  function draw(){
+    const e=cur, T=e[lang], U=UI[lang], W=1080, H=1350;
+    const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,e.c1); g.addColorStop(1,e.c2);
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    // Foto oben
+    if(usePhoto && photo && photo.complete && photo.naturalWidth){
+      const ph=520, sc=Math.max(W/photo.naturalWidth, ph/photo.naturalHeight), iw=photo.naturalWidth*sc, ih=photo.naturalHeight*sc;
+      ctx.save(); ctx.beginPath(); ctx.rect(0,0,W,ph); ctx.clip(); ctx.drawImage(photo,(W-iw)/2,ph-ih+ih*0.12,iw,ih); ctx.restore();
+      const o=ctx.createLinearGradient(0,0,0,ph); o.addColorStop(0,'rgba(10,25,40,.35)'); o.addColorStop(1,'rgba(10,25,40,0)'); ctx.fillStyle=o; ctx.fillRect(0,0,W,ph);
+    } else {
+      ctx.fillStyle='rgba(255,255,255,.35)'; ctx.beginPath(); ctx.arc(860,170,230,0,7); ctx.fill(); ctx.beginPath(); ctx.arc(150,420,170,0,7); ctx.fill();
+      ctx.font='260px serif'; ctx.textAlign='center'; ctx.fillStyle='#000'; ctx.fillText(e.icon,W/2,360);
+    }
+    ctx.textAlign='center'; ctx.fillStyle='#fff'; ctx.font='600 34px Georgia, serif'; ctx.shadowColor='rgba(0,0,0,.45)'; ctx.shadowBlur=10;
+    ctx.fillText(U.inv.split('').join(String.fromCharCode(8202)),W/2,110); ctx.shadowBlur=0;
+    // weiße Karte
+    ctx.save(); ctx.shadowColor='rgba(30,50,70,.25)'; ctx.shadowBlur=40; ctx.shadowOffsetY=12; ctx.fillStyle='#fff'; rr(70,400,W-140,740,34); ctx.fill(); ctx.restore();
+    ctx.fillStyle=e.ink; ctx.font='64px serif'; ctx.textAlign='center'; ctx.fillText(e.icon,W/2,490);
+    let y=wrap(T.t,W/2,590,W-260,92,'bold 82px Georgia, serif',e.ink);
+    ctx.fillStyle=e.c1; ctx.fillRect(W/2-70,y-34,140,6);
+    ctx.fillStyle='#22333f'; y=wrap(T.w,W/2,y+30,W-220,50,'600 42px "Segoe UI", Arial, sans-serif','#22333f');
+    y=wrap(T.z,W/2,y+16,W-220,70,'bold 62px "Segoe UI", Arial, sans-serif',e.ink);
+    y=wrap(T.x,W/2,y+4,W-260,42,'34px "Segoe UI", Arial, sans-serif','#4a5b68');
+    y=wrap(T.v,W/2,y+40,W-290,46,'italic 34px Georgia, serif','#5b6b78');
+    wrap('– '+T.r+' –',W/2,y+10,W-290,36,'600 28px "Segoe UI", Arial, sans-serif',e.ink);
+    // Fuß
+    ctx.fillStyle=e.ink; ctx.textAlign='center'; ctx.font='bold 40px Georgia, serif'; ctx.fillText(U.all,W/2,1215);
+    ctx.font='28px "Segoe UI", Arial, sans-serif'; ctx.fillStyle='#33475a'; ctx.fillText('Gemeinde Gottes Rosal · '+U.loc,W/2,1262);
+    if(logo && logo.complete && logo.naturalWidth){ ctx.save(); ctx.beginPath(); ctx.arc(W/2,400,0,0,1); ctx.restore(); }
+  }
+  photo=new Image(); photo.onload=draw; photo.src='hero-foto.jpg';
+  logo=new Image(); logo.src='logo.png';
+  function toBlobSafe(cb){
+    try{ cv.toBlob(b=>{ if(b) cb(b); else fallback(cb); },'image/png'); }catch(err){ fallback(cb); }
+  }
+  function fallback(cb){ usePhoto=false; cv.width=1080; draw(); cv.toBlob(b=>cb(b),'image/png'); }
+  function fname(){ return UI[lang].dl+'-'+cur.id+'-Gemeinde-Rosal.png'; }
+  document.getElementById('invDl').onclick=()=>toBlobSafe(b=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=fname(); document.body.appendChild(a); a.click(); a.remove(); });
+  document.getElementById('invWa').onclick=()=>toBlobSafe(async b=>{
+    const T=cur[lang], txt=UI[lang].share+': '+T.t+' – '+T.w+', '+T.z+'. Gemeinde Gottes Rosal · gemeindegottesrosal.org';
+    const f=new File([b],fname(),{type:'image/png'});
+    try{
+      if(navigator.canShare && navigator.canShare({files:[f]})){ await navigator.share({files:[f],text:txt}); return; }
+    }catch(err){ if(err && err.name==='AbortError') return; }
+    const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=fname(); document.body.appendChild(a); a.click(); a.remove();
+    window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+  });
+  document.querySelectorAll('#invLangs button').forEach(btn=>btn.onclick=()=>{
+    lang=btn.dataset.l; document.querySelectorAll('#invLangs button').forEach(x=>x.classList.toggle('on',x===btn));
+    document.getElementById('invNote').textContent=UI[lang].note; drawChips(); draw(); });
+  document.getElementById('invNote').textContent=UI[lang].note;
+  drawChips(); draw();
 })();
 </script>
 
