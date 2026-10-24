@@ -2183,6 +2183,11 @@
   </div>
   <div class="predigten-body" id="predigtenList">
     <div class="predigt-item">
+      <div class="predigt-title">Predigt vom 18. Oktober 2026 – Der Glaubenskampf</div>
+      <div class="predigt-meta">Br. Hans Klassen</div>
+      <iframe src="https://archive.org/embed/18-october-2026-br.-klassen-der-glaubens-kampf" width="100%" height="30" frameborder="0" allowfullscreen loading="lazy" title="Predigt 18. Oktober 2026"></iframe>
+    </div>
+    <div class="predigt-item">
       <div class="predigt-title">Predigt vom 11. Oktober 2026 – Der Lebensstil der Kinder Gottes</div>
       <div class="predigt-meta">Br. Hans Klassen</div>
       <audio controls preload="none" src="https://archive.org/download/11-october-2026-br.-klassen-der-lebensstil-der-kinder-gottes/11-October-2026%20Br.%20Klassen%20Der%20Lebensstil%20der%20Kinder%20Gottes.mp3"></audio>
@@ -2991,10 +2996,11 @@ if ('serviceWorker' in navigator) {
   const sm=document.getElementById('nhSermons');
   document.querySelectorAll('#predigtenList .predigt-item').forEach((it,i)=>{
     if(i>2||!sm) return;
-    const ti=it.querySelector('.predigt-title'), me=it.querySelector('.predigt-meta'), au=it.querySelector('audio');
+    const ti=it.querySelector('.predigt-title'), me=it.querySelector('.predigt-meta'), au=it.querySelector('audio'), fr=it.querySelector('iframe');
     const w=document.createElement('div'); w.className='nh-sermon';
     w.innerHTML='<div class="t"></div><div class="m"></div>';
     w.querySelector('.t').textContent=ti?ti.textContent:''; w.querySelector('.m').textContent=me?me.textContent:'';
+    if(fr){ const f2=document.createElement('iframe'); f2.src=fr.getAttribute('src'); f2.width='100%'; f2.height='30'; f2.frameBorder='0'; f2.loading='lazy'; w.appendChild(f2); }
     if(au){ const a=document.createElement('audio'); a.controls=true; a.preload='none'; a.src=au.getAttribute('src'); w.appendChild(a); }
     sm.appendChild(w);
   });
