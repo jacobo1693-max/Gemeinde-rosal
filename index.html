@@ -1843,6 +1843,90 @@
     border-radius:12px;
     display:block;
   }
+
+  /* ===== Neues Layout (Kirchen-Stil) ===== */
+
+  nav.main-nav{ gap:20px; } nav.main-nav a, .nav-dropbtn{ white-space:nowrap; font-size:.9rem; } .brand-text .name{ white-space:nowrap; }
+
+  .nh-hero{
+    position:relative; text-align:center; color:#fff;
+    min-height: 470px; display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0)), url('hero-foto.jpg') center/cover no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201600%20600%22%20preserveAspectRatio%3D%22xMidYMid%20slice%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22sky%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237cc4e6%22/%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23cfe9f3%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffe3c4%22/%3E%3C/linearGradient%3E%0A%3CradialGradient%20id%3D%22sun%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6dc%22%20stop-opacity%3D%22.95%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff6dc%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%221600%22%20height%3D%22600%22%20fill%3D%22url%28%23sky%29%22/%3E%0A%3Ccircle%20cx%3D%22800%22%20cy%3D%22330%22%20r%3D%22260%22%20fill%3D%22url%28%23sun%29%22/%3E%0A%3Cpath%20d%3D%22M0%20360%20L180%20290%20L330%20345%20L520%20270%20L700%20350%20L900%20300%20L1080%20355%20L1280%20280%20L1450%20340%20L1600%20300%20L1600%20600%20L0%20600Z%22%20fill%3D%22%23c4b5da%22/%3E%0A%3Cpath%20d%3D%22M0%20400%20L220%20350%20L420%20395%20L640%20340%20L860%20400%20L1100%20345%20L1320%20400%20L1600%20350%20L1600%20600%20L0%20600Z%22%20fill%3D%22%23e6b8a2%22/%3E%0A%3Cpath%20d%3D%22M0%20600%20L0%20430%20Q800%20380%201600%20430%20L1600%20600Z%22%20fill%3D%22%23f0c9a0%22/%3E%0A%3Cpath%20d%3D%22M760%20420%20L840%20420%20L1180%20600%20L420%20600Z%22%20fill%3D%22%23d8cfc4%22/%3E%0A%3Cpath%20d%3D%22M797%20420%20L803%20420%20L812%20600%20L788%20600Z%22%20fill%3D%22%23f4eee6%22%20opacity%3D%22.7%22/%3E%0A%3Cg%20fill%3D%22%234a5560%22%3E%3Ccircle%20cx%3D%22800%22%20cy%3D%22468%22%20r%3D%227%22/%3E%3Cpath%20d%3D%22M793%20476%20h14%20l3%2030%20h-6%20l-2%2022%20h-5%20l-1%20-22%20l-1%2022%20h-5%20l-2%20-22%20h-6z%22/%3E%3C/g%3E%0A%3C/svg%3E") center/cover no-repeat, #bfe3f1;
+    padding: 70px 20px 90px;
+  }
+  .nh-hero-logo{ width:76px; height:76px; object-fit:contain; background:#fff; border-radius:50%; padding:8px; margin-bottom:14px; }
+  .nh-hero h1{ margin:0 0 6px; font-size:2.8rem; letter-spacing:1px; text-shadow:0 2px 12px rgba(30,60,90,.55); }
+  .nh-hero-sub{ text-shadow:0 2px 10px rgba(30,60,90,.55); font-size:1.25rem; letter-spacing:.18em; text-transform:uppercase; opacity:.95; }
+  .nh-hero-tag{ margin-top:18px; font-size:.95rem; letter-spacing:.45em; text-transform:uppercase; color:#fff; text-shadow:0 2px 10px rgba(30,60,90,.6); }
+  .nh-next{
+    max-width:1100px; margin:-34px auto 34px; position:relative; z-index:2;
+    background:#fff; border:1px solid var(--border); border-radius:10px;
+    box-shadow:0 8px 24px rgba(60,42,30,.15);
+    display:flex; align-items:center; gap:26px; padding:16px 26px; flex-wrap:wrap;
+  }
+  .nh-next-label{ display:flex; flex-direction:column; gap:2px; }
+  .nh-badge{ background:var(--blue); color:#fff; font-size:.65rem; font-weight:700; padding:2px 7px; border-radius:3px; width:max-content; letter-spacing:.08em; }
+  .nh-next-big{ font-weight:800; letter-spacing:.14em; color:var(--navy); }
+  .nh-next-info{ flex:1; min-width:180px; display:flex; flex-direction:column; }
+  .nh-next-info strong{ color:var(--navy); }
+  .nh-next-info em{ color:var(--muted); font-size:.88rem; }
+  .nh-count{ display:flex; gap:8px; }
+  .nh-count div{ background:#f1e8d6; border-radius:5px; padding:6px 10px; text-align:center; min-width:52px; }
+  .nh-count b{ display:block; font-size:1.2rem; color:var(--navy); }
+  .nh-count span{ font-size:.68rem; color:var(--muted); text-transform:uppercase; }
+  .nh-btn{ background:var(--blue); color:#fff; text-decoration:none; font-weight:700; font-size:.85rem; padding:13px 22px; border-radius:5px; letter-spacing:.05em; }
+  .nh-btn:hover{ background:var(--navy); }
+  .nh-tiles{ max-width:1100px; margin:0 auto 40px; padding:0 14px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .nh-tile{ position:relative; display:block; height:210px; overflow:hidden; border:6px solid #fff; box-shadow:0 2px 10px rgba(0,0,0,.12); background:#3c2a1e; }
+  .nh-tile img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(.35); transition:transform .4s; }
+  .nh-tile:hover img{ transform:scale(1.06); }
+  .nh-tile-label{ position:absolute; left:-6px; bottom:22px; background:var(--blue); color:#fff; font-weight:700; padding:9px 20px 9px 22px; box-shadow:0 2px 6px rgba(0,0,0,.3); }
+  .nh-cols{ max-width:1100px; margin:0 auto 40px; padding:0 14px; display:grid; grid-template-columns:2fr 1fr; gap:36px; }
+  .nh-h{ font-size:1.4rem; font-weight:400; color:var(--navy); margin:0 0 6px; padding-bottom:10px; border-bottom:3px solid #eadfca; }
+  .nh-ev{ display:flex; gap:18px; align-items:center; padding:14px 0; border-bottom:1px solid #eadfca; }
+  .nh-ev-date{ width:54px; text-align:center; color:var(--navy); line-height:1; }
+  .nh-ev-date b{ display:block; font-size:1.8rem; }
+  .nh-ev-date span{ font-size:.72rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+  .nh-ev-body{ flex:1; }
+  .nh-ev-body strong{ display:block; color:var(--blue); }
+  .nh-ev-body em{ color:var(--muted); font-size:.85rem; }
+  .nh-ev a{ border:1px solid var(--navy); color:var(--navy); font-size:.7rem; font-weight:700; padding:6px 12px; border-radius:3px; text-decoration:none; letter-spacing:.05em; }
+  .nh-ev a:hover{ background:var(--navy); color:#fff; }
+  .nh-sermon{ background:#fff; border:1px solid var(--border); border-top:3px solid var(--blue); padding:14px 16px; margin-bottom:14px; }
+  .nh-sermon .t{ font-size:.82rem; font-weight:700; color:var(--blue); letter-spacing:.04em; margin-bottom:4px; }
+  .nh-sermon .m{ font-size:.8rem; color:var(--muted); margin-bottom:8px; }
+  .nh-sermon audio{ width:100%; height:34px; }
+  .nh-more{ display:inline-block; margin-top:12px; color:var(--blue); font-weight:600; text-decoration:none; font-size:.9rem; }
+  @media (max-width:880px){
+    .nh-hero{ min-height:340px; } .nh-hero h1{ font-size:2rem; }
+    .nh-next{ margin:-26px 14px 28px; gap:14px; }
+    .nh-tiles{ grid-template-columns:1fr; gap:18px; }
+    .nh-cols{ grid-template-columns:1fr; }
+  }
+  /* Helle Farben */
+  :root{ --navy:#24465c; --navy-dark:#173243; --blue:#2f8fa3; --bg:#f4f9fc; --card-bg:#ffffff; --text:#22333f; --muted:#6a7f8e; --border:#dce8ef; }
+  .nh-count div{ background:#e6f2f7; } .nh-next{ background:#fff; } .nh-sermon{ background:#fff; }
+  .nh-h{ border-bottom-color:#dce8ef; } .nh-ev{ border-bottom-color:#dce8ef; }
+  .nh-tile{ background:#cfe9f3; } .nh-tile img{ filter:none; }
+  .nh-hero-sub,.nh-hero-tag{ text-shadow:0 1px 3px rgba(20,50,80,.7),0 2px 14px rgba(20,50,80,.6); font-weight:600; }
+  .nh-hero-inner{ margin-top:-30px; }
+
+  /* Menü über der Portada */
+  body{ padding-top:0 !important; }
+  header.site-header{ background:transparent; border-bottom:none; box-shadow:none; transition:background .25s, box-shadow .25s; }
+  header.site-header .brand-text .name, header.site-header .brand-text .tag,
+  header.site-header nav.main-nav a, header.site-header .nav-dropbtn{ color:#fff; text-shadow:0 1px 6px rgba(20,50,80,.55); transition:color .25s; }
+  header.site-header .menu-toggle span{ background:#fff; box-shadow:0 1px 4px rgba(20,50,80,.5); }
+  header.site-header .nav-dropdown-content a{ color:var(--navy); text-shadow:none; }
+  header.site-header.scrolled, header.site-header.menu-open{ background:#fff; box-shadow:0 2px 10px rgba(36,70,92,.12); }
+  header.site-header.scrolled .brand-text .name, header.site-header.menu-open .brand-text .name,
+  header.site-header.scrolled nav.main-nav a, header.site-header.menu-open nav.main-nav a,
+  header.site-header.scrolled .nav-dropbtn, header.site-header.menu-open .nav-dropbtn{ color:var(--navy); text-shadow:none; }
+  header.site-header.scrolled .brand-text .tag, header.site-header.menu-open .brand-text .tag{ color:var(--muted); text-shadow:none; }
+  header.site-header.scrolled .menu-toggle span, header.site-header.menu-open .menu-toggle span{ background:var(--navy); box-shadow:none; }
+  .nh-hero{ padding-top:130px !important; }
+  .nh-hero-inner{ margin-top:0 !important; }
+  @media (max-width:880px){ header.site-header nav.main-nav a, header.site-header .nav-dropbtn{ color:var(--navy); text-shadow:none; } .nh-hero{ padding-top:110px !important; } }
 </style>
 </head>
 <body>
@@ -1877,55 +1961,45 @@
   </nav>
 </header>
 
-<section class="hero" id="top">
-  <h1>Herzlich Willkommen</h1>
-  <div class="divider"><span class="line"></span><span class="heart">♥</span><span class="line"></span></div>
-  <p>Willkommen auf der offiziellen Webseite<br>der Gemeinde Gottes Rosal.</p>
+<section class="nh-hero" id="top">
+  <div class="nh-hero-inner">
+    <img src="logo.png" alt="" class="nh-hero-logo" onerror="this.style.display='none'">
+    <h1>Herzlich Willkommen</h1>
+    <div class="nh-hero-sub">Gemeinde Gottes Rosal</div>
+    <div class="nh-hero-tag">Wie frejen ons opp junt!</div>
+  </div>
 </section>
 
-<div class="home-slider" id="homeSlider">
-  <a href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener" class="home-slide image-slide active" data-slide="0" aria-label="Lese die Plautdietsche Bibel online">
-    <img src="bibel-foto.jpg" alt="Die Heilige Schrift – Lese die Plautdietsche Bibel online" class="home-slide-img">
-    <span class="home-slide-hint">📖 Lese die Bibel online →</span>
-  </a>
-  <a href="kalender.html" class="home-slide image-slide" data-slide="1" aria-label="Männer- und Jungsabend am 18. Oktober 2026 – zur vollständigen Einladung">
-    <img src="manner-jungsabend-flyer.jpg" alt="Männer- und Jungsabend, 18. Oktober 2026, Film: The Forge / La Forga, Gimnasio der Gemeinde Gottes Campo 101" class="home-slide-img">
-    <span class="home-slide-hint">🧑‍🤝‍🧑 Zur vollständigen Einladung →</span>
-  </a>
-  <div class="home-slide-dots">
-    <span class="home-slide-dot active" data-dot="0"></span>
-    <span class="home-slide-dot" data-dot="1"></span>
+<div class="nh-next" id="nhNext">
+  <div class="nh-next-label"><span class="nh-badge">NÄCHSTER</span><span class="nh-next-big">TERMIN</span></div>
+  <div class="nh-next-info"><strong id="nhNextTitle">…</strong><em id="nhNextDate"></em></div>
+  <div class="nh-count" id="nhCount">
+    <div><b id="nhD">–</b><span>Tage</span></div>
+    <div><b id="nhH">–</b><span>Std</span></div>
+    <div><b id="nhM">–</b><span>Min</span></div>
+    <div><b id="nhS">–</b><span>Sek</span></div>
   </div>
+  <a class="nh-btn" href="kalender.html">ALLE TERMINE</a>
 </div>
 
-<section class="card herbst-section" id="herbstversammlung">
-  <div class="card-header">
-    <div class="title">🧑‍🤝‍🧑 Männer- und Jungsabend</div>
-    <div class="ann-date">18. Oktober</div>
+<div class="nh-tiles">
+  <a class="nh-tile" href="wir-sind.html"><img src="cross-abendversammlung.jpg" alt=""><span class="nh-tile-label">Wer wir sind</span></a>
+  <a class="nh-tile" href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener"><img src="bibel-foto.jpg" alt=""><span class="nh-tile-label">Plautdietsche Bibel</span></a>
+  <a class="nh-tile" href="#predigten"><img src="cross-abendversammlung.jpg" alt="" style="object-position:30% 70%;filter:grayscale(.6)"><span class="nh-tile-label">Predigten</span></a>
+</div>
+
+<div class="nh-cols">
+  <div class="nh-col">
+    <h2 class="nh-h">Kommende Termine</h2>
+    <div id="nhEvents"></div>
+    <a class="nh-more" href="kalender.html">Zum ganzen Kalender →</a>
   </div>
-  <div class="herbst-body">
-    <p class="herbst-theme">Film: „The Forge / La Forga" – Abendessen &amp; Gemeinschaft folgt</p>
-    <p class="herbst-verse">„Eisen schärft Eisen, und ein Mann schärft den andern." – Sprüche 27,17</p>
-    <p class="herbst-redner">Ziel: aufbauende Verbindungen zwischen Männern und Jungen herzustellen, die das geistliche Leben fördern.</p>
-
-    <div class="herbst-schedule">
-      <div class="herbst-row">
-        <span class="herbst-day">Sonntag, 18. Okt.</span>
-        <span class="herbst-time">3:30 pm</span>
-        <span class="herbst-topic">Alle Männer und Jungen ab dem Jugendalter sind eingeladen</span>
-      </div>
-    </div>
-
-    <div class="herbst-note">
-      🎟️ Eintritt ist frei.
-    </div>
-
-    <div class="herbst-footer">
-      <span>📍 Gimnasio der Gemeinde Gottes Campo 101</span>
-      <span>♥ Wie frejen ons opp junt! – Wir freuen uns auf euch!</span>
-    </div>
+  <div class="nh-col nh-col-side">
+    <h2 class="nh-h">Neueste Predigten</h2>
+    <div id="nhSermons"></div>
+    <a class="nh-more" href="#predigten">Alle Predigten →</a>
   </div>
-</section>
+</div>
 
 <section class="card intro-section">
   <div class="intro-block">
@@ -2331,19 +2405,23 @@ function showBibleLang(lang){
 }
 
 const WEEK_CARDS = [
-  { key: 'sonntag-gottesdienst', dateLabel: '18. OKTOBER • 10:00 AM', title: 'Hauptgottesdienst', icon: '⛪', image: 'cross-abendversammlung.jpg',
-    de: 'Hauptgottesdienst mit Sonntagsschule. Um 3:30 pm: Männer- und Jungsabend im Gimnasio (Campo 101), Film „The Forge“ – danach Abendessen.',
-    es: 'Culto principal con escuela dominical. A las 3:30 pm: Noche de hombres y jóvenes en el gimnasio (Campo 101), película “La Forga” – después cena.',
-    en: 'Main service with Sunday school. At 3:30 pm: Men’s and Boys’ Evening in the gym (Campo 101), film “The Forge” – supper follows.' },
-  { key: 'mittwoch-gebetsstunde', dateLabel: '21. OKTOBER • 7:30 PM', title: 'Gebetsstunde', icon: '🙏', image: 'cross-abendversammlung.jpg',
-    de: 'Am Mittwoch, den 21. Oktober, um 7:30 pm.',
-    es: 'El miércoles 21 de octubre, a las 7:30 pm.',
-    en: 'On Wednesday, October 21, at 7:30 pm.' },
-  { key: 'freitag-jugendstunde', dateLabel: '23. OKTOBER', title: 'Keine Jugendstunde', icon: '🎸', image: 'cross-abendversammlung.jpg',
-    de: 'Am Freitag, den 23. Oktober, findet keine Jugendstunde statt.',
-    es: 'El viernes 23 de octubre no habrá hora de jóvenes.',
-    en: 'There will be no youth hour on Friday, October 23.' },
-  { key: 'naechster-sonntag-gottesdienst', dateLabel: '25. OKTOBER • 10:00 AM', title: 'Hauptgottesdienst', icon: '⛪', image: 'cross-abendversammlung.jpg',
+  { key: 'sonntag-gottesdienst', dateLabel: '25. OKTOBER • 10:00 AM', title: 'Hauptgottesdienst', icon: '⛪', image: 'cross-abendversammlung.jpg',
+    de: 'Hauptgottesdienst mit Sonntagsschule.',
+    es: 'Culto principal con escuela dominical.',
+    en: 'Main service with Sunday school.' },
+  { key: 'dienstag-frauenstunde', dateLabel: '27. OKTOBER • 9:00 AM', title: 'Frauenstunde', icon: '🌸', image: 'cross-abendversammlung.jpg',
+    de: 'Am Dienstag, den 27. Oktober, um 9:00 am.',
+    es: 'El martes 27 de octubre, a las 9:00 am.',
+    en: 'On Tuesday, October 27, at 9:00 am.' },
+  { key: 'mittwoch-gebetsstunde', dateLabel: '28. OKTOBER • 7:30 PM', title: 'Gebetsstunde', icon: '🙏', image: 'cross-abendversammlung.jpg',
+    de: 'Am Mittwoch, den 28. Oktober, um 7:30 pm.',
+    es: 'El miércoles 28 de octubre, a las 7:30 pm.',
+    en: 'On Wednesday, October 28, at 7:30 pm.' },
+  { key: 'freitag-jugendstunde', dateLabel: '30. OKTOBER • 7:00 PM', title: 'Jugendstunde in Neustadt', icon: '🎸', image: 'cross-abendversammlung.jpg',
+    de: 'Am Freitag, den 30. Oktober, um 7:00 pm in Neustadt.',
+    es: 'El viernes 30 de octubre, a las 7:00 pm en Neustadt.',
+    en: 'On Friday, October 30, at 7:00 pm in Neustadt.' },
+  { key: 'naechster-sonntag-gottesdienst', dateLabel: '1. NOVEMBER • 10:00 AM', title: 'Hauptgottesdienst', icon: '⛪', image: 'cross-abendversammlung.jpg',
     de: 'Nächsten Sonntag: Hauptgottesdienst mit Sonntagsschule.',
     es: 'El próximo domingo: culto principal con escuela dominical.',
     en: 'Next Sunday: main service with Sunday school.' }
@@ -2457,9 +2535,8 @@ function renderAutoAnnouncement(){
   if(zukEl){
     zukEl.innerHTML = '';
     let items = [
-      { title: 'Männer- und Jungsabend', date: '18. Oktober 2026', desc: '3:30 pm – Gimnasio der Gemeinde Gottes Campo 101 – Film: „The Forge / La Forga" – danach Abendessen & Gemeinschaft. Alle Männer und Jungen ab dem Jugendalter sind eingeladen. Eintritt frei.',
-        image: 'manner-jungsabend-flyer.jpg',
-        verse: { text: 'Eisen schärft Eisen, und ein Mann schärft den andern.', ref: 'Sprüche 27,17' } }
+      { title: 'Erntedankfest', date: '8. November 2026', desc: '10:00 am – mit gemeinsamem Mittagessen für die ganze Gemeinde.' },
+      { title: 'Männer-Gebetsfrühstück', date: '21. November 2026', desc: '7:00 am.' }
     ];
 
     if(items.length === 0){
@@ -2856,6 +2933,77 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+// ===== Neues Layout: Nächster Termin, Terminliste, Predigten =====
+(function nhInit(){
+  const MN=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  const DN=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  function parseTime(t){
+    const m=t.match(/^(\d{1,2}):(\d{2})\s*(am|pm)/i);
+    if(!m) return null;
+    let h=+m[1]%12; if(m[3].toLowerCase()==='pm') h+=12;
+    return {h:h, min:+m[2]};
+  }
+  const now=new Date(), list=[];
+  for(let i=0;i<60 && list.length<8;i++){
+    const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i);
+    const evs=getEventsFor(d.getFullYear(),d.getMonth()+1,d.getDate())||[];
+    evs.forEach(e=>{
+      const t=e.t||'';
+      if(e.c==='grey' || /Gitarren|Kinderstunde|Kinderchor üben/i.test(t)) return;
+      const tm=parseTime(t);
+      const at=new Date(d.getFullYear(),d.getMonth(),d.getDate(),tm?tm.h:8,tm?tm.min:0);
+      if(at<now) return;
+      const title=t.replace(/^\d{1,2}:\d{2}\s*(am|pm)\s*[–-]\s*/i,'');
+      list.push({at:at,d:d,title:title,time:tm?t.match(/^\d{1,2}:\d{2}\s*(am|pm)/i)[0]:''});
+    });
+  }
+  const box=document.getElementById('nhEvents');
+  if(box){
+    list.slice(0,6).forEach(ev=>{
+      const row=document.createElement('div'); row.className='nh-ev';
+      row.innerHTML='<div class="nh-ev-date"><b>'+ev.d.getDate()+'</b><span>'+MN[ev.d.getMonth()].slice(0,3)+'</span></div>'+
+        '<div class="nh-ev-body"><strong></strong><em>'+DN[ev.d.getDay()]+', '+ev.d.getDate()+'. '+MN[ev.d.getMonth()]+(ev.time?' · '+ev.time:'')+'</em></div>'+
+        '<a href="kalender.html">DETAILS</a>';
+      row.querySelector('strong').textContent=ev.title;
+      box.appendChild(row);
+    });
+    if(!list.length) box.innerHTML='<p style="color:var(--muted)">Zur Zeit keine weiteren Termine.</p>';
+  }
+  const next=list[0];
+  if(next){
+    document.getElementById('nhNextTitle').textContent=next.title;
+    document.getElementById('nhNextDate').textContent=DN[next.d.getDay()]+', '+next.d.getDate()+'. '+MN[next.d.getMonth()]+' '+next.d.getFullYear()+(next.time?' · '+next.time:'');
+    const p=n=>String(n).padStart(2,'0');
+    function tick(){
+      let diff=Math.max(0,Math.floor((next.at-new Date())/1000));
+      document.getElementById('nhD').textContent=Math.floor(diff/86400);
+      document.getElementById('nhH').textContent=p(Math.floor(diff%86400/3600));
+      document.getElementById('nhM').textContent=p(Math.floor(diff%3600/60));
+      document.getElementById('nhS').textContent=p(diff%60);
+    }
+    tick(); setInterval(tick,1000);
+  } else { document.getElementById('nhNext').style.display='none'; }
+  // Predigten: die 3 neuesten aus der Liste unten übernehmen
+  const sm=document.getElementById('nhSermons');
+  document.querySelectorAll('#predigtenList .predigt-item').forEach((it,i)=>{
+    if(i>2||!sm) return;
+    const ti=it.querySelector('.predigt-title'), me=it.querySelector('.predigt-meta'), au=it.querySelector('audio');
+    const w=document.createElement('div'); w.className='nh-sermon';
+    w.innerHTML='<div class="t"></div><div class="m"></div>';
+    w.querySelector('.t').textContent=ti?ti.textContent:''; w.querySelector('.m').textContent=me?me.textContent:'';
+    if(au){ const a=document.createElement('audio'); a.controls=true; a.preload='none'; a.src=au.getAttribute('src'); w.appendChild(a); }
+    sm.appendChild(w);
+  });
+})();
+
+(function(){
+  const h=document.querySelector('header.site-header'); if(!h) return;
+  function upd(){ h.classList.toggle('scrolled', window.scrollY>40); }
+  window.addEventListener('scroll',upd,{passive:true}); upd();
+  const t=document.getElementById('menuToggle');
+  if(t) t.addEventListener('click',()=>setTimeout(()=>h.classList.toggle('menu-open',document.getElementById('mainNav').classList.contains('open')),0));
+})();
 </script>
 
 <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
