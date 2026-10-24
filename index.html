@@ -1843,104 +1843,6 @@
     border-radius:12px;
     display:block;
   }
-
-  /* ===== Neues Layout (Kirchen-Stil) ===== */
-
-  nav.main-nav{ gap:20px; } nav.main-nav a, .nav-dropbtn{ white-space:nowrap; font-size:.9rem; } .brand-text .name{ white-space:nowrap; }
-
-  .nh-hero{
-    position:relative; text-align:center; color:#fff;
-    min-height: 560px; display:flex; align-items:center; justify-content:center;
-    background: linear-gradient(rgba(10,25,40,.5), rgba(10,25,40,.3) 60%, rgba(10,25,40,.05)), url('hero-foto.jpg') center 78%/cover no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201600%20600%22%20preserveAspectRatio%3D%22xMidYMid%20slice%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22sky%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237cc4e6%22/%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23cfe9f3%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffe3c4%22/%3E%3C/linearGradient%3E%0A%3CradialGradient%20id%3D%22sun%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6dc%22%20stop-opacity%3D%22.95%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff6dc%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%221600%22%20height%3D%22600%22%20fill%3D%22url%28%23sky%29%22/%3E%0A%3Ccircle%20cx%3D%22800%22%20cy%3D%22330%22%20r%3D%22260%22%20fill%3D%22url%28%23sun%29%22/%3E%0A%3Cpath%20d%3D%22M0%20360%20L180%20290%20L330%20345%20L520%20270%20L700%20350%20L900%20300%20L1080%20355%20L1280%20280%20L1450%20340%20L1600%20300%20L1600%20600%20L0%20600Z%22%20fill%3D%22%23c4b5da%22/%3E%0A%3Cpath%20d%3D%22M0%20400%20L220%20350%20L420%20395%20L640%20340%20L860%20400%20L1100%20345%20L1320%20400%20L1600%20350%20L1600%20600%20L0%20600Z%22%20fill%3D%22%23e6b8a2%22/%3E%0A%3Cpath%20d%3D%22M0%20600%20L0%20430%20Q800%20380%201600%20430%20L1600%20600Z%22%20fill%3D%22%23f0c9a0%22/%3E%0A%3Cpath%20d%3D%22M760%20420%20L840%20420%20L1180%20600%20L420%20600Z%22%20fill%3D%22%23d8cfc4%22/%3E%0A%3Cpath%20d%3D%22M797%20420%20L803%20420%20L812%20600%20L788%20600Z%22%20fill%3D%22%23f4eee6%22%20opacity%3D%22.7%22/%3E%0A%3Cg%20fill%3D%22%234a5560%22%3E%3Ccircle%20cx%3D%22800%22%20cy%3D%22468%22%20r%3D%227%22/%3E%3Cpath%20d%3D%22M793%20476%20h14%20l3%2030%20h-6%20l-2%2022%20h-5%20l-1%20-22%20l-1%2022%20h-5%20l-2%20-22%20h-6z%22/%3E%3C/g%3E%0A%3C/svg%3E") center/cover no-repeat, #bfe3f1;
-    padding: 70px 20px 90px;
-  }
-  .nh-hero-logo{ width:76px; height:76px; object-fit:contain; background:#fff; border-radius:50%; padding:8px; margin-bottom:14px; }
-  .nh-hero h1{ margin:0 0 6px; font-size:2.8rem; letter-spacing:1px; text-shadow:0 2px 12px rgba(30,60,90,.55); }
-  .nh-hero-sub{ text-shadow:0 2px 10px rgba(30,60,90,.55); font-size:1.25rem; letter-spacing:.18em; text-transform:uppercase; opacity:.95; }
-  .nh-hero-tag{ margin-top:18px; font-size:.95rem; letter-spacing:.45em; text-transform:uppercase; color:#fff; text-shadow:0 2px 10px rgba(30,60,90,.6); }
-  .nh-next{
-    max-width:1100px; margin:-34px auto 34px; position:relative; z-index:2;
-    background:#fff; border:1px solid var(--border); border-radius:10px;
-    box-shadow:0 8px 24px rgba(60,42,30,.15);
-    display:flex; align-items:center; gap:26px; padding:16px 26px; flex-wrap:wrap;
-  }
-  .nh-next-label{ display:flex; flex-direction:column; gap:2px; }
-  .nh-badge{ background:var(--blue); color:#fff; font-size:.65rem; font-weight:700; padding:2px 7px; border-radius:3px; width:max-content; letter-spacing:.08em; }
-  .nh-next-big{ font-weight:800; letter-spacing:.14em; color:var(--navy); }
-  .nh-next-info{ flex:1; min-width:180px; display:flex; flex-direction:column; }
-  .nh-next-info strong{ color:var(--navy); }
-  .nh-next-info em{ color:var(--muted); font-size:.88rem; }
-  .nh-count{ display:flex; gap:8px; }
-  .nh-count div{ background:#f1e8d6; border-radius:5px; padding:6px 10px; text-align:center; min-width:52px; }
-  .nh-count b{ display:block; font-size:1.2rem; color:var(--navy); }
-  .nh-count span{ font-size:.68rem; color:var(--muted); text-transform:uppercase; }
-  .nh-btn{ background:var(--blue); color:#fff; text-decoration:none; font-weight:700; font-size:.85rem; padding:13px 22px; border-radius:5px; letter-spacing:.05em; }
-  .nh-btn:hover{ background:var(--navy); }
-  .nh-tiles{ max-width:1100px; margin:0 auto 40px; padding:0 14px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .nh-tile{ position:relative; display:block; height:210px; overflow:hidden; border:6px solid #fff; box-shadow:0 2px 10px rgba(0,0,0,.12); background:#3c2a1e; }
-  .nh-tile img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(.35); transition:transform .4s; }
-  .nh-tile:hover img{ transform:scale(1.06); }
-  .nh-tile-label{ position:absolute; left:-6px; bottom:22px; background:var(--blue); color:#fff; font-weight:700; padding:9px 20px 9px 22px; box-shadow:0 2px 6px rgba(0,0,0,.3); }
-  .nh-cols{ max-width:1100px; margin:0 auto 40px; padding:0 14px; display:grid; grid-template-columns:2fr 1fr; gap:36px; }
-  .nh-h{ font-size:1.4rem; font-weight:400; color:var(--navy); margin:0 0 6px; padding-bottom:10px; border-bottom:3px solid #eadfca; }
-  .nh-ev{ display:flex; gap:18px; align-items:center; padding:14px 0; border-bottom:1px solid #eadfca; }
-  .nh-ev-date{ width:54px; text-align:center; color:var(--navy); line-height:1; }
-  .nh-ev-date b{ display:block; font-size:1.8rem; }
-  .nh-ev-date span{ font-size:.72rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
-  .nh-ev-body{ flex:1; }
-  .nh-ev-body strong{ display:block; color:var(--blue); }
-  .nh-ev-body em{ color:var(--muted); font-size:.85rem; }
-  .nh-ev a{ border:1px solid var(--navy); color:var(--navy); font-size:.7rem; font-weight:700; padding:6px 12px; border-radius:3px; text-decoration:none; letter-spacing:.05em; }
-  .nh-ev a:hover{ background:var(--navy); color:#fff; }
-  .nh-sermon{ background:#fff; border:1px solid var(--border); border-top:3px solid var(--blue); padding:14px 16px; margin-bottom:14px; }
-  .nh-sermon .t{ font-size:.82rem; font-weight:700; color:var(--blue); letter-spacing:.04em; margin-bottom:4px; }
-  .nh-sermon .m{ font-size:.8rem; color:var(--muted); margin-bottom:8px; }
-  .nh-sermon audio{ width:100%; height:34px; }
-  .nh-more{ display:inline-block; margin-top:12px; color:var(--blue); font-weight:600; text-decoration:none; font-size:.9rem; }
-  @media (max-width:880px){
-    .nh-hero{ min-height:340px; } .nh-hero h1{ font-size:2rem; }
-    .nh-next{ margin:-26px 14px 28px; gap:14px; }
-    .nh-tiles{ grid-template-columns:1fr; gap:18px; }
-    .nh-cols{ grid-template-columns:1fr; }
-  }
-  /* Helle Farben */
-  :root{ --navy:#24465c; --navy-dark:#173243; --blue:#2f8fa3; --bg:#f4f9fc; --card-bg:#ffffff; --text:#22333f; --muted:#6a7f8e; --border:#dce8ef; }
-  .nh-count div{ background:#e6f2f7; } .nh-next{ background:#fff; } .nh-sermon{ background:#fff; }
-  .nh-h{ border-bottom-color:#dce8ef; } .nh-ev{ border-bottom-color:#dce8ef; }
-  .nh-tile{ background:#cfe9f3; } .nh-tile img{ filter:none; }
-  .nh-hero-sub,.nh-hero-tag{ text-shadow:0 1px 3px rgba(20,50,80,.7),0 2px 14px rgba(20,50,80,.6); font-weight:600; }
-  .nh-hero-inner{ margin-top:-30px; }
-
-  /* Menü über der Portada */
-  body{ padding-top:0 !important; }
-  header.site-header{ background:transparent; border-bottom:none; box-shadow:none; transition:background .25s, box-shadow .25s; }
-  header.site-header .brand-text .name, header.site-header .brand-text .tag,
-  header.site-header nav.main-nav a, header.site-header .nav-dropbtn{ color:#fff; text-shadow:0 1px 6px rgba(20,50,80,.55); transition:color .25s; }
-  header.site-header .menu-toggle span{ background:#fff; box-shadow:0 1px 4px rgba(20,50,80,.5); }
-  header.site-header .nav-dropdown-content a{ color:var(--navy); text-shadow:none; }
-  header.site-header.scrolled, header.site-header.menu-open{ background:#fff; box-shadow:0 2px 10px rgba(36,70,92,.12); }
-  header.site-header.scrolled .brand-text .name, header.site-header.menu-open .brand-text .name,
-  header.site-header.scrolled nav.main-nav a, header.site-header.menu-open nav.main-nav a,
-  header.site-header.scrolled .nav-dropbtn, header.site-header.menu-open .nav-dropbtn{ color:var(--navy); text-shadow:none; }
-  header.site-header.scrolled .brand-text .tag, header.site-header.menu-open .brand-text .tag{ color:var(--muted); text-shadow:none; }
-  header.site-header.scrolled .menu-toggle span, header.site-header.menu-open .menu-toggle span{ background:var(--navy); box-shadow:none; }
-  .nh-hero{ padding-top:130px !important; }
-  .nh-hero-inner{ margin-top:-120px !important; }
-  @media (max-width:880px){ header.site-header nav.main-nav a, header.site-header .nav-dropbtn{ color:var(--navy); text-shadow:none; } .nh-hero{ padding-top:110px !important; } }
-
-  .nh-inv{ max-width:1100px; margin:0 auto 40px; padding:0 14px; }
-  .nh-inv-hint{ color:var(--muted); margin:8px 0 14px; font-size:.92rem; }
-  .nh-inv-top{ display:flex; gap:12px; flex-wrap:wrap; justify-content:space-between; align-items:center; margin-bottom:16px; }
-  .nh-inv-chips{ display:flex; gap:8px; flex-wrap:wrap; }
-  .nh-inv-chips button, .nh-inv-langs button{ border:1px solid var(--blue); background:#fff; color:var(--blue); padding:8px 14px; border-radius:20px; font-weight:600; cursor:pointer; font-family:inherit; font-size:.85rem; }
-  .nh-inv-chips button.on, .nh-inv-langs button.on{ background:var(--blue); color:#fff; }
-  .nh-inv-langs{ display:flex; gap:6px; }
-  .nh-inv-body{ display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap; }
-  #invCanvas{ width:100%; max-width:430px; height:auto; border-radius:10px; box-shadow:0 8px 24px rgba(36,70,92,.2); background:#fff; }
-  .nh-inv-actions{ display:flex; flex-direction:column; gap:12px; align-items:flex-start; padding-top:10px; }
-  .nh-inv-actions .nh-btn{ border:none; cursor:pointer; font-family:inherit; }
-  .nh-btn-wa{ background:#25a244 !important; }
-  .nh-inv-note{ color:var(--muted); font-size:.82rem; max-width:320px; margin:0; }
 </style>
 </head>
 <body>
@@ -1975,62 +1877,55 @@
   </nav>
 </header>
 
-<section class="nh-hero" id="top">
-  <div class="nh-hero-inner">
-    <img src="logo.png" alt="" class="nh-hero-logo" onerror="this.style.display='none'">
-    <h1>Herzlich Willkommen</h1>
-    <div class="nh-hero-sub">Gemeinde Gottes Rosal</div>
-    <div class="nh-hero-tag">Wie frejen ons opp junt!</div>
-  </div>
+<section class="hero" id="top">
+  <h1>Herzlich Willkommen</h1>
+  <div class="divider"><span class="line"></span><span class="heart">♥</span><span class="line"></span></div>
+  <p>Willkommen auf der offiziellen Webseite<br>der Gemeinde Gottes Rosal.</p>
 </section>
 
-<div class="nh-next" id="nhNext">
-  <div class="nh-next-label"><span class="nh-badge">NÄCHSTER</span><span class="nh-next-big">TERMIN</span></div>
-  <div class="nh-next-info"><strong id="nhNextTitle">…</strong><em id="nhNextDate"></em></div>
-  <div class="nh-count" id="nhCount">
-    <div><b id="nhD">–</b><span>Tage</span></div>
-    <div><b id="nhH">–</b><span>Std</span></div>
-    <div><b id="nhM">–</b><span>Min</span></div>
-    <div><b id="nhS">–</b><span>Sek</span></div>
+<div class="home-slider" id="homeSlider">
+  <a href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener" class="home-slide image-slide active" data-slide="0" aria-label="Lese die Plautdietsche Bibel online">
+    <img src="bibel-foto.jpg" alt="Die Heilige Schrift – Lese die Plautdietsche Bibel online" class="home-slide-img">
+    <span class="home-slide-hint">📖 Lese die Bibel online →</span>
+  </a>
+  <a href="kalender.html" class="home-slide image-slide" data-slide="1" aria-label="Männer- und Jungsabend am 18. Oktober 2026 – zur vollständigen Einladung">
+    <img src="manner-jungsabend-flyer.jpg" alt="Männer- und Jungsabend, 18. Oktober 2026, Film: The Forge / La Forga, Gimnasio der Gemeinde Gottes Campo 101" class="home-slide-img">
+    <span class="home-slide-hint">🧑‍🤝‍🧑 Zur vollständigen Einladung →</span>
+  </a>
+  <div class="home-slide-dots">
+    <span class="home-slide-dot active" data-dot="0"></span>
+    <span class="home-slide-dot" data-dot="1"></span>
   </div>
-  <a class="nh-btn" href="kalender.html">ALLE TERMINE</a>
 </div>
 
-<div class="nh-tiles">
-  <a class="nh-tile" href="wir-sind.html"><img src="cross-abendversammlung.jpg" alt=""><span class="nh-tile-label">Wer wir sind</span></a>
-  <a class="nh-tile" href="https://www.bible.com/de/bible/563" target="_blank" rel="noopener"><img src="bibel-foto.jpg" alt=""><span class="nh-tile-label">Plautdietsche Bibel</span></a>
-  <a class="nh-tile" href="#predigten"><img src="cross-abendversammlung.jpg" alt="" style="object-position:30% 70%;filter:grayscale(.6)"><span class="nh-tile-label">Predigten</span></a>
-</div>
-
-<section class="nh-inv" id="einladungen">
-  <h2 class="nh-h">Einladungen zum Teilen</h2>
-  <p class="nh-inv-hint">Wähle einen Anlass – lade die Einladung herunter oder schicke sie per WhatsApp.</p>
-  <div class="nh-inv-top">
-    <div class="nh-inv-chips" id="invChips"></div>
-    <div class="nh-inv-langs" id="invLangs"><button data-l="de" class="on">DE</button><button data-l="es">ES</button><button data-l="en">EN</button></div>
+<section class="card herbst-section" id="herbstversammlung">
+  <div class="card-header">
+    <div class="title">🧑‍🤝‍🧑 Männer- und Jungsabend</div>
+    <div class="ann-date">18. Oktober</div>
   </div>
-  <div class="nh-inv-body">
-    <canvas id="invCanvas" width="1080" height="1350"></canvas>
-    <div class="nh-inv-actions">
-      <button class="nh-btn" id="invDl">⬇ Herunterladen</button>
-      <button class="nh-btn nh-btn-wa" id="invWa">💬 Per WhatsApp teilen</button>
-      <p class="nh-inv-note" id="invNote"></p>
+  <div class="herbst-body">
+    <p class="herbst-theme">Film: „The Forge / La Forga" – Abendessen &amp; Gemeinschaft folgt</p>
+    <p class="herbst-verse">„Eisen schärft Eisen, und ein Mann schärft den andern." – Sprüche 27,17</p>
+    <p class="herbst-redner">Ziel: aufbauende Verbindungen zwischen Männern und Jungen herzustellen, die das geistliche Leben fördern.</p>
+
+    <div class="herbst-schedule">
+      <div class="herbst-row">
+        <span class="herbst-day">Sonntag, 18. Okt.</span>
+        <span class="herbst-time">3:30 pm</span>
+        <span class="herbst-topic">Alle Männer und Jungen ab dem Jugendalter sind eingeladen</span>
+      </div>
+    </div>
+
+    <div class="herbst-note">
+      🎟️ Eintritt ist frei.
+    </div>
+
+    <div class="herbst-footer">
+      <span>📍 Gimnasio der Gemeinde Gottes Campo 101</span>
+      <span>♥ Wie frejen ons opp junt! – Wir freuen uns auf euch!</span>
     </div>
   </div>
 </section>
-
-<div class="nh-cols">
-  <div class="nh-col">
-    <h2 class="nh-h">Kommende Termine</h2>
-    <div id="nhEvents"></div>
-    <a class="nh-more" href="kalender.html">Zum ganzen Kalender →</a>
-  </div>
-  <div class="nh-col nh-col-side">
-    <h2 class="nh-h">Neueste Predigten</h2>
-    <div id="nhSermons"></div>
-    <a class="nh-more" href="#predigten">Alle Predigten →</a>
-  </div>
-</div>
 
 <section class="card intro-section">
   <div class="intro-block">
@@ -2182,6 +2077,11 @@
     <div class="title">🎤 Predigten</div>
   </div>
   <div class="predigten-body" id="predigtenList">
+    <div class="predigt-item">
+      <div class="predigt-title">Predigt vom 18. Oktober 2026 – Der Glaubenskampf</div>
+      <div class="predigt-meta">Br. Hans Klassen</div>
+      <iframe src="https://archive.org/embed/18-october-2026-br.-klassen-der-glaubens-kampf" width="100%" height="30" frameborder="0" allowfullscreen loading="lazy" title="Predigt 18. Oktober 2026"></iframe>
+    </div>
     <div class="predigt-item">
       <div class="predigt-title">Predigt vom 11. Oktober 2026 – Der Lebensstil der Kinder Gottes</div>
       <div class="predigt-meta">Br. Hans Klassen</div>
@@ -2936,177 +2836,6 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-
-// ===== Neues Layout: Nächster Termin, Terminliste, Predigten =====
-(function nhInit(){
-  const MN=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
-  const DN=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
-  function parseTime(t){
-    const m=t.match(/^(\d{1,2}):(\d{2})\s*(am|pm)/i);
-    if(!m) return null;
-    let h=+m[1]%12; if(m[3].toLowerCase()==='pm') h+=12;
-    return {h:h, min:+m[2]};
-  }
-  const now=new Date(), list=[];
-  for(let i=0;i<60 && list.length<8;i++){
-    const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i);
-    const evs=getEventsFor(d.getFullYear(),d.getMonth()+1,d.getDate())||[];
-    evs.forEach(e=>{
-      const t=e.t||'';
-      if(e.c==='grey' || /Gitarren|Kinderstunde|Kinderchor üben/i.test(t)) return;
-      const tm=parseTime(t);
-      const at=new Date(d.getFullYear(),d.getMonth(),d.getDate(),tm?tm.h:8,tm?tm.min:0);
-      if(at<now) return;
-      const title=t.replace(/^\d{1,2}:\d{2}\s*(am|pm)\s*[–-]\s*/i,'');
-      list.push({at:at,d:d,title:title,time:tm?t.match(/^\d{1,2}:\d{2}\s*(am|pm)/i)[0]:''});
-    });
-  }
-  const box=document.getElementById('nhEvents');
-  if(box){
-    list.slice(0,6).forEach(ev=>{
-      const row=document.createElement('div'); row.className='nh-ev';
-      row.innerHTML='<div class="nh-ev-date"><b>'+ev.d.getDate()+'</b><span>'+MN[ev.d.getMonth()].slice(0,3)+'</span></div>'+
-        '<div class="nh-ev-body"><strong></strong><em>'+DN[ev.d.getDay()]+', '+ev.d.getDate()+'. '+MN[ev.d.getMonth()]+(ev.time?' · '+ev.time:'')+'</em></div>'+
-        '<a href="kalender.html">DETAILS</a>';
-      row.querySelector('strong').textContent=ev.title;
-      box.appendChild(row);
-    });
-    if(!list.length) box.innerHTML='<p style="color:var(--muted)">Zur Zeit keine weiteren Termine.</p>';
-  }
-  const next=list[0];
-  if(next){
-    document.getElementById('nhNextTitle').textContent=next.title;
-    document.getElementById('nhNextDate').textContent=DN[next.d.getDay()]+', '+next.d.getDate()+'. '+MN[next.d.getMonth()]+' '+next.d.getFullYear()+(next.time?' · '+next.time:'');
-    const p=n=>String(n).padStart(2,'0');
-    function tick(){
-      let diff=Math.max(0,Math.floor((next.at-new Date())/1000));
-      document.getElementById('nhD').textContent=Math.floor(diff/86400);
-      document.getElementById('nhH').textContent=p(Math.floor(diff%86400/3600));
-      document.getElementById('nhM').textContent=p(Math.floor(diff%3600/60));
-      document.getElementById('nhS').textContent=p(diff%60);
-    }
-    tick(); setInterval(tick,1000);
-  } else { document.getElementById('nhNext').style.display='none'; }
-  // Predigten: die 3 neuesten aus der Liste unten übernehmen
-  const sm=document.getElementById('nhSermons');
-  document.querySelectorAll('#predigtenList .predigt-item').forEach((it,i)=>{
-    if(i>2||!sm) return;
-    const ti=it.querySelector('.predigt-title'), me=it.querySelector('.predigt-meta'), au=it.querySelector('audio');
-    const w=document.createElement('div'); w.className='nh-sermon';
-    w.innerHTML='<div class="t"></div><div class="m"></div>';
-    w.querySelector('.t').textContent=ti?ti.textContent:''; w.querySelector('.m').textContent=me?me.textContent:'';
-    if(au){ const a=document.createElement('audio'); a.controls=true; a.preload='none'; a.src=au.getAttribute('src'); w.appendChild(a); }
-    sm.appendChild(w);
-  });
-})();
-
-(function(){
-  const h=document.querySelector('header.site-header'); if(!h) return;
-  function upd(){ h.classList.toggle('scrolled', window.scrollY>40); }
-  window.addEventListener('scroll',upd,{passive:true}); upd();
-  const t=document.getElementById('menuToggle');
-  if(t) t.addEventListener('click',()=>setTimeout(()=>h.classList.toggle('menu-open',document.getElementById('mainNav').classList.contains('open')),0));
-})();
-
-// ===== Einladungen (Bild-Generator) =====
-(function invInit(){
-  const EVENTS=[
-   {id:'ernte',y:2026,m:11,d:8,c1:'#f7c85e',c2:'#fff4d6',ink:'#7a4a0e',icon:'🌾',
-    de:{t:'Erntedankfest',w:'Sonntag, 8. November 2026',z:'10:00 Uhr',x:'Mit gemeinsamem Mittagessen – jeder ist herzlich willkommen',v:'„Danket dem HERRN; denn er ist freundlich, und seine Güte währet ewiglich!“',r:'Psalm 107,1'},
-    es:{t:'Fiesta de Acción de Gracias',w:'Domingo, 8 de noviembre de 2026',z:'10:00 am',x:'Con comida compartida – cualquier persona es bienvenida',v:'“Alabad á Jehová, porque él es bueno; porque para siempre es su misericordia.”',r:'Salmo 107:1'},
-    en:{t:'Thanksgiving Service',w:'Sunday, November 8, 2026',z:'10:00 am',x:'With a shared lunch – everyone is welcome',v:'“O give thanks unto the LORD, for he is good: for his mercy endureth for ever.”',r:'Psalm 107:1'}},
-   {id:'sing',y:2026,m:12,d:13,c1:'#8ecae6',c2:'#eef8fd',ink:'#1d4e66',icon:'🎵',
-    de:{t:'Singabend',w:'Sonntag, 13. Dezember 2026',z:'17:00 Uhr',x:'In der Kirche – danach Abendbrot im Gym',v:'„…mit Psalmen, Lobgesängen und geistlichen Liedern singt Gott dankbar in euren Herzen.“',r:'Kolosser 3,16'},
-    es:{t:'Noche de Cantos',w:'Domingo, 13 de diciembre de 2026',z:'5:00 pm',x:'En la iglesia – después cena en el gimnasio',v:'“…con salmos é himnos y canciones espirituales, con gracia cantando en vuestros corazones al Señor.”',r:'Colosenses 3:16'},
-    en:{t:'Singing Evening',w:'Sunday, December 13, 2026',z:'5:00 pm',x:'At the church – supper in the gym afterwards',v:'“…in psalms and hymns and spiritual songs, singing with grace in your hearts to the Lord.”',r:'Colossians 3:16'}},
-   {id:'xmas',y:2026,m:12,d:25,c1:'#f2a4a0',c2:'#fff2f0',ink:'#7d2a26',icon:'🎄',
-    de:{t:'Weihnachtsbotschaft',w:'Freitag, 25. Dezember 2026',z:'10:00 Uhr',x:'Gottesdienst zur Geburt unseres Herrn',v:'„Denn euch ist heute der Heiland geboren, welcher ist Christus, der Herr.“',r:'Lukas 2,11'},
-    es:{t:'Mensaje de Navidad',w:'Viernes, 25 de diciembre de 2026',z:'10:00 am',x:'Servicio por el nacimiento de nuestro Señor',v:'“Que os ha nacido hoy un Salvador, que es Cristo el Señor.”',r:'Lucas 2:11'},
-    en:{t:'Christmas Message',w:'Friday, December 25, 2026',z:'10:00 am',x:'Service for the birth of our Lord',v:'“For unto you is born this day a Saviour, which is Christ the Lord.”',r:'Luke 2:11'}},
-   {id:'silv',y:2026,m:12,d:31,c1:'#b9a8e6',c2:'#f6f2ff',ink:'#3f2f73',icon:'🎉',
-    de:{t:'Silvesterabend',w:'Donnerstag, 31. Dezember 2026',z:'18:00 Uhr',x:'Gemeinsam das Jahr beschließen',v:'„Der HERR behüte deinen Ausgang und Eingang von nun an bis in Ewigkeit!“',r:'Psalm 121,8'},
-    es:{t:'Noche de Fin de Año',w:'Jueves, 31 de diciembre de 2026',z:'6:00 pm',x:'Despedimos el año juntos',v:'“Jehová guardará tu salida y tu entrada, desde ahora y para siempre.”',r:'Salmo 121:8'},
-    en:{t:'New Year’s Eve Service',w:'Thursday, December 31, 2026',z:'6:00 pm',x:'Closing the year together',v:'“The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.”',r:'Psalm 121:8'}}
-  ];
-  const UI={
-   de:{inv:'HERZLICHE EINLADUNG',all:'Alle sind herzlich willkommen!',loc:'Calle del Rosal 54, Cuauhtémoc, Chih.',dl:'Einladung',share:'Herzliche Einladung',note:'Auf dem Handy öffnet „Per WhatsApp teilen“ direkt das Teilen-Menü mit dem Bild.'},
-   es:{inv:'CORDIAL INVITACIÓN',all:'¡Todos son bienvenidos!',loc:'Calle del Rosal 54, Cuauhtémoc, Chih.',dl:'Invitacion',share:'Cordial invitación',note:'En el celular, “Compartir por WhatsApp” abre el menú de compartir con la imagen.'},
-   en:{inv:'WARM INVITATION',all:'Everyone is welcome!',loc:'Calle del Rosal 54, Cuauhtémoc, Chih.',dl:'Invitation',share:'Warm invitation',note:'On a phone, “Share via WhatsApp” opens the share menu with the image.'}};
-  const cv=document.getElementById('invCanvas'); if(!cv) return;
-  const ctx=cv.getContext('2d');
-  let cur=null, lang='de', photo=null, logo=null, usePhoto=true;
-  const now=new Date(); now.setHours(0,0,0,0);
-  const upcoming=EVENTS.filter(e=>new Date(e.y,e.m-1,e.d)>=now);
-  const list=upcoming.length?upcoming:EVENTS;
-  cur=list[0];
-  const chips=document.getElementById('invChips');
-  function drawChips(){
-    chips.innerHTML='';
-    list.forEach(e=>{ const b=document.createElement('button'); b.textContent=e.icon+' '+e[lang].t; if(e===cur) b.className='on';
-      b.onclick=()=>{cur=e;drawChips();draw();}; chips.appendChild(b); });
-  }
-  function wrap(text,x,y,maxW,lh,font,color,align){
-    ctx.font=font; ctx.fillStyle=color; ctx.textAlign=align||'center';
-    const words=text.split(' '); let line=''; const lines=[];
-    words.forEach(w=>{ const t=line?line+' '+w:w; if(ctx.measureText(t).width>maxW && line){lines.push(line);line=w;} else line=t; });
-    if(line) lines.push(line);
-    lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lh));
-    return y+lines.length*lh;
-  }
-  function rr(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
-  function draw(){
-    const e=cur, T=e[lang], U=UI[lang], W=1080, H=1350;
-    const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,e.c1); g.addColorStop(1,e.c2);
-    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-    // Foto oben
-    if(usePhoto && photo && photo.complete && photo.naturalWidth){
-      const ph=520, sc=Math.max(W/photo.naturalWidth, ph/photo.naturalHeight), iw=photo.naturalWidth*sc, ih=photo.naturalHeight*sc;
-      ctx.save(); ctx.beginPath(); ctx.rect(0,0,W,ph); ctx.clip(); ctx.drawImage(photo,(W-iw)/2,ph-ih+ih*0.12,iw,ih); ctx.restore();
-      const o=ctx.createLinearGradient(0,0,0,ph); o.addColorStop(0,'rgba(10,25,40,.35)'); o.addColorStop(1,'rgba(10,25,40,0)'); ctx.fillStyle=o; ctx.fillRect(0,0,W,ph);
-    } else {
-      ctx.fillStyle='rgba(255,255,255,.35)'; ctx.beginPath(); ctx.arc(860,170,230,0,7); ctx.fill(); ctx.beginPath(); ctx.arc(150,420,170,0,7); ctx.fill();
-      ctx.font='260px serif'; ctx.textAlign='center'; ctx.fillStyle='#000'; ctx.fillText(e.icon,W/2,360);
-    }
-    ctx.textAlign='center'; ctx.fillStyle='#fff'; ctx.font='600 34px Georgia, serif'; ctx.shadowColor='rgba(0,0,0,.45)'; ctx.shadowBlur=10;
-    ctx.fillText(U.inv.split('').join(String.fromCharCode(8202)),W/2,110); ctx.shadowBlur=0;
-    // weiße Karte
-    ctx.save(); ctx.shadowColor='rgba(30,50,70,.25)'; ctx.shadowBlur=40; ctx.shadowOffsetY=12; ctx.fillStyle='#fff'; rr(70,400,W-140,740,34); ctx.fill(); ctx.restore();
-    ctx.fillStyle=e.ink; ctx.font='64px serif'; ctx.textAlign='center'; ctx.fillText(e.icon,W/2,490);
-    let y=wrap(T.t,W/2,590,W-260,92,'bold 82px Georgia, serif',e.ink);
-    ctx.fillStyle=e.c1; ctx.fillRect(W/2-70,y-34,140,6);
-    ctx.fillStyle='#22333f'; y=wrap(T.w,W/2,y+30,W-220,50,'600 42px "Segoe UI", Arial, sans-serif','#22333f');
-    y=wrap(T.z,W/2,y+16,W-220,70,'bold 62px "Segoe UI", Arial, sans-serif',e.ink);
-    y=wrap(T.x,W/2,y+4,W-260,42,'34px "Segoe UI", Arial, sans-serif','#4a5b68');
-    y=wrap(T.v,W/2,y+40,W-290,46,'italic 34px Georgia, serif','#5b6b78');
-    wrap('– '+T.r+' –',W/2,y+10,W-290,36,'600 28px "Segoe UI", Arial, sans-serif',e.ink);
-    // Fuß
-    ctx.fillStyle=e.ink; ctx.textAlign='center'; ctx.font='bold 40px Georgia, serif'; ctx.fillText(U.all,W/2,1215);
-    ctx.font='28px "Segoe UI", Arial, sans-serif'; ctx.fillStyle='#33475a'; ctx.fillText('Gemeinde Gottes Rosal · '+U.loc,W/2,1262);
-    if(logo && logo.complete && logo.naturalWidth){ ctx.save(); ctx.beginPath(); ctx.arc(W/2,400,0,0,1); ctx.restore(); }
-  }
-  photo=new Image(); photo.onload=draw; photo.src='hero-foto.jpg';
-  logo=new Image(); logo.src='logo.png';
-  function toBlobSafe(cb){
-    try{ cv.toBlob(b=>{ if(b) cb(b); else fallback(cb); },'image/png'); }catch(err){ fallback(cb); }
-  }
-  function fallback(cb){ usePhoto=false; cv.width=1080; draw(); cv.toBlob(b=>cb(b),'image/png'); }
-  function fname(){ return UI[lang].dl+'-'+cur.id+'-Gemeinde-Rosal.png'; }
-  document.getElementById('invDl').onclick=()=>toBlobSafe(b=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=fname(); document.body.appendChild(a); a.click(); a.remove(); });
-  document.getElementById('invWa').onclick=()=>toBlobSafe(async b=>{
-    const T=cur[lang], txt=UI[lang].share+': '+T.t+' – '+T.w+', '+T.z+'. Gemeinde Gottes Rosal · gemeindegottesrosal.org';
-    const f=new File([b],fname(),{type:'image/png'});
-    try{
-      if(navigator.canShare && navigator.canShare({files:[f]})){ await navigator.share({files:[f],text:txt}); return; }
-    }catch(err){ if(err && err.name==='AbortError') return; }
-    const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=fname(); document.body.appendChild(a); a.click(); a.remove();
-    window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
-  });
-  document.querySelectorAll('#invLangs button').forEach(btn=>btn.onclick=()=>{
-    lang=btn.dataset.l; document.querySelectorAll('#invLangs button').forEach(x=>x.classList.toggle('on',x===btn));
-    document.getElementById('invNote').textContent=UI[lang].note; drawChips(); draw(); });
-  document.getElementById('invNote').textContent=UI[lang].note;
-  drawChips(); draw();
-})();
 </script>
 
 <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
