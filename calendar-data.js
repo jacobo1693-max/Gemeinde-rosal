@@ -114,7 +114,7 @@ const monthsData = {
     label: "November 2026",
     events: {
       6: [ {c:'grey', t:'Keine Jugendstunde'} ],
-      8: [ {c:'red', t:'10:00 am – Erntedankfest'}, {c:'gold', t:'Gemeinsames Mittagessen – alle sind herzlich eingeladen'} ],
+      8: [ {c:'red', t:'10:00 am – Erntedankfest'}, {c:'gold', t:'Gemeinsames Mittagessen – jeder ist herzlich willkommen'} ],
       13: [ {c:'blue', t:'7:30 pm – Jugendstunde'} ],
       20: [ {c:'grey', t:'Keine Jugendstunde'} ],
       21: [ {c:'gold', t:'7:00 am – Männer-Gebetsfrühstück'} ],
