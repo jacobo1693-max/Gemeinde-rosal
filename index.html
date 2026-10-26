@@ -2386,6 +2386,13 @@
       <button class="admin-add-btn" onclick="generateAnnouncementsText()">📋 Bekanntmachungen zusammenstellen</button>
       <textarea id="admAnnouncementsBox" class="admin-export-box" readonly placeholder="Hier erscheint der Text zum Kopieren/Drucken..." style="min-height:220px; margin-top:10px;"></textarea>
     </div>
+    <div class="admin-pdf-section">
+      <h4 class="admin-pdf-title">🎧 Predigten – Wie oft angehört?</h4>
+      <p class="admin-hint">Zählt, wie oft jemand auf „Play“ gedrückt hat (pro Besuch einmal pro Predigt).</p>
+      <button class="admin-add-btn" onclick="loadSermonStats()">📊 Statistik laden</button>
+      <div id="sermonStatsBox" style="margin-top:12px; font-size:.92rem;"></div>
+    </div>
+
   </div>
 </section>
 
@@ -3113,6 +3120,48 @@ if ('serviceWorker' in navigator) {
   document.getElementById('invNote').textContent=UI[lang].note;
   drawChips(); draw();
 })();
+
+// ===== Predigt-Statistik (Supabase) =====
+// Nach der Einrichtung hier die zwei Werte aus Supabase eintragen (Project URL und anon public key).
+const SUPA_URL = 'https://pcnzsrmdfbwjmwcdkjdj.supabase.co';
+const SUPA_KEY = 'sb_publishable_A1D-BOA6ghn3sUbeBO3Teg_D_jrSH3u';
+(function sermonTracking(){
+  if(!SUPA_URL || !SUPA_KEY) return;
+  const done = new Set();
+  document.addEventListener('play', function(ev){
+    const el = ev.target; if(!el || el.tagName !== 'AUDIO') return;
+    const box = el.closest('.predigt-item, .nh-sermon'); if(!box) return;
+    const tEl = box.querySelector('.predigt-title, .t');
+    const title = tEl ? tEl.textContent.trim() : (el.getAttribute('src')||'?');
+    if(done.has(title)) return; done.add(title);
+    try{
+      fetch(SUPA_URL + '/rest/v1/sermon_plays', { method:'POST',
+        headers:{ 'apikey':SUPA_KEY, 'Content-Type':'application/json', 'Prefer':'return=minimal' },
+        body: JSON.stringify({ sermon: title }), keepalive:true }).catch(()=>{});
+    }catch(e){}
+  }, true);
+})();
+async function loadSermonStats(){
+  const box = document.getElementById('sermonStatsBox'); if(!box) return;
+  if(!SUPA_URL || !SUPA_KEY){ box.textContent = 'Noch nicht eingerichtet (SUPA_URL / SUPA_KEY fehlen).'; return; }
+  box.textContent = 'Lädt…';
+  try{
+    const r = await fetch(SUPA_URL + '/rest/v1/rpc/sermon_counts', { method:'POST',
+      headers:{ 'apikey':SUPA_KEY, 'Content-Type':'application/json' }, body:'{}' });
+    if(!r.ok) throw new Error(r.status);
+    const rows = await r.json();
+    if(!rows.length){ box.textContent = 'Noch keine Wiedergaben.'; return; }
+    const tbl = document.createElement('table'); tbl.style.cssText='width:100%;border-collapse:collapse;';
+    tbl.innerHTML = '<tr style="text-align:left;border-bottom:2px solid #ddd"><th style="padding:6px">Predigt</th><th style="padding:6px">Plays</th><th style="padding:6px">Zuletzt</th></tr>';
+    rows.forEach(x=>{
+      const tr = document.createElement('tr'); tr.style.borderBottom='1px solid #eee';
+      const d = x.last_play ? new Date(x.last_play).toLocaleDateString('de-DE') : '';
+      tr.innerHTML = '<td style="padding:6px"></td><td style="padding:6px"><b>'+x.plays+'</b></td><td style="padding:6px">'+d+'</td>';
+      tr.firstChild.textContent = x.sermon; tbl.appendChild(tr);
+    });
+    box.innerHTML=''; box.appendChild(tbl);
+  }catch(e){ box.textContent = 'Fehler beim Laden der Statistik.'; }
+}
 </script>
 
 <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
