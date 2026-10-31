@@ -554,7 +554,7 @@ const READERS = {
   '2026-10-11': 'Corny Froesse',
   '2026-10-18': 'Jacob Wiebe',
   '2026-10-25': 'Willy Friesen',
-  '2026-11-1':  'Cornelius Fehr',
+  '2026-11-1':  'Johnny Peters',
   '2026-11-8':  'Erwin Rempel',
   '2026-11-15': 'Johan Neufeld',
   '2026-11-22': 'Armando Enns',
